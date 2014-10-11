@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<project
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.coherentlogic.wb</groupId>
+        <artifactId>client</artifactId>
+        <version>1.0.2-RELEASE</version>
+    </parent>
+
+    <groupId>com.coherentlogic.wb.client</groupId>
+    <artifactId>wb-client-core-it</artifactId>
+
+    <name>wb-client-core-it</name>
+    <url>http://www.coherentlogic.com</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.coherentlogic.wb.client</groupId>
+            <artifactId>wb-client-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

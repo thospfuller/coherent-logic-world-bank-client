@@ -1,0 +1,105 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <import resource="invalid-request-example.xml"/>
+    <import resource="income-levels-example.xml"/>
+    <import resource="indicators-example.xml"/>
+    <import resource="countries-example.xml"/>
+    <import resource="catalogsources-example.xml"/>
+    <import resource="datapoints-example.xml"/>
+
+    <bean id="wbRestTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean id="xstreamMessageConverter"
+                    class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+                    <property name="marshaller" ref="xstreamMarshaller" />
+                    <property name="unmarshaller" ref="xstreamMarshaller" />
+                </bean>
+                <!-- bean id="applicationZipMessageConverter"
+                    class="com.coherentlogic.wb.client.core.converters.ApplicationZipMessageConverter"/ -->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="springXStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+        <!-- Underscores in attributes cause problems with XStream and the stream driver below
+             addresses this issue - in particular see the XmlFriendlyReplacer.
+          -->
+        <property name="streamDriver">
+            <bean class="com.thoughtworks.xstream.io.xml.XppDriver">
+                <constructor-arg>
+                    <bean class="com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer">
+                        <constructor-arg index="0" value="_-"/>
+                        <constructor-arg index="1" value="_"/>
+                    </bean>
+                </constructor-arg>
+            </bean>
+        </property>
+        <property name="annotatedClasses">
+            <array>
+                <value>com.coherentlogic.wb.client.core.domain.IdValuePair</value>
+                <value>com.coherentlogic.wb.client.core.domain.CatalogSources</value>
+                <value>com.coherentlogic.wb.client.core.domain.CatalogSource</value>
+                <value>com.coherentlogic.wb.client.core.domain.IncomeLevels</value>
+                <value>com.coherentlogic.wb.client.core.domain.IncomeLevel</value>
+                <value>com.coherentlogic.wb.client.core.domain.Countries</value>
+                <value>com.coherentlogic.wb.client.core.domain.Country</value>
+                <value>com.coherentlogic.wb.client.core.domain.Region</value>
+                <value>com.coherentlogic.wb.client.core.domain.Indicators</value>
+                <value>com.coherentlogic.wb.client.core.domain.Topics</value>
+                <value>com.coherentlogic.wb.client.core.domain.Topic</value>
+                <value>com.coherentlogic.wb.client.core.domain.LendingTypes</value>
+                <value>com.coherentlogic.wb.client.core.domain.DataPoint</value>
+                <value>com.coherentlogic.wb.client.core.domain.DataPoints</value>
+                <value>com.coherentlogic.wb.client.core.domain.Message</value>
+                <value>com.coherentlogic.wb.client.core.domain.ErrorMessage</value>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="xstreamMarshaller" class="com.coherentlogic.wb.client.core.marshallers.WBXStreamMarshallerDelegate">
+        <constructor-arg ref="springXStreamMarshaller"/>
+    </bean>
+
+    <util:map id="queryBuilderFactoryMap">
+        <entry key="Countries" value-ref="countriesQueryBuilderFactory"/>
+        <entry key="CatalogSources" value-ref="catalogSourcesQueryBuilderFactory"/>
+        <entry key="InvalidRequest" value-ref="countriesQueryBuilderFactory"/>
+        <entry key="IncomeLevels" value-ref="incomeLevelsQueryBuilderFactory"/>
+        <entry key="Indicators" value-ref="indicatorsQueryBuilderFactory"/>
+        <entry key="DataPoints" value-ref="dataPointsQueryBuilderFactory"/>
+    </util:map>
+
+    <util:map id="exampleMap">
+        <entry key="Countries" value-ref="getCountriesExample"/>
+        <entry key="CatalogSources" value-ref="getCatalogSourcesExample"/>
+        <entry key="InvalidRequest" value-ref="getInvalidRequestExample"/>
+        <entry key="IncomeLevels" value-ref="getIncomeLevelsExample"/>
+        <entry key="Indicators" value-ref="getIndicatorsExample"/>
+        <entry key="DataPoints" value-ref="getDataPointsExample"/>
+    </util:map>
+
+    <bean id="binding" class="groovy.lang.Binding"/>
+
+    <bean id="groovyEngine" class="com.coherentlogic.coherent.data.model.demo.application.GroovyEngine">
+        <constructor-arg name="binding" ref="binding"/>
+    </bean>
+
+    <bean id="wbClientGUI"
+     class="com.coherentlogic.wb.client.webstart.application.WBClientGUI"
+     init-method="initialize">
+        <constructor-arg name="groovyEngine" ref="groovyEngine"/>
+        <constructor-arg name="queryBuilderFactoryMap" ref="queryBuilderFactoryMap"/>
+        <constructor-arg name="exampleMap" ref="exampleMap"/>
+    </bean>
+</beans>
+

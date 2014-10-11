@@ -1,0 +1,102 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- jdbc:h2:tcp://localhost/~/NewTest2 jdbc:h2:mem:BasicExample -->
+    <bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver" />
+        <property name="url" value="jdbc:h2:mem:BasicExample;DB_CLOSE_DELAY=-1" />
+        <property name="username" value="sa" />
+        <property name="password" value="password" />
+    </bean>
+
+    <bean id="entityManagerFactory"
+        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="com.coherentlogic.wb.client" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true" />
+                <property name="generateDdl" value="true" />
+                <property name="databasePlatform" value="org.hibernate.dialect.H2Dialect" />
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="com.coherentlogic.fred.client.core.domain" />
+
+        <property name="annotatedClasses">
+            <util:list>
+                <value>com.coherentlogic.wb.client.core.domain.AdminRegion</value>
+                <value>com.coherentlogic.wb.client.core.domain.CatalogSource</value>
+                <value>com.coherentlogic.wb.client.core.domain.CatalogSources
+                </value>
+                <value>com.coherentlogic.wb.client.core.domain.Constants</value>
+                <value>com.coherentlogic.wb.client.core.domain.Countries</value>
+                <value>com.coherentlogic.wb.client.core.domain.Country</value>
+                <value>com.coherentlogic.wb.client.core.domain.DataPoint</value>
+                <value>com.coherentlogic.wb.client.core.domain.DataPointCountry
+                </value>
+                <value>com.coherentlogic.wb.client.core.domain.DataPointIndicator
+                </value>
+                <value>com.coherentlogic.wb.client.core.domain.DataPoints</value>
+                <!-- value>com.coherentlogic.wb.client.core.domain.ErrorMessage</value -->
+                <value>com.coherentlogic.wb.client.core.domain.Frequency</value>
+                <value>com.coherentlogic.wb.client.core.domain.IdValuePair</value>
+                <value>com.coherentlogic.wb.client.core.domain.IncomeLevel</value>
+                <value>com.coherentlogic.wb.client.core.domain.IncomeLevelCodes
+                </value>
+                <value>com.coherentlogic.wb.client.core.domain.IncomeLevels</value>
+                <value>com.coherentlogic.wb.client.core.domain.Indicator</value>
+                <value>com.coherentlogic.wb.client.core.domain.Indicators</value>
+                <value>com.coherentlogic.wb.client.core.domain.IndicatorSource
+                </value>
+                <value>com.coherentlogic.wb.client.core.domain.IndicatorTopic
+                </value>
+                <value>com.coherentlogic.wb.client.core.domain.IndicatorTopics
+                </value>
+                <value>com.coherentlogic.wb.client.core.domain.Languages</value>
+                <value>com.coherentlogic.wb.client.core.domain.LendingType</value>
+                <value>com.coherentlogic.wb.client.core.domain.LendingTypeCodes
+                </value>
+                <value>com.coherentlogic.wb.client.core.domain.LendingTypes</value>
+                <value>com.coherentlogic.wb.client.core.domain.Message</value>
+                <value>com.coherentlogic.wb.client.core.domain.PaginationBean
+                </value>
+                <!-- Not sure we need this. -->
+                <value>com.coherentlogic.wb.client.core.domain.PaginationSpecification
+                </value>
+                <value>com.coherentlogic.wb.client.core.domain.Region</value>
+                <value>com.coherentlogic.wb.client.core.domain.RegionCodes</value>
+                <value>com.coherentlogic.wb.client.core.domain.Source</value>
+                <value>com.coherentlogic.wb.client.core.domain.Topic</value>
+                <value>com.coherentlogic.wb.client.core.domain.Topics</value>
+            </util:list>
+        </property>
+
+        <property name="hibernateProperties">
+            <util:properties>
+                <prop key="dialect">org.hibernate.dialect.H2Dialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+            </util:properties>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
+</beans>

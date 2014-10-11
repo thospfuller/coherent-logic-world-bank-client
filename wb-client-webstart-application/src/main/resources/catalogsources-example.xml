@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="catalogSourcesQueryBuilderFactory" class="com.coherentlogic.wb.client.core.factories.QueryBuilderFactory">
+        <constructor-arg name="restTemplate" ref="wbRestTemplate"/>
+        <constructor-arg name="uri" value="http://api.worldbank.org/sources"/>
+    </bean>
+
+    <bean id="getCatalogSourcesExample" class="java.lang.String"
+     factory-bean="getCatalogSourcesExampleFactory" factory-method="getInstance"/>
+
+    <bean id="getCatalogSourcesExampleFactory" class="com.coherentlogic.wb.client.webstart.application.ExampleFactory">
+        <constructor-arg name="resource" ref="getCatalogSourcesExampleResource"/>
+    </bean>
+
+    <bean id="getCatalogSourcesExampleResource" class="org.springframework.core.io.ClassPathResource">
+        <constructor-arg name="path" value="GetCatalogSourcesExample.groovy"/>
+    </bean>
+</beans>
+

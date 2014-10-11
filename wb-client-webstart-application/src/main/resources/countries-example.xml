@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="countriesQueryBuilderFactory" class="com.coherentlogic.wb.client.core.factories.QueryBuilderFactory">
+        <constructor-arg name="restTemplate" ref="wbRestTemplate"/>
+        <constructor-arg name="uri" value="http://api.worldbank.org/countries"/>
+    </bean>
+
+    <bean id="getCountriesExample" class="java.lang.String"
+     factory-bean="getCountriesExampleFactory" factory-method="getInstance"/>
+
+    <bean id="getCountriesExampleFactory" class="com.coherentlogic.wb.client.webstart.application.ExampleFactory">
+        <constructor-arg name="resource" ref="getCountriesExampleResource"/>
+    </bean>
+
+    <bean id="getCountriesExampleResource" class="org.springframework.core.io.ClassPathResource">
+        <constructor-arg name="path" value="GetCountriesExample.groovy"/>
+    </bean>
+</beans>
+

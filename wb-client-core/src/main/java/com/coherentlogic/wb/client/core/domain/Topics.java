@@ -1,0 +1,50 @@
+package com.coherentlogic.wb.client.core.domain;
+
+import static com.coherentlogic.wb.client.core.domain.PropertyConstants.TOPIC_LIST;
+import static com.coherentlogic.wb.client.core.domain.Constants.TOPICS_TBL;
+import static com.coherentlogic.wb.client.core.domain.Constants.WB_TOPICS;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.coherentlogic.wb.client.core.converters.TopicsConverter;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
+
+/**
+ * An aggregation of topic objects -- for example:
+ *
+ * http://api.worldbank.org/topics
+ *
+ * @author <a href="mailto:support@coherentlogic.com">Support</a>
+ */
+@Entity
+@Table(name=TOPICS_TBL)
+@XStreamAlias(WB_TOPICS)
+@XStreamConverter(value=TopicsConverter.class)
+public class Topics extends PaginationBean {
+
+    private static final long serialVersionUID = 8963550016383375659L;
+
+    @XStreamImplicit
+    private List<Topic> topicList = null;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    public List<Topic> getTopicList() {
+        return topicList;
+    }
+
+    public void setTopicList(List<Topic> topicList) {
+
+        List<Topic> oldValue = this.topicList;
+
+        this.topicList = topicList;
+
+        firePropertyChange(TOPIC_LIST, oldValue, topicList);
+    }
+}
