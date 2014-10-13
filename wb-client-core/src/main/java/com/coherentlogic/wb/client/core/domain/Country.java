@@ -44,7 +44,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias(WB_COUNTRY)
 public class Country extends IdentityBean {
 
-    private static final long serialVersionUID = -719074263712542778L;
+    private static final long serialVersionUID = -1896842424658297729L;
 
     /**
      * @todo Should this be named iso2Code? This is the value in the XML
@@ -204,5 +204,84 @@ public class Country extends IdentityBean {
         this.latitude = latitude;
 
         firePropertyChange(LATITUDE, oldValue, latitude);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+            + ((adminRegion == null) ? 0 : adminRegion.hashCode());
+        result = prime * result
+            + ((capitalCity == null) ? 0 : capitalCity.hashCode());
+        result = prime * result
+            + ((incomeLevel == null) ? 0 : incomeLevel.hashCode());
+        result = prime * result + ((isoCode == null) ? 0 : isoCode.hashCode());
+        result = prime * result
+            + ((latitude == null) ? 0 : latitude.hashCode());
+        result = prime * result
+            + ((lendingType == null) ? 0 : lendingType.hashCode());
+        result = prime * result
+            + ((longitude == null) ? 0 : longitude.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((region == null) ? 0 : region.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Country other = (Country) obj;
+        if (adminRegion == null) {
+            if (other.adminRegion != null)
+                return false;
+        } else if (!adminRegion.equals(other.adminRegion))
+            return false;
+        if (capitalCity == null) {
+            if (other.capitalCity != null)
+                return false;
+        } else if (!capitalCity.equals(other.capitalCity))
+            return false;
+        if (incomeLevel == null) {
+            if (other.incomeLevel != null)
+                return false;
+        } else if (!incomeLevel.equals(other.incomeLevel))
+            return false;
+        if (isoCode == null) {
+            if (other.isoCode != null)
+                return false;
+        } else if (!isoCode.equals(other.isoCode))
+            return false;
+        if (latitude == null) {
+            if (other.latitude != null)
+                return false;
+        } else if (!latitude.equals(other.latitude))
+            return false;
+        if (lendingType == null) {
+            if (other.lendingType != null)
+                return false;
+        } else if (!lendingType.equals(other.lendingType))
+            return false;
+        if (longitude == null) {
+            if (other.longitude != null)
+                return false;
+        } else if (!longitude.equals(other.longitude))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (region == null) {
+            if (other.region != null)
+                return false;
+        } else if (!region.equals(other.region))
+            return false;
+        return true;
     }
 }

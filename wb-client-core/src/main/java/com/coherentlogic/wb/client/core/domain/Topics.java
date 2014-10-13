@@ -29,7 +29,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @XStreamConverter(value=TopicsConverter.class)
 public class Topics extends PaginationBean {
 
-    private static final long serialVersionUID = 8963550016383375659L;
+    private static final long serialVersionUID = -2608272772165645414L;
 
     @XStreamImplicit
     private List<Topic> topicList = null;
@@ -46,5 +46,31 @@ public class Topics extends PaginationBean {
         this.topicList = topicList;
 
         firePropertyChange(TOPIC_LIST, oldValue, topicList);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((topicList == null) ? 0 : topicList.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Topics other = (Topics) obj;
+        if (topicList == null) {
+            if (other.topicList != null)
+                return false;
+        } else if (!topicList.equals(other.topicList))
+            return false;
+        return true;
     }
 }

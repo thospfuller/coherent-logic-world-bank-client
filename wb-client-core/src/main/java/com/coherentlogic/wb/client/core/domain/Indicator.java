@@ -37,7 +37,7 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 @XStreamConverter(value=IndicatorConverter.class)
 public class Indicator extends IdentityBean {
 
-    private static final long serialVersionUID = -3301814083801463308L;
+    private static final long serialVersionUID = -8683623172883423312L;
 
     @XStreamAlias(WB_NAME)
     private String name = null;
@@ -119,5 +119,59 @@ public class Indicator extends IdentityBean {
         this.indicatorTopics = indicatorTopics;
 
         firePropertyChange(INDICATOR_TOPICS, oldValue, indicatorTopics);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+            + ((indicatorTopics == null) ? 0 : indicatorTopics.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((source == null) ? 0 : source.hashCode());
+        result = prime * result
+            + ((sourceNote == null) ? 0 : sourceNote.hashCode());
+        result = prime
+            * result
+            + ((sourceOrganization == null) ? 0 : sourceOrganization
+                .hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Indicator other = (Indicator) obj;
+        if (indicatorTopics == null) {
+            if (other.indicatorTopics != null)
+                return false;
+        } else if (!indicatorTopics.equals(other.indicatorTopics))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (source == null) {
+            if (other.source != null)
+                return false;
+        } else if (!source.equals(other.source))
+            return false;
+        if (sourceNote == null) {
+            if (other.sourceNote != null)
+                return false;
+        } else if (!sourceNote.equals(other.sourceNote))
+            return false;
+        if (sourceOrganization == null) {
+            if (other.sourceOrganization != null)
+                return false;
+        } else if (!sourceOrganization.equals(other.sourceOrganization))
+            return false;
+        return true;
     }
 }

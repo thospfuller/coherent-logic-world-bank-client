@@ -47,7 +47,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias(WB_SOURCE)
 public class CatalogSource extends IdentityValueBean {
 
-    private static final long serialVersionUID = 1565939298568564587L;
+    private static final long serialVersionUID = -553548971542234579L;
 
 	@XStreamAlias(WB_NAME)
     private String name = null;
@@ -96,4 +96,42 @@ public class CatalogSource extends IdentityValueBean {
 
         firePropertyChange(URL, oldValue, url);
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+			+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CatalogSource other = (CatalogSource) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (url == null) {
+			if (other.url != null)
+				return false;
+		} else if (!url.equals(other.url))
+			return false;
+		return true;
+	}
 }

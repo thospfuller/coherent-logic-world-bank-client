@@ -34,9 +34,9 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 @XStreamConverter(value=DataPointConverter.class)
 public class DataPoint extends IdentityValueBean {
 
-    private static final long serialVersionUID = 1969586975692213913L;
+    private static final long serialVersionUID = -4415363615093341591L;
 
-	@XStreamAlias(WB_INDICATOR)
+    @XStreamAlias(WB_INDICATOR)
 //    @OneToOne(cascade = {CascadeType.ALL})
     private DataPointIndicator dataPointIndicator = null;
 
@@ -129,5 +129,57 @@ public class DataPoint extends IdentityValueBean {
         this.value = value;
 
         firePropertyChange(VALUE, oldValue, value);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((country == null) ? 0 : country.hashCode());
+        result = prime
+            * result
+            + ((dataPointIndicator == null) ? 0 : dataPointIndicator
+                .hashCode());
+        result = prime * result + ((date == null) ? 0 : date.hashCode());
+        result = prime * result + ((decimal == null) ? 0 : decimal.hashCode());
+        result = prime * result + ((value == null) ? 0 : value.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DataPoint other = (DataPoint) obj;
+        if (country == null) {
+            if (other.country != null)
+                return false;
+        } else if (!country.equals(other.country))
+            return false;
+        if (dataPointIndicator == null) {
+            if (other.dataPointIndicator != null)
+                return false;
+        } else if (!dataPointIndicator.equals(other.dataPointIndicator))
+            return false;
+        if (date == null) {
+            if (other.date != null)
+                return false;
+        } else if (!date.equals(other.date))
+            return false;
+        if (decimal == null) {
+            if (other.decimal != null)
+                return false;
+        } else if (!decimal.equals(other.decimal))
+            return false;
+        if (value == null) {
+            if (other.value != null)
+                return false;
+        } else if (!value.equals(other.value))
+            return false;
+        return true;
     }
 }

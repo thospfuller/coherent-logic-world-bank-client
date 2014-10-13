@@ -25,7 +25,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @Table(name=INDICATOR_TOPICS_TBL)
 public class IndicatorTopics extends PaginationBean {
 
-    private static final long serialVersionUID = 8942107796954829692L;
+    private static final long serialVersionUID = -6352089579106533851L;
 
     @XStreamAlias(WB_TOPIC)
     @XStreamImplicit
@@ -43,5 +43,33 @@ public class IndicatorTopics extends PaginationBean {
         this.indicatorTopicList = indicatorTopicList;
 
         firePropertyChange(INDICATOR_TOPIC_LIST, oldValue, indicatorTopicList);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime
+            * result
+            + ((indicatorTopicList == null) ? 0 : indicatorTopicList
+                .hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        IndicatorTopics other = (IndicatorTopics) obj;
+        if (indicatorTopicList == null) {
+            if (other.indicatorTopicList != null)
+                return false;
+        } else if (!indicatorTopicList.equals(other.indicatorTopicList))
+            return false;
+        return true;
     }
 }

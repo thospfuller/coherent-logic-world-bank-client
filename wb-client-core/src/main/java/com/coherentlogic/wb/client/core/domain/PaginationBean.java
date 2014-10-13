@@ -17,7 +17,7 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 public class PaginationBean extends SerializableBean
     implements PaginationSpecification {
 
-    private static final long serialVersionUID = 4127798975578870751L;
+    private static final long serialVersionUID = 5178764963047504945L;
 
     @XStreamAlias(PAGE)
     @XStreamAsAttribute
@@ -35,12 +35,12 @@ public class PaginationBean extends SerializableBean
     @XStreamAsAttribute
     private Integer total = null;
 
-//    @Override
+    @Override
     public Integer getPage() {
         return page;
     }
 
-//    @Override
+    @Override
     public void setPage(Integer page) {
 
         Integer oldValue = this.page;
@@ -50,12 +50,12 @@ public class PaginationBean extends SerializableBean
         firePropertyChange(PropertyConstants.PAGE, oldValue, page);
     }
 
-//    @Override
+    @Override
     public Integer getPages() {
         return pages;
     }
 
-//    @Override
+    @Override
     public void setPages(Integer pages) {
 
         Integer oldValue = this.pages;
@@ -93,5 +93,48 @@ public class PaginationBean extends SerializableBean
         this.total = total;
 
         firePropertyChange(PropertyConstants.TOTAL, oldValue, total);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((page == null) ? 0 : page.hashCode());
+        result = prime * result + ((pages == null) ? 0 : pages.hashCode());
+        result = prime * result + ((perPage == null) ? 0 : perPage.hashCode());
+        result = prime * result + ((total == null) ? 0 : total.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PaginationBean other = (PaginationBean) obj;
+        if (page == null) {
+            if (other.page != null)
+                return false;
+        } else if (!page.equals(other.page))
+            return false;
+        if (pages == null) {
+            if (other.pages != null)
+                return false;
+        } else if (!pages.equals(other.pages))
+            return false;
+        if (perPage == null) {
+            if (other.perPage != null)
+                return false;
+        } else if (!perPage.equals(other.perPage))
+            return false;
+        if (total == null) {
+            if (other.total != null)
+                return false;
+        } else if (!total.equals(other.total))
+            return false;
+        return true;
     }
 }

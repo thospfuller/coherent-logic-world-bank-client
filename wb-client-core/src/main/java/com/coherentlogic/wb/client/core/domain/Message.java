@@ -26,9 +26,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias(WB_MESSAGE)
 public class Message extends IdentityValueBean {
 
-    private static final long serialVersionUID = -8415253588732205072L;
+	private static final long serialVersionUID = -7537455771776289598L;
 
-    @XStreamAlias(KEY)
+	@XStreamAlias(KEY)
     private String key = null;
 
     public Message() {
@@ -40,5 +40,30 @@ public class Message extends IdentityValueBean {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((key == null) ? 0 : key.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Message other = (Message) obj;
+        if (key == null) {
+            if (other.key != null)
+                return false;
+        } else if (!key.equals(other.key))
+            return false;
+        return true;
     }
 }

@@ -29,7 +29,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @XStreamConverter(value=DataPointsConverter.class)
 public class DataPoints extends PaginationBean {
 
-    private static final long serialVersionUID = 9125816460085924865L;
+    private static final long serialVersionUID = 7545981253467781206L;
 
     @XStreamAlias(WB_DATA)
     @XStreamImplicit
@@ -47,5 +47,31 @@ public class DataPoints extends PaginationBean {
         this.dataPointList = dataPointList;
 
         firePropertyChange(DATA_POINT_LIST, oldValue, dataPointList);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+            + ((dataPointList == null) ? 0 : dataPointList.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DataPoints other = (DataPoints) obj;
+        if (dataPointList == null) {
+            if (other.dataPointList != null)
+                return false;
+        } else if (!dataPointList.equals(other.dataPointList))
+            return false;
+        return true;
     }
 }

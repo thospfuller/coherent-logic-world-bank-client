@@ -26,9 +26,9 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @XStreamAlias(WB_LENDING_TYPES)
 public class LendingTypes extends PaginationBean {
 
-    private static final long serialVersionUID = 3752741599064965541L;
+    private static final long serialVersionUID = 2906188547364937411L;
 
-    @XStreamImplicit
+	@XStreamImplicit
     private List<LendingType> lendingTypeList = null;
 
     @OneToMany(cascade=CascadeType.ALL)
@@ -43,5 +43,31 @@ public class LendingTypes extends PaginationBean {
         this.lendingTypeList = lendingTypeList;
 
         firePropertyChange(LENDING_TYPE_LIST, oldValue, lendingTypeList);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+            + ((lendingTypeList == null) ? 0 : lendingTypeList.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        LendingTypes other = (LendingTypes) obj;
+        if (lendingTypeList == null) {
+            if (other.lendingTypeList != null)
+                return false;
+        } else if (!lendingTypeList.equals(other.lendingTypeList))
+            return false;
+        return true;
     }
 }

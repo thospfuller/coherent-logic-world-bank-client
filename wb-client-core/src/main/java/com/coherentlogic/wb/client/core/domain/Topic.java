@@ -31,7 +31,7 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 @XStreamConverter(value=TopicConverter.class)
 public class Topic extends IdentityValueBean {
 
-    private static final long serialVersionUID = -3862814751332182874L;
+    private static final long serialVersionUID = -3187439709310925507L;
 
 	/**
      * The value comes through as an attribute so we override the parent's
@@ -70,5 +70,37 @@ public class Topic extends IdentityValueBean {
         this.sourceNote = sourceNote;
 
         firePropertyChange(SOURCE_NOTE, oldValue, sourceNote);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((sourceNote == null) ? 0 : sourceNote.hashCode());
+        result = prime * result + ((value == null) ? 0 : value.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Topic other = (Topic) obj;
+        if (sourceNote == null) {
+            if (other.sourceNote != null)
+                return false;
+        } else if (!sourceNote.equals(other.sourceNote))
+            return false;
+        if (value == null) {
+            if (other.value != null)
+                return false;
+        } else if (!value.equals(other.value))
+            return false;
+        return true;
     }
 }

@@ -26,7 +26,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @XStreamAlias(WB_INCOME_LEVELS)
 public class IncomeLevels extends PaginationBean {
 
-    private static final long serialVersionUID = 7945626943212138734L;
+    private static final long serialVersionUID = 5116005522470843330L;
 
     @XStreamImplicit
     private List<IncomeLevel> incomeLevelList;
@@ -43,5 +43,31 @@ public class IncomeLevels extends PaginationBean {
         this.incomeLevelList = incomeLevelList;
 
         firePropertyChange(INCOME_LEVEL_LIST, oldValue, incomeLevelList);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+            + ((incomeLevelList == null) ? 0 : incomeLevelList.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        IncomeLevels other = (IncomeLevels) obj;
+        if (incomeLevelList == null) {
+            if (other.incomeLevelList != null)
+                return false;
+        } else if (!incomeLevelList.equals(other.incomeLevelList))
+            return false;
+        return true;
     }
 }
