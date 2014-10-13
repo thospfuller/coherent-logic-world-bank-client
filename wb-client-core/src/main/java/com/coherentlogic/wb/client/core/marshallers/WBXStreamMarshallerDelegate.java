@@ -33,10 +33,11 @@ public class WBXStreamMarshallerDelegate implements Marshaller, Unmarshaller {
     private static final String INVALID_XML_MSG = "The World Bank appears to "
         + "have returned some invalid XML -- see the cause for more details "
         + "and note that this has been going on for some time now and seems "
-        + "to change from one method to the next at seemingly random "
-        + "intervals. The problem is that the byte order mark (BOM -- see here "
+        + "to change from one or more methods for a few days and then this "
+        + "issue moves to another method or methods for a few days, etc. The "
+        + "problem is that the byte order mark, or BOM, (see here "
         + "http://en.wikipedia.org/wiki/Byte_order_mark#UTF-8) for UTF-8 "
-        + "encoded text contains an invalid character.";
+        + "encoded text contains one or more invalid characters.";
 
     private final XStreamMarshaller parentMarshaller;
 
