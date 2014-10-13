@@ -5,6 +5,8 @@ import static com.coherentlogic.wb.client.core.domain.Constants.SOURCE_TBL;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
+
 /**
  * A single source occurrence -- for example:
  *
@@ -19,8 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name=SOURCE_TBL)
-public class Source extends IdValuePair {
+public class Source extends IdentityValueBean {
 
     private static final long serialVersionUID = 9198649338192873361L;
-
 }

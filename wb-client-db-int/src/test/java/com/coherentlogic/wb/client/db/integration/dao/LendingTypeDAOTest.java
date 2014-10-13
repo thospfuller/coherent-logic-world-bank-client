@@ -30,7 +30,7 @@ public class LendingTypeDAOTest {
 
     @Before
     public void setUp() {
-        lendingType = IdValuePairTestHelper.create(LendingType.class);
+        lendingType = IdentityValueBeanTestHelper.create(LendingType.class);
     }
 
     @After
@@ -44,7 +44,7 @@ public class LendingTypeDAOTest {
      */
     @Test
     public void testAllCRUDOperations () {
-        new IdValuePairTestHelper<LendingType>
+        new IdentityValueBeanTestHelper<LendingType>
             (lendingTypeDAO).testAllCRUDOperations(lendingType);
     }
 }

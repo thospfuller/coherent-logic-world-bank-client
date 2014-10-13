@@ -32,7 +32,7 @@ public class IndicatorTopicDAOTest {
 
     @Before
     public void setUp() {
-        indicatorTopic = IdValuePairTestHelper.create(IndicatorTopic.class);
+        indicatorTopic = IdentityValueBeanTestHelper.create(IndicatorTopic.class);
     }
 
     @After
@@ -46,7 +46,7 @@ public class IndicatorTopicDAOTest {
      */
     @Test
     public void testAllCRUDOperations () {
-        new IdValuePairTestHelper<IndicatorTopic>
+        new IdentityValueBeanTestHelper<IndicatorTopic>
             (indicatorTopicDAO).testAllCRUDOperations(indicatorTopic);
     }
 }

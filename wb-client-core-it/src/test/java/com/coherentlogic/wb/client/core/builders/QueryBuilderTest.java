@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.web.client.RestTemplate;
 
+import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
 import com.coherentlogic.wb.client.core.domain.AdminRegion;
 import com.coherentlogic.wb.client.core.domain.CatalogSource;
 import com.coherentlogic.wb.client.core.domain.CatalogSources;
@@ -19,7 +20,6 @@ import com.coherentlogic.wb.client.core.domain.Countries;
 import com.coherentlogic.wb.client.core.domain.Country;
 import com.coherentlogic.wb.client.core.domain.DataPoint;
 import com.coherentlogic.wb.client.core.domain.DataPoints;
-import com.coherentlogic.wb.client.core.domain.IdValuePair;
 import com.coherentlogic.wb.client.core.domain.IncomeLevel;
 import com.coherentlogic.wb.client.core.domain.IncomeLevelCodes;
 import com.coherentlogic.wb.client.core.domain.IncomeLevels;
@@ -79,7 +79,7 @@ public class QueryBuilderTest {
     private void reviewIdValuePair (
         String expectedId,
         String expectedValue,
-        IdValuePair actual
+        IdentityValueBean actual
     ) {
         assertNotNull(actual);
         assertEquals (expectedId, actual.getId());
@@ -201,7 +201,10 @@ public class QueryBuilderTest {
         reviewIdValuePair(expected, actual);
     }
 
-    void reviewIdValuePair (IdValuePair expected, IdValuePair actual) {
+    void reviewIdValuePair (
+        IdentityValueBean expected,
+        IdentityValueBean actual
+    ) {
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getValue(), actual.getValue());
     }
@@ -513,7 +516,7 @@ public class QueryBuilderTest {
 
         DataPoint dataPoint = dataPointList.get(4);
 
-        reviewIdValuePair("SP.POP.TOTL", "Population (Total)",
+        reviewIdValuePair("SP.POP.TOTL", "Population, total",
             dataPoint.getDataPointIndicator());
 
         reviewIdValuePair("BR", "Brazil",

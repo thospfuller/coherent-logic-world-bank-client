@@ -40,12 +40,12 @@ public class DataPointDAOTest {
         DataPoint dataPoint = new DataPoint ();
 
         DataPointCountry dataPointCountry =
-            IdValuePairTestHelper.create(DataPointCountry.class);
+            IdentityValueBeanTestHelper.create(DataPointCountry.class);
 
         dataPoint.setCountry(dataPointCountry);
 
         DataPointIndicator dataPointIndicator =
-            IdValuePairTestHelper.create(DataPointIndicator.class);
+            IdentityValueBeanTestHelper.create(DataPointIndicator.class);
 
         dataPoint.setDataPointIndicator(dataPointIndicator);
 

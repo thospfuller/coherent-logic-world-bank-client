@@ -7,6 +7,7 @@ import static com.coherentlogic.wb.client.core.domain.Constants.WB_ADMIN_REGION;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
@@ -27,8 +28,8 @@ import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
 //correctly. This is not exactly a beatiful solution, but it's not brutal
 //either.
 @XStreamConverter(value=ToAttributedValueConverter.class,
-    types={IdValuePair.class}, strings={VALUE})
-public class AdminRegion extends IdValuePair {
+    types={IdentityValueBean.class}, strings={VALUE})
+public class AdminRegion extends IdentityValueBean {
 
     private static final long serialVersionUID = -4539675330396358361L;
 }

@@ -13,7 +13,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
-public class ErrorMessageConverter extends IdValuePairConverter {
+public class ErrorMessageConverter extends IdentityValueBeanConverter {
 
     public ErrorMessageConverter() {
         super(Message.class);

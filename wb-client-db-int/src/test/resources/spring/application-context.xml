@@ -22,27 +22,24 @@
         </property>
     </bean>
 
-    <!--
-      org.springframework.oxm.xstream.XStreamMarshaller
-      -->
     <bean id="springXStreamMarshaller" class="com.coherentlogic.coherent.data.model.core.xstream.CustomXStreamMarshaller">
         <!-- Underscores in attributes cause problems with XStream and the stream driver below
              addresses this issue - in particular see the XmlFriendlyReplacer.
           -->
         <property name="streamDriver">
-            <bean class="com.thoughtworks.xstream.io.xml.XppDriver">
-                <constructor-arg>
+            <!-- com.thoughtworks.xstream.io.xml.XppDriver / com.coherentlogic.wb.client.io.xml.BOMAwareXppDriver -->
+            <bean class="com.thoughtworks.xstream.io.xml.DomDriver">
+                <constructor-arg name="encoding" value="UTF-8"/>
+                <!-- constructor-arg>
                     <bean class="com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer">
                         <constructor-arg index="0" value="_-"/>
                         <constructor-arg index="1" value="_"/>
                     </bean>
-                </constructor-arg>
+                </constructor-arg -->
             </bean>
         </property>
         <property name="annotatedClasses">
             <array>
-                <!-- value>com.coherentlogic.coherent.data.model.core.domain.IdentityObject</value -->
-                <value>com.coherentlogic.wb.client.core.domain.IdValuePair</value>
                 <value>com.coherentlogic.wb.client.core.domain.CatalogSources</value>
                 <value>com.coherentlogic.wb.client.core.domain.CatalogSource</value>
                 <value>com.coherentlogic.wb.client.core.domain.IncomeLevels</value>

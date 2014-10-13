@@ -30,7 +30,7 @@ public class MessageDAOTest {
 
     @Before
     public void setUp() {
-        message = IdValuePairTestHelper.create(Message.class);
+        message = IdentityValueBeanTestHelper.create(Message.class);
     }
 
     @After
@@ -44,7 +44,7 @@ public class MessageDAOTest {
      */
     @Test
     public void testAllCRUDOperations () {
-        new IdValuePairTestHelper<Message>
+        new IdentityValueBeanTestHelper<Message>
             (messageDAO).testAllCRUDOperations(message);
     }
 }

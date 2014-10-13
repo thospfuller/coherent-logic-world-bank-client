@@ -12,13 +12,12 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
-public class DataPointIndicatorConverter extends IdValuePairConverter {
+public class DataPointIndicatorConverter extends IdentityValueBeanConverter {
 
     public DataPointIndicatorConverter() {
         super(DataPointIndicator.class);
     }
 
-    @Override
     public Object unmarshal(
         HierarchicalStreamReader reader,
         UnmarshallingContext context
@@ -34,5 +33,10 @@ public class DataPointIndicatorConverter extends IdValuePairConverter {
         dataPointIndicator.setValue(value);
 
         return dataPointIndicator;
+    }
+
+    @Override
+    public boolean canConvert(Class type) {
+        return false;
     }
 }

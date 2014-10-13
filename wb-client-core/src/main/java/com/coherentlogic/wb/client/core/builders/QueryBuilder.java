@@ -27,7 +27,6 @@ import java.util.regex.Pattern;
 
 import javax.ws.rs.core.UriBuilder;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
@@ -76,11 +75,16 @@ public class QueryBuilder extends AbstractQueryBuilder {
     static {
         log.warn("***********************************************************");
         log.warn("*** Welcome to the Coherent Logic World Bank Client     ***");
-        log.warn("***             version 1.0.2-RELEASE.                  ***");
+        log.warn("***             version 1.0.3-RELEASE.                  ***");
         log.warn("***                                                     ***");
-        log.warn("***    Please take a moment to follow us on Twitter:    ***");
+        log.warn("*** NOTICE:                                             ***");
         log.warn("***                                                     ***");
-        log.warn("***         https://twitter.com/CoherentMktData         ***");
+        log.warn("*** AS  OF  THE  1.0.3-RELEASE  THIS  PROJECT  HAS BEEN ***");
+        log.warn("*** MOVED   FROM   SOURCEFORGE.NET   TO  BITBUCKET.ORG. ***");
+        log.warn("*** PLEASE  VISIT THE FOLLOWING ADDRESS FROM THIS POINT ***");
+        log.warn("*** FORWARD FOR ALL PROJECT-RELATED UPDATES:            ***");
+        log.warn("***                                                     ***");
+        log.warn("*** http://bit.ly/1vZ5md8                               ***");
         log.warn("***                                                     ***");
         log.warn("***********************************************************");
     }
@@ -623,7 +627,7 @@ public class QueryBuilder extends AbstractQueryBuilder {
             throw new InvalidMetatypesException(
                 "The values passed to the combine method are invalid -- " +
                 "these values include: " +
-                ToStringBuilder.reflectionToString(values));
+                toString (values));
 
         String result = "";
 
@@ -637,6 +641,41 @@ public class QueryBuilder extends AbstractQueryBuilder {
                 result += ";";
         }
         return result;
+    }
+
+    /**
+     * Method creates a single string using the values in the values array.
+     *
+     * @todo Unit test this class.
+     * @todo Move this to the utils package.
+     */
+    static final String toString (String... values) {
+
+        final String COMMA = ", ";
+
+        String results = null;
+
+        StringBuffer resultsBuffer = new StringBuffer ();
+
+        int ctr = 0;
+
+        if (values == null)
+            results = "null array";
+        else if (values != null && values.length == 0)
+            results = "empty array";
+        else {
+            for (String next : values) {
+                String temp = (next == null) ? "null" : next;
+                resultsBuffer.append(next);
+
+                if (ctr++ < values.length) {
+                    resultsBuffer.append(COMMA);
+                }
+                ctr++;
+            }
+            results.toString();
+        }
+        return results;
     }
 
     /**

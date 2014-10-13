@@ -30,7 +30,7 @@ public class IncomeLevelDAOTest {
 
     @Before
     public void setUp() {
-        incomeLevel = IdValuePairTestHelper.create(IncomeLevel.class);
+        incomeLevel = IdentityValueBeanTestHelper.create(IncomeLevel.class);
     }
 
     @After
@@ -40,7 +40,7 @@ public class IncomeLevelDAOTest {
 
     @Test
     public void testAllCRUDOperations () {
-        new IdValuePairTestHelper<IncomeLevel>
+        new IdentityValueBeanTestHelper<IncomeLevel>
             (incomeLevelDAO).testAllCRUDOperations(incomeLevel);
     }
 }

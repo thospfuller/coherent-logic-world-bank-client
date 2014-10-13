@@ -12,6 +12,7 @@ import static com.coherentlogic.wb.client.core.domain.Constants.WB_URL;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -44,11 +45,11 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @Entity
 @Table(name=CATALOG_SOURCE_TBL)
 @XStreamAlias(WB_SOURCE)
-public class CatalogSource extends IdValuePair {
+public class CatalogSource extends IdentityValueBean {
 
     private static final long serialVersionUID = 1565939298568564587L;
 
-    @XStreamAlias(WB_NAME)
+	@XStreamAlias(WB_NAME)
     private String name = null;
 
     @XStreamAlias(WB_DESCRIPTION)

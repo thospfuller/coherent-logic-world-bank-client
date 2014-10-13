@@ -30,7 +30,7 @@ public class TopicDAOTest {
 
     @Before
     public void setUp() {
-        topic = IdValuePairTestHelper.create(Topic.class);
+        topic = IdentityValueBeanTestHelper.create(Topic.class);
     }
 
     @After
@@ -44,7 +44,7 @@ public class TopicDAOTest {
      */
     @Test
     public void testAllCRUDOperations () {
-        new IdValuePairTestHelper<Topic>
+        new IdentityValueBeanTestHelper<Topic>
             (topicDAO).testAllCRUDOperations(topic);
     }
 }

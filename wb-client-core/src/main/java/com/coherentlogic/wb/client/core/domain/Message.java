@@ -7,6 +7,7 @@ import static com.coherentlogic.wb.client.core.domain.Constants.WB_MESSAGE;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -23,7 +24,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @Entity
 @Table(name=MESSAGE_TBL)
 @XStreamAlias(WB_MESSAGE)
-public class Message extends IdValuePair {
+public class Message extends IdentityValueBean {
 
     private static final long serialVersionUID = -8415253588732205072L;
 

@@ -32,7 +32,7 @@ public class IndicatorSourceDAOTest {
 
     @Before
     public void setUp() {
-        indicatorSource = IdValuePairTestHelper.create(IndicatorSource.class);
+        indicatorSource = IdentityValueBeanTestHelper.create(IndicatorSource.class);
     }
 
     @After
@@ -46,7 +46,7 @@ public class IndicatorSourceDAOTest {
      */
     @Test
     public void testAllCRUDOperations () {
-        new IdValuePairTestHelper<IndicatorSource>
+        new IdentityValueBeanTestHelper<IndicatorSource>
             (indicatorSourceDAO).testAllCRUDOperations(indicatorSource);
     }
 }

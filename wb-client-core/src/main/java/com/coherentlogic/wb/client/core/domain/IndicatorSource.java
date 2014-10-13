@@ -1,10 +1,11 @@
 package com.coherentlogic.wb.client.core.domain;
 
-import static com.coherentlogic.wb.client.core.domain.Constants.
-    INDICATOR_SOURCE_TBL;
+import static com.coherentlogic.wb.client.core.domain.Constants.INDICATOR_SOURCE_TBL;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
 
 /**
  * This class represents a source as it exists as a member of an
@@ -29,8 +30,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name=INDICATOR_SOURCE_TBL)
-public class IndicatorSource extends IdValuePair {
+public class IndicatorSource extends IdentityValueBean {
 
     private static final long serialVersionUID = 3905895210852563432L;
-
 }

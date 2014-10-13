@@ -74,7 +74,7 @@ public class IndicatorDAOTest {
         result.setIndicatorTopics(createIndicatorTopics());
         result.setName(NAME);
 
-        Source source = IdValuePairTestHelper.create(Source.class);
+        Source source = IdentityValueBeanTestHelper.create(Source.class);
 
         result.setSource(source);
         result.setSourceNote(SOURCE_NOTE);

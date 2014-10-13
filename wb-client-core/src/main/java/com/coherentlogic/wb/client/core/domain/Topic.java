@@ -1,14 +1,16 @@
 package com.coherentlogic.wb.client.core.domain;
 
-import static com.coherentlogic.wb.client.core.domain.Constants.WB_SOURCE_NOTE;
 import static com.coherentlogic.wb.client.core.domain.Constants.TOPIC_TBL;
+import static com.coherentlogic.wb.client.core.domain.Constants.WB_SOURCE_NOTE;
 import static com.coherentlogic.wb.client.core.domain.Constants.WB_TOPIC;
 import static com.coherentlogic.wb.client.core.domain.Constants.WB_VALUE;
-import static com.coherentlogic.wb.client.core.domain.PropertyConstants.*;
+import static com.coherentlogic.wb.client.core.domain.PropertyConstants.SOURCE_NOTE;
+import static com.coherentlogic.wb.client.core.domain.PropertyConstants.VALUE;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
 import com.coherentlogic.wb.client.core.converters.TopicConverter;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
@@ -27,11 +29,11 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 @Table(name=TOPIC_TBL)
 @XStreamAlias(WB_TOPIC)
 @XStreamConverter(value=TopicConverter.class)
-public class Topic extends IdValuePair {
+public class Topic extends IdentityValueBean {
 
     private static final long serialVersionUID = -3862814751332182874L;
 
-    /**
+	/**
      * The value comes through as an attribute so we override the parent's
      * accessor and mutator methods and declare the property here so that we
      * can apply the appropriate annotation to it.

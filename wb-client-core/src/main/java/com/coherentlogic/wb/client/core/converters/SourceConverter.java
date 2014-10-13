@@ -12,7 +12,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
-public class SourceConverter extends IdValuePairConverter {
+public class SourceConverter extends IdentityValueBeanConverter {
 
     public SourceConverter() {
         super(Source.class);

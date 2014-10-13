@@ -31,7 +31,7 @@ public class DataPointIndicatorDAOTest {
     @Before
     public void setUp() {
         dataPointIndicator =
-            IdValuePairTestHelper.create(DataPointIndicator.class);
+            IdentityValueBeanTestHelper.create(DataPointIndicator.class);
     }
 
     @After
@@ -41,7 +41,7 @@ public class DataPointIndicatorDAOTest {
 
     @Test
     public void testAllCRUDOperations () {
-        new IdValuePairTestHelper<DataPointIndicator>
+        new IdentityValueBeanTestHelper<DataPointIndicator>
             (dataPointIndicatorDAO).testAllCRUDOperations(dataPointIndicator);
     }
 }

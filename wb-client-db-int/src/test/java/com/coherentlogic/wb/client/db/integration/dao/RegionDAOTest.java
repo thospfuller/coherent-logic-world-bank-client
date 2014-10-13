@@ -30,7 +30,7 @@ public class RegionDAOTest {
 
     @Before
     public void setUp() {
-        region = IdValuePairTestHelper.create(Region.class);
+        region = IdentityValueBeanTestHelper.create(Region.class);
     }
 
     @After
@@ -44,7 +44,7 @@ public class RegionDAOTest {
      */
     @Test
     public void testAllCRUDOperations () {
-        new IdValuePairTestHelper<Region>
+        new IdentityValueBeanTestHelper<Region>
             (regionDAO).testAllCRUDOperations(region);
     }
 }

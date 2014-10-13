@@ -54,7 +54,7 @@
                 <value>com.coherentlogic.wb.client.core.domain.DataPoints</value>
                 <!-- value>com.coherentlogic.wb.client.core.domain.ErrorMessage</value -->
                 <value>com.coherentlogic.wb.client.core.domain.Frequency</value>
-                <value>com.coherentlogic.wb.client.core.domain.IdValuePair</value>
+                <value>com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean</value>
                 <value>com.coherentlogic.wb.client.core.domain.IncomeLevel</value>
                 <value>com.coherentlogic.wb.client.core.domain.IncomeLevelCodes
                 </value>

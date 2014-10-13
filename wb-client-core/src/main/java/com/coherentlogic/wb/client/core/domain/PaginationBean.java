@@ -35,12 +35,12 @@ public class PaginationBean extends SerializableBean
     @XStreamAsAttribute
     private Integer total = null;
 
-    @Override
+//    @Override
     public Integer getPage() {
         return page;
     }
 
-    @Override
+//    @Override
     public void setPage(Integer page) {
 
         Integer oldValue = this.page;
@@ -50,12 +50,12 @@ public class PaginationBean extends SerializableBean
         firePropertyChange(PropertyConstants.PAGE, oldValue, page);
     }
 
-    @Override
+//    @Override
     public Integer getPages() {
         return pages;
     }
 
-    @Override
+//    @Override
     public void setPages(Integer pages) {
 
         Integer oldValue = this.pages;

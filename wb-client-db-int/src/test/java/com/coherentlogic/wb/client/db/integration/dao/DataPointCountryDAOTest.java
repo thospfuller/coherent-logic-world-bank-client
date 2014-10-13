@@ -37,7 +37,7 @@ public class DataPointCountryDAOTest {
 
     @Before
     public void setUp() throws Exception {
-        dataPointCountry = IdValuePairTestHelper.create(DataPointCountry.class);
+        dataPointCountry = IdentityValueBeanTestHelper.create(DataPointCountry.class);
     }
 
     @After
@@ -48,7 +48,7 @@ public class DataPointCountryDAOTest {
 
     @Test
     public void testAllCRUDOperations () {
-        new IdValuePairTestHelper<DataPointCountry>
+        new IdentityValueBeanTestHelper<DataPointCountry>
             (dataPointCountryDAO).testAllCRUDOperations (dataPointCountry);
     }
 }

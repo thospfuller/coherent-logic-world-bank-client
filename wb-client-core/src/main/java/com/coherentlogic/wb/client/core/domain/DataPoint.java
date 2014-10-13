@@ -1,16 +1,21 @@
 package com.coherentlogic.wb.client.core.domain;
 
-import static com.coherentlogic.wb.client.core.domain.PropertyConstants.*;
 import static com.coherentlogic.wb.client.core.domain.Constants.DATA_POINT_TBL;
 import static com.coherentlogic.wb.client.core.domain.Constants.WB_COUNTRY;
 import static com.coherentlogic.wb.client.core.domain.Constants.WB_DATE;
 import static com.coherentlogic.wb.client.core.domain.Constants.WB_DECIMAL;
 import static com.coherentlogic.wb.client.core.domain.Constants.WB_INDICATOR;
 import static com.coherentlogic.wb.client.core.domain.Constants.WB_VALUE;
+import static com.coherentlogic.wb.client.core.domain.PropertyConstants.COUNTRY;
+import static com.coherentlogic.wb.client.core.domain.PropertyConstants.DATA_POINT_INDICATOR;
+import static com.coherentlogic.wb.client.core.domain.PropertyConstants.DATE;
+import static com.coherentlogic.wb.client.core.domain.PropertyConstants.DECIMAL;
+import static com.coherentlogic.wb.client.core.domain.PropertyConstants.VALUE;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
 import com.coherentlogic.wb.client.core.converters.DataPointConverter;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
@@ -27,11 +32,11 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 @Entity
 @Table(name=DATA_POINT_TBL)
 @XStreamConverter(value=DataPointConverter.class)
-public class DataPoint extends IdValuePair {
+public class DataPoint extends IdentityValueBean {
 
-    private static final long serialVersionUID = 4157231173162488200L;
+    private static final long serialVersionUID = 1969586975692213913L;
 
-    @XStreamAlias(WB_INDICATOR)
+	@XStreamAlias(WB_INDICATOR)
 //    @OneToOne(cascade = {CascadeType.ALL})
     private DataPointIndicator dataPointIndicator = null;
 

@@ -30,7 +30,7 @@ public class SourceDAOTest {
 
     @Before
     public void setUp() {
-        source = IdValuePairTestHelper.create(Source.class);
+        source = IdentityValueBeanTestHelper.create(Source.class);
     }
 
     @After
@@ -44,7 +44,7 @@ public class SourceDAOTest {
      */
     @Test
     public void testAllCRUDOperations () {
-        new IdValuePairTestHelper<Source>
+        new IdentityValueBeanTestHelper<Source>
             (sourceDAO).testAllCRUDOperations(source);
     }
 }

@@ -41,7 +41,7 @@ public class IncomeLevelsDAOTest {
         IncomeLevels result = new IncomeLevels ();
 
         IncomeLevel incomeLevel =
-            IdValuePairTestHelper.create(IncomeLevel.class);
+            IdentityValueBeanTestHelper.create(IncomeLevel.class);
 
         List<IncomeLevel> incomeLevelList = new ArrayList<IncomeLevel> ();
         
