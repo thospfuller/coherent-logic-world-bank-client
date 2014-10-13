@@ -1,6 +1,7 @@
 package com.coherentlogic.wb.client.db.integration.dao;
 
 import org.junit.Test;
+import static org.junit.Assert.fail;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -51,6 +52,9 @@ public abstract class BasicDAOTestHarness<P extends SerializableBean, C> {
         QueryBuilder queryBuilder = queryBuilderFactory.getInstance();
 
         P parent = query (queryBuilder);
+
+        if (parent == null)
+            fail("The resultant parent is null and this should never happen.");
 
         P result = reviewNonPersistedObject (parent);
 

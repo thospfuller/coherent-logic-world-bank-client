@@ -63,7 +63,7 @@ public class WBClientGUI extends ClientGUI<QueryBuilder> {
        return new AboutDialog(
            "About the World Bank Client",
            new JLabel[] {
-               newLabel("Coherent Logic World Bank Client GUI version 1.0.1"),
+               newLabel("Coherent Logic World Bank Client GUI version 1.0.3"),
                newLabel(
                    "Copyright (C) 2012 - Present Coherent Logic Limited; All " +
                    "Rights Reserved."),

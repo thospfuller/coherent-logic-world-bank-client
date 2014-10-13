@@ -46,7 +46,6 @@
         </property>
         <property name="annotatedClasses">
             <array>
-                <value>com.coherentlogic.wb.client.core.domain.IdValuePair</value>
                 <value>com.coherentlogic.wb.client.core.domain.CatalogSources</value>
                 <value>com.coherentlogic.wb.client.core.domain.CatalogSource</value>
                 <value>com.coherentlogic.wb.client.core.domain.IncomeLevels</value>
