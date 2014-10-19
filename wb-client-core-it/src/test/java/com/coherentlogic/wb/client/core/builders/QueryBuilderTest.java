@@ -242,7 +242,7 @@ public class QueryBuilderTest {
 
         assertNotNull (result);
 
-        reviewPaginationProperties (1, 4, 10, 36, result);
+        reviewPaginationProperties (1, 4, 10, 34, result);
 
         List<Country> countryList = result.getCountryList();
 
@@ -303,7 +303,7 @@ public class QueryBuilderTest {
 
         assertNotNull (result);
 
-        reviewPaginationProperties (1, 4, 10, 36, result);
+        reviewPaginationProperties (1, 4, 10, 34, result);
 
         List<Country> countryList = result.getCountryList();
 
