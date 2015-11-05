@@ -1,5 +1,7 @@
 package com.coherentlogic.wb.client.webstart.application;
 
+import static com.coherentlogic.coherent.data.model.demo.application.AboutDialog.newLabel;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -15,8 +17,9 @@ import javax.swing.JTextArea;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import static com.coherentlogic.coherent.data.model.demo.application.AboutDialog.newLabel;
 import com.coherentlogic.coherent.data.model.demo.application.AboutDialog;
 import com.coherentlogic.coherent.data.model.demo.application.ClientGUI;
 import com.coherentlogic.coherent.data.model.demo.application.GroovyEngine;
@@ -26,7 +29,7 @@ import com.coherentlogic.wb.client.core.factories.QueryBuilderFactory;
 
 /**
  * The front-end for the World Bank Client that allows users to directly work
- * with the {@link com.coherentlogic.fred.client.core.builders.QueryBuilder}. 
+ * with the {@link com.coherentlogic.wb.client.core.builders.QueryBuilder}. 
  *
  * @author <a href="support@coherentlogic.com">Support</a>
  */
@@ -177,5 +180,32 @@ public class WBClientGUI extends ClientGUI<QueryBuilder> {
     @Override
     protected String getDefaultExampleApplicationText() {
         return exampleMap.get (COUNTRIES);
+    }
+
+    private static final String WB_CLIENT_GUI = "wbClientGUI";
+
+    /**
+     * The main method uses the Spring application context to get an instance of
+     * {@link WBClientGUI} and then displays this object.
+     */
+    public static void main (String[] unused) throws IOException {
+
+        ApplicationContext applicationContext
+            = new ClassPathXmlApplicationContext (
+                "application-context.xml");
+
+//        SplashComponent splash;
+//
+//        try {
+//            splash = new SplashComponent ();
+//            splash.show();
+//        } catch (NullPointerException npe) {
+//            log.error("No splash will be displayed.", npe);
+//        }
+
+        WBClientGUI applet = (WBClientGUI)
+            applicationContext.getBean(WB_CLIENT_GUI);
+
+        applet.setVisible(true);
     }
 }
