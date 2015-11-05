@@ -73,7 +73,7 @@
         <module>wb-client-core</module>
         <module>wb-client-core-it</module>
         <module>wb-client-db-int</module>
-        <module>wb-client-webstart-application</module>
+        <!-- module>wb-client-webstart-application</module -->
     </modules>
 
     <dependencyManagement>
