@@ -60,68 +60,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>webstart-maven-plugin</artifactId>
-                <version>1.0-beta-6</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jnlp-inline</goal> <!-- use jnlp, jnlp-inline or jnlp-single as appropriate -->
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <excludeTransitive>false</excludeTransitive>
-
-                    <!-- The path where the libraries are stored within the jnlp structure. 
-                        not required. by default the libraries are within the working directory -->
-                    <libPath>lib</libPath>
-
-                    <!-- JNLP generation -->
-                    <jnlp>
-                        <outputFile>application.jnlp</outputFile>
-
-                        <!-- used to automatically identify the jar containing the main class. -->
-                        <!-- this is perhaps going to change -->
-                        <mainClass>com.coherentlogic.wb.client.core.main.Main</mainClass>
-                    </jnlp>
-
-                    <sign>
-                        <keystore>/development/temp/keystore/server.keystore</keystore>
-                        <keypass>${CA_CERT_PASSWORD}</keypass><!-- ${keypass} -->
-                        <storepass>${CA_CERT_PASSWORD}</storepass> <!-- ${storepass} -->
-                        <alias>coherent logic limited's comodo ca limited id</alias>
-
-                        <storetype>jks</storetype>
-                        <validity>365</validity>
-                        <dnameCn>Support</dnameCn>
-                        <dnameOu>Coherent Logic Limited</dnameOu>
-                        <dnameO>Coherent Logic Limited</dnameO>
-                        <dnameL>Vienna</dnameL>
-                        <dnameSt>Virginia</dnameSt>
-                        <dnameC>US</dnameC>
-
-                        <verify>true</verify>
-
-                        <keystoreConfig>
-                            <delete>false</delete>
-                            <gen>false</gen>
-                        </keystoreConfig>
-                    </sign>
-
-                    <!-- pack200>false</pack200>
-                    <gzip>true</gzip>
-                    <unsign>true</unsign -->
-
-                    <outputJarVersions>false</outputJarVersions>
-                    <verbose>true</verbose>
-                    <updateManifestEntries>
-                        <Permissions>all-permissions</Permissions>
-                    </updateManifestEntries>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>1.4</version>
