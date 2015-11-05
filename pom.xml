@@ -67,8 +67,9 @@
         as this causes problems and the process will fail. There may be a better 
         way to do this however at the moment commenting the module seems to work. -->
     <modules>
-        <!-- module>wb-client-assembly</module> <module>wb-client-config</module> 
-            <module>wb-client-misc</module -->
+        <module>wb-client-assembly</module>
+        <!-- module>wb-client-config</module> 
+        <module>wb-client-misc</module -->
         <module>wb-client-core</module>
         <module>wb-client-core-it</module>
         <module>wb-client-db-int</module>
@@ -87,6 +88,16 @@
             <dependency>
                 <groupId>com.coherentlogic.wb.client</groupId>
                 <artifactId>wb-client-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.coherentlogic.wb.client</groupId>
+                <artifactId>wb-client-db-int</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.coherentlogic.wb.client</groupId>
+                <artifactId>wb-client-webstart-application</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
