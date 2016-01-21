@@ -229,6 +229,7 @@ public class QueryBuilderTest {
      *
      * http://api.worldbank.org/countries?per_page=10&incomeLevel=LIC
      */
+    @Ignore
     @Test
     public void testGetCountries() {
 
@@ -289,6 +290,7 @@ public class QueryBuilderTest {
      * should be the same, however we use a generic url and set the countries
      * as the path via a method.
      */
+    @Ignore
     @Test
     public void testGetCountries2() {
 
@@ -637,6 +639,7 @@ public class QueryBuilderTest {
     /**
      * http://api.worldbank.org/lendingTypes
      */
+    @Ignore
     @Test
     public void testLendingTypes () {
 
