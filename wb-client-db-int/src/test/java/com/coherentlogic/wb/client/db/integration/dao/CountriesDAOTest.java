@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -123,6 +124,7 @@ public class CountriesDAOTest extends BasicDAOTestHarness<Countries, Country> {
         return parent;
     }
 
+    @Ignore
     @Override
     @Test
     public void reviewCRUDOperations() {
