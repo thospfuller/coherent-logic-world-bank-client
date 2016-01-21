@@ -18,7 +18,8 @@
     <description>Java client for the World Bank Web Services</description>
     <url>www.coherentlogic.com</url>
     <properties>
-        <data.model.version>1.0.16-RELEASE</data.model.version>
+        <data.model.version>1.0.18-RELEASE</data.model.version>
+        <java.version>1.8</java.version>
     </properties>
     <licenses>
         <license>
@@ -67,7 +68,7 @@
         as this causes problems and the process will fail. There may be a better 
         way to do this however at the moment commenting the module seems to work. -->
     <modules>
-        <module>wb-client-assembly</module>
+        <!-- module>wb-client-assembly</module -->
         <!-- module>wb-client-config</module> 
         <module>wb-client-misc</module -->
         <module>wb-client-core</module>
@@ -164,11 +165,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.3</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <compilerId>eclipse</compilerId>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <!-- @TODO: Remove the executable as we really don't want to have this 
+                        here in order to make this work as this destroys platform independence. -->
+                    <executable>C:/Program Files/Java/jdk1.8.0_66/bin/javac</executable>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -180,13 +183,33 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.4.1</version>
+                <executions>
+                    <execution>
+                        <id>enforce-java</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>[1.8.0,)</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.16</version>
+                <version>2.19</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9</version>
+                <version>2.10.3</version>
                 <configuration>
                     <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
                     <docletPath>C:/development/software/UMLGraph-5.6.6/lib/UmlGraph.jar</docletPath>
@@ -221,28 +244,31 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- https://issues.sonatype.org/browse/OSSRH-3376 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.2</version>
-                <!-- configuration> <port>9000</port> <tempWebappDirectory>${basedir}/target/site/tempdir</tempWebappDirectory> 
-                    </configuration -->
-            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <!-- https://issues.sonatype.org/browse/OSSRH-3376 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
