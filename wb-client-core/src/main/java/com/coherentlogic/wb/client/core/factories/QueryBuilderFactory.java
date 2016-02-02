@@ -20,7 +20,7 @@ import com.coherentlogic.wb.client.core.builders.QueryBuilder;
  * @todo Move this class into the data-model project. 
  */
 public class QueryBuilderFactory
-    extends AbstractQueryBuilderFactory<QueryBuilder> {
+    extends AbstractQueryBuilderFactory {
 
     public QueryBuilderFactory(RestTemplate restTemplate, String uri) {
         super(restTemplate, uri);

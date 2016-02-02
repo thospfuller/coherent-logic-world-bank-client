@@ -31,7 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
 
-import com.coherentlogic.coherent.data.model.core.builders.rest.AbstractQueryBuilder;
+import com.coherentlogic.coherent.data.model.core.builders.rest.AbstractRESTQueryBuilder;
 import com.coherentlogic.coherent.data.model.core.cache.CacheServiceProviderSpecification;
 import com.coherentlogic.wb.client.core.domain.Frequency;
 import com.coherentlogic.wb.client.core.domain.IncomeLevelCodes;
@@ -67,24 +67,32 @@ import com.coherentlogic.wb.client.core.exceptions.InvalidParameterValueExceptio
  * @todo Refactor this class as some of the logic needs to be shared between
  *  this class and the fred client.
  */
-public class QueryBuilder extends AbstractQueryBuilder {
+public class QueryBuilder extends AbstractRESTQueryBuilder {
 
     private static final Logger log =
         LoggerFactory.getLogger(QueryBuilder.class);
 
     static {
         log.warn("***********************************************************");
-        log.warn("*** Welcome to the Coherent Logic World Bank Client     ***");
-        log.warn("***             version 1.0.3-RELEASE.                  ***");
+        log.warn("***   Welcome to the Coherent Logic World Bank Client   ***");
+        log.warn("***               version 1.0.4-RELEASE.                ***");
         log.warn("***                                                     ***");
-        log.warn("*** NOTICE:                                             ***");
+        log.warn("***                Follow us on LinkedIn:               ***");
+        log.warn("***                                                     ***");
+        log.warn("***       https://www.linkedin.com/company/229316       ***");
+        log.warn("***                                                     ***");
+        log.warn("***                Follow us on Twitter:                ***");
+        log.warn("***                                                     ***");
+        log.warn("***         https://twitter.com/CoherentMktData         ***");
+        log.warn("***                                                     ***");
+        log.warn("*** --------------------- NOTICE ---------------------- ***");
         log.warn("***                                                     ***");
         log.warn("*** AS  OF  THE  1.0.3-RELEASE  THIS  PROJECT  HAS BEEN ***");
         log.warn("*** MOVED   FROM   SOURCEFORGE.NET   TO  BITBUCKET.ORG. ***");
         log.warn("*** PLEASE  VISIT THE FOLLOWING ADDRESS FROM THIS POINT ***");
         log.warn("*** FORWARD FOR ALL PROJECT-RELATED UPDATES:            ***");
         log.warn("***                                                     ***");
-        log.warn("*** http://bit.ly/1vZ5md8                               ***");
+        log.warn("***                http://bit.ly/1vZ5md8                ***");
         log.warn("***                                                     ***");
         log.warn("***********************************************************");
     }
