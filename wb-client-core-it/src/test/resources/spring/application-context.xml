@@ -23,7 +23,7 @@
           -->
         <property name="streamDriver">
             <!-- com.thoughtworks.xstream.io.xml.XppDriver / com.coherentlogic.wb.client.io.xml.BOMAwareXppDriver -->
-            <bean class="com.thoughtworks.xstream.io.xml.XppDriver">
+            <bean class="com.coherentlogic.wb.client.core.drivers.CustomXppDriver">
                 <constructor-arg>
                     <bean class="com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer">
                         <constructor-arg index="0" value="_-"/>
