@@ -7,10 +7,13 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
@@ -44,13 +47,15 @@ import com.coherentlogic.wb.client.core.exceptions.InvalidRequestException;
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="/spring/application-context.xml")
+@SpringBootApplication(scanBasePackages = {"com.coherentlogic.wb.client"})
 public class QueryBuilderTest {
 
     static final String WB_REST_TEMPLATE_ID = "wbRestTemplate";
 
-    private final ApplicationContext context
-        = new FileSystemXmlApplicationContext (
-            "src/test/resources/spring/application-context.xml");
+    @Autowired
+    private ApplicationContext context = null;
 
     private RestTemplate restTemplate = null;
 
@@ -61,6 +66,7 @@ public class QueryBuilderTest {
 
     @After
     public void tearDown() throws Exception {
+        context = null;
         restTemplate = null;
     }
 
@@ -229,7 +235,6 @@ public class QueryBuilderTest {
      *
      * http://api.worldbank.org/countries?per_page=10&incomeLevel=LIC
      */
-    @Ignore
     @Test
     public void testGetCountries() {
 
@@ -290,7 +295,6 @@ public class QueryBuilderTest {
      * should be the same, however we use a generic url and set the countries
      * as the path via a method.
      */
-    @Ignore
     @Test
     public void testGetCountries2() {
 
@@ -566,7 +570,6 @@ public class QueryBuilderTest {
      *
      * http://api.worldbank.org/indicators/NY.GDP.MKTP.CD
      */
-    @Ignore
     @Test
     public void testIndicators() {
 
@@ -588,7 +591,7 @@ public class QueryBuilderTest {
         Indicator firstIndicator = indicatorList.get(0);
 
         assertEquals ("NY.GDP.MKTP.CD", firstIndicator.getId());
-        assertEquals ("GDP (current US$)", firstIndicator.getName());
+        assertEquals ("GDP at market prices (current US$)", firstIndicator.getName());
 
         Source source = firstIndicator.getSource();
 
@@ -639,7 +642,6 @@ public class QueryBuilderTest {
     /**
      * http://api.worldbank.org/lendingTypes
      */
-    @Ignore
     @Test
     public void testLendingTypes () {
 
