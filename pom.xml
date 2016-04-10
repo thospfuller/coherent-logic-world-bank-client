@@ -30,8 +30,6 @@
         </license>
     </licenses>
 
-    <!-- scm> <connection></connection> <developerConnection></developerConnection> 
-        <url></url> <tag></tag> </scm -->
     <developers>
         <developer>
             <name>Support</name>
