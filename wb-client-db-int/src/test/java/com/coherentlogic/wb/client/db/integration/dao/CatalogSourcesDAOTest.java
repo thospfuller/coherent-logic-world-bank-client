@@ -1,10 +1,10 @@
 package com.coherentlogic.wb.client.db.integration.dao;
 
-import java.util.List;
-
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,7 +12,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +31,6 @@ import com.coherentlogic.wb.client.core.factories.QueryBuilderFactory;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration
 @Transactional
-@ContextConfiguration(locations={"/spring/application-context.xml"})
 public class CatalogSourcesDAOTest {
 
     @Autowired

@@ -20,7 +20,7 @@ import com.coherentlogic.wb.client.core.domain.LendingType;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration
 @Transactional
-@ContextConfiguration(locations={"/spring/application-context.xml"})
+@ContextConfiguration(locations={"classpath*:/spring/application-context.xml"})
 public class LendingTypeDAOTest {
 
     @Autowired

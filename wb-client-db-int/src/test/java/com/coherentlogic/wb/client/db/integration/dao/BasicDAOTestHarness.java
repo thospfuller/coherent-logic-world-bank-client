@@ -1,16 +1,16 @@
 package com.coherentlogic.wb.client.db.integration.dao;
 
-import org.junit.Test;
 import static org.junit.Assert.fail;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.coherentlogic.coherent.data.model.core.db.integration.dao.SerializableDAO;
 import com.coherentlogic.coherent.data.model.core.domain.SerializableBean;
-import com.coherentlogic.coherent.data.model.db.integration.dao.SerializableDAO;
 import com.coherentlogic.wb.client.core.builders.QueryBuilder;
 import com.coherentlogic.wb.client.core.factories.QueryBuilderFactory;
 
@@ -26,7 +26,6 @@ import com.coherentlogic.wb.client.core.factories.QueryBuilderFactory;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration
 @Transactional
-@ContextConfiguration(locations={"/spring/application-context.xml"})
 public abstract class BasicDAOTestHarness<P extends SerializableBean, C> {
 
     @Autowired

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
-import com.coherentlogic.coherent.data.model.db.integration.dao.SerializableDAO;
+import com.coherentlogic.coherent.data.model.core.db.integration.dao.SerializableDAO;
 
 /**
  * A class which is used to test children of {@link IdentityValueBean}.
