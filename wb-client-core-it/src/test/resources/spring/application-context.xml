@@ -5,6 +5,9 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:annotation-config />
+    <context:component-scan base-package="com.coherentlogic.wb.client" />
+
     <bean id="wbRestTemplate" class="org.springframework.web.client.RestTemplate">
         <property name="messageConverters">
             <list>
