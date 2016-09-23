@@ -32,7 +32,7 @@
         </property>
     </bean>
 
-    <bean id="sessionFactory"
+    <!-- bean id="sessionFactory"
         class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan" value="com.coherentlogic.fred.client.core.domain" />
@@ -52,7 +52,7 @@
                 <value>com.coherentlogic.wb.client.core.domain.DataPointIndicator
                 </value>
                 <value>com.coherentlogic.wb.client.core.domain.DataPoints</value>
-                <!-- value>com.coherentlogic.wb.client.core.domain.ErrorMessage</value -->
+                <!== value>com.coherentlogic.wb.client.core.domain.ErrorMessage</value ==>
                 <value>com.coherentlogic.wb.client.core.domain.Frequency</value>
                 <value>com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean</value>
                 <value>com.coherentlogic.wb.client.core.domain.IncomeLevel</value>
@@ -75,7 +75,7 @@
                 <value>com.coherentlogic.wb.client.core.domain.Message</value>
                 <value>com.coherentlogic.wb.client.core.domain.PaginationBean
                 </value>
-                <!-- Not sure we need this. -->
+                <!== Not sure we need this. ==>
                 <value>com.coherentlogic.wb.client.core.domain.PaginationSpecification
                 </value>
                 <value>com.coherentlogic.wb.client.core.domain.Region</value>
@@ -92,7 +92,7 @@
                 <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
             </util:properties>
         </property>
-    </bean>
+    </bean -->
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
