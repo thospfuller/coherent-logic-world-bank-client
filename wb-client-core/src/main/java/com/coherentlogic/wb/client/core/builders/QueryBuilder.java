@@ -22,6 +22,7 @@ import static com.coherentlogic.wb.client.core.domain.Constants.TOPIC;
 import static com.coherentlogic.wb.client.core.domain.Constants.TOPICS;
 import static com.coherentlogic.wb.client.core.domain.Constants.YES;
 
+import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,8 +32,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
 
+import com.coherentlogic.coherent.data.model.core.builders.AbstractQueryBuilder;
 import com.coherentlogic.coherent.data.model.core.builders.rest.AbstractRESTQueryBuilder;
 import com.coherentlogic.coherent.data.model.core.cache.CacheServiceProviderSpecification;
+import com.coherentlogic.coherent.data.model.core.util.WelcomeMessage;
 import com.coherentlogic.wb.client.core.domain.Frequency;
 import com.coherentlogic.wb.client.core.domain.IncomeLevelCodes;
 import com.coherentlogic.wb.client.core.domain.LendingTypeCodes;
@@ -41,6 +44,7 @@ import com.coherentlogic.wb.client.core.domain.RegionCodes;
 import com.coherentlogic.wb.client.core.exceptions.InvalidFromToFormatException;
 import com.coherentlogic.wb.client.core.exceptions.InvalidMetatypesException;
 import com.coherentlogic.wb.client.core.exceptions.InvalidParameterValueException;
+import com.coherentlogic.wb.client.core.services.GoogleAnalyticsMeasurementService;
 
 /**
  * Class that allows the developer to construct and execute a query to the
@@ -48,7 +52,7 @@ import com.coherentlogic.wb.client.core.exceptions.InvalidParameterValueExceptio
  * <p>
  * Note that this class is <b>not</b> thread-safe and cannot be used as a member
  * -level property -- if this is required, use the
- * {@link com.coherentlogic.fred.client.core.builders#RequestBuilderFactory
+ * {@link com.coherentlogic.wb.client.core.builders#RequestBuilderFactory
  * QueryBuilderFactory} class.
  * <p>
  * In order to facilitate method-chaining each setter method returns a reference
@@ -65,36 +69,79 @@ import com.coherentlogic.wb.client.core.exceptions.InvalidParameterValueExceptio
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  *
  * @todo Refactor this class as some of the logic needs to be shared between
- *  this class and the fred client.
+ *  this class and the FRED Client.
  */
-public class QueryBuilder extends AbstractRESTQueryBuilder {
+public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
 
-    private static final Logger log =
-        LoggerFactory.getLogger(QueryBuilder.class);
+    private static final Logger log = LoggerFactory.getLogger(QueryBuilder.class);
 
+    static final String[] WELCOME_MESSAGE = {
+        "*************************************************************************************************************",
+        "***                                                                                                       ***",
+        "***                        Welcome to the World Bank Client  (http://bit.ly/1vZ5md8)                      ***",
+        "***                                                                                                       ***",
+        "***                                        Version 1.0.5-RELEASE                                          ***",
+        "***                                                                                                       ***",
+        "***                              Please take a moment to follow us on Twitter:                            ***",
+        "***                                                                                                       ***",
+        "***                                    www.twitter.com/CoherentMktData                                    ***",
+        "***                                                                                                       ***",
+        "***                                          or on LinkedIn:                                              ***",
+        "***                                                                                                       ***",
+        "***                            www.linkedin.com/company/coherent-logic-limited                            ***",
+        "***                                                                                                       ***",
+        "***                            The project and issue tracker can be found here:                           ***",
+        "***                                                                                                       ***",
+        "***                 https://bitbucket.org/CoherentLogic/coherent-logic-world-bank-client                  ***",
+        "***                                                                                                       ***",
+        "*** ----------------------------------------------------------------------------------------------------- ***",
+        "***                                                                                                       ***",
+        "*** BE ADVISED:                                                                                           ***",
+        "***                                                                                                       ***",
+        "*** This framework uses the Google Analytics Measurement API (GAM) to track framework usage  information. ***",
+        "*** As this software is open-source, you are welcomed to review our use of GAM -- please  see  the  class ***",
+        "*** named  com.coherentlogic.wb.client.core.services.GoogleAnalyticsMeasurementService   and   feel  free ***",
+        "*** to send us an email if you have further questions.                                                    ***",
+        "***                                                                                                       ***",
+        "*** We do NOT recommend disabling this feature however we offer the option below, just add the following  ***",
+        "*** VM parameter and tracking will be disabled:                                                           ***",
+        "***                                                                                                       ***",
+        "*** -DGOOGLE_ANALYTICS_TRACKING=false                                                                     ***",
+        "***                                                                                                       ***",
+        "*** ----------------------------------------------------------------------------------------------------- ***",
+        "***                                                                                                       ***",
+        "*** We offer support and consulting services to businesses that  utilize  this  framework  or  that  have ***",
+        "*** custom financial data acquisition projects -- inquiries can be directed to:                           ***",
+        "***                                                                                                       ***",
+        "*** [M] sales@coherentlogic.com                                                                           ***",
+        "*** [T] +1.571.306.3403 (GMT-5)                                                                           ***",
+        "***                                                                                                       ***",
+        "*************************************************************************************************************"
+    };
+
+    /**
+     * Todo: Move this message so that it appears in the AbstractQueryBuilder.
+     */
     static {
-        log.warn("***********************************************************");
-        log.warn("***   Welcome to the Coherent Logic World Bank Client   ***");
-        log.warn("***               version 1.0.4-RELEASE.                ***");
-        log.warn("***                                                     ***");
-        log.warn("***                Follow us on LinkedIn:               ***");
-        log.warn("***                                                     ***");
-        log.warn("***       https://www.linkedin.com/company/229316       ***");
-        log.warn("***                                                     ***");
-        log.warn("***                Follow us on Twitter:                ***");
-        log.warn("***                                                     ***");
-        log.warn("***         https://twitter.com/CoherentMktData         ***");
-        log.warn("***                                                     ***");
-        log.warn("*** --------------------- NOTICE ---------------------- ***");
-        log.warn("***                                                     ***");
-        log.warn("*** AS  OF  THE  1.0.3-RELEASE  THIS  PROJECT  HAS BEEN ***");
-        log.warn("*** MOVED   FROM   SOURCEFORGE.NET   TO  BITBUCKET.ORG. ***");
-        log.warn("*** PLEASE  VISIT THE FOLLOWING ADDRESS FROM THIS POINT ***");
-        log.warn("*** FORWARD FOR ALL PROJECT-RELATED UPDATES:            ***");
-        log.warn("***                                                     ***");
-        log.warn("***                http://bit.ly/1vZ5md8                ***");
-        log.warn("***                                                     ***");
-        log.warn("***********************************************************");
+
+        GoogleAnalyticsMeasurementService googleAnalyticsMeasurementService = new GoogleAnalyticsMeasurementService ();
+
+        if (googleAnalyticsMeasurementService.shouldTrack()) {
+            try {
+                googleAnalyticsMeasurementService.fireGAFrameworkUsageEvent ();
+            } catch (Throwable thrown) {
+                log.warn("fireGAFrameworkUsageEvent: method call failed. This exception can be ignored, and the "
+                    + "framework will function without issue.", thrown);
+            }
+        }
+
+        WelcomeMessage welcomeMessage = new WelcomeMessage();
+
+        for (String next : WELCOME_MESSAGE) {
+            welcomeMessage.addText(next);
+        }
+
+        welcomeMessage.display();
     }
 
     /**
@@ -722,5 +769,21 @@ public class QueryBuilder extends AbstractRESTQueryBuilder {
         addParameter (METATYPES, metatypes);
 
         return this;
+    }
+
+    @Override
+    protected String getKey() {
+        return getEscapedURI();
+    }
+
+    @Override
+    protected <T> T doExecute(Class<T> type) {
+
+        // Using the escapedUri / ASCII string ends up double-encoding the text and this messes up the data because ":"
+        // will be encoded firstly to "%3A" and then later to "%253A", which is wrong and results in a 400 being
+        // returned from the WB.
+        URI uri = getUriBuilder().build();
+
+        return (T) getRestTemplate ().getForObject(uri, type);
     }
 }
