@@ -24,7 +24,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @Entity
 @Table(name=LENDING_TYPES_TBL)
 @XStreamAlias(WB_LENDING_TYPES)
-public class LendingTypes extends PaginationBean {
+public class LendingTypes extends PaginationBean<LendingTypes> {
 
     private static final long serialVersionUID = 2906188547364937411L;
 

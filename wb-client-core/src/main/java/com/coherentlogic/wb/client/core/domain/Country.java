@@ -37,6 +37,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  * @see http://data.worldbank.org/country
  * @see http://data.worldbank.org/querybuilder
  *
+ * @todo Add the SerializableBean type.
+ *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @Entity

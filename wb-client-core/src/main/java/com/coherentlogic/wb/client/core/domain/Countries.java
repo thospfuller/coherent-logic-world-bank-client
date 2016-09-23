@@ -30,7 +30,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @Entity
 @Table(name=COUNTRIES_TBL)
 @XStreamAlias(WB_COUNTRIES)
-public class Countries extends PaginationBean {
+public class Countries extends PaginationBean<Countries> {
 
     private static final long serialVersionUID = 4083267349540633057L;
 

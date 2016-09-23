@@ -23,6 +23,8 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
  * Topic only has a value when we call the indicators web service (see also
  * testTopics).
  *
+ * @todo Add the SerializableBean type.
+ *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @Entity

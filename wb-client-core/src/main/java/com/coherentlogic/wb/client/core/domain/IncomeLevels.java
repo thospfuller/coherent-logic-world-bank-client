@@ -19,12 +19,14 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
  *
  * http://api.worldbank.org/incomeLevels
  *
+ * @todo Add the SerializableBean type.
+ *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @Entity
 @Table(name=INCOME_LEVELS_TBL)
 @XStreamAlias(WB_INCOME_LEVELS)
-public class IncomeLevels extends PaginationBean {
+public class IncomeLevels extends PaginationBean<IncomeLevels> {
 
     private static final long serialVersionUID = 5116005522470843330L;
 

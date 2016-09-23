@@ -21,13 +21,14 @@ import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
  *
  * @see {@link DataPoint}
  *
+ * @todo Add the SerializableBean type.
+ *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @Entity
 @Table(name=DATA_POINT_INDICATOR_TBL)
 @XStreamAlias(WB_INDICATOR)
-@XStreamConverter(value=ToAttributedValueConverter.class,
-    types={IdentityValueBean.class}, strings={VALUE})
+@XStreamConverter(value=ToAttributedValueConverter.class, types={IdentityValueBean.class}, strings={VALUE})
 public class DataPointIndicator extends IdentityValueBean {
 
     private static final long serialVersionUID = -8077529068703406981L;

@@ -17,6 +17,8 @@ import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
  *
  * @see {@link CatalogSource} for use with http://api.worldbank.org/sources.
  *
+ * @todo Add the SerializableBean type.
+ *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @Entity

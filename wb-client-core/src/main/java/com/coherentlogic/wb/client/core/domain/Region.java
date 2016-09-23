@@ -17,6 +17,8 @@ import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
  *
  * http://api.worldbank.org/countries/br;gb
  *
+ * @todo Add the SerializableBean type.
+ *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @Entity
@@ -25,8 +27,7 @@ import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
 //We need the converter here otherwise XStream won't deserialize the XML
 //correctly. This is not exactly a beatiful solution, but it's not brutal
 //either.
-@XStreamConverter(value=ToAttributedValueConverter.class,
-    types={IdentityValueBean.class}, strings={VALUE})
+@XStreamConverter(value=ToAttributedValueConverter.class, types={IdentityValueBean.class}, strings={VALUE})
 public class Region extends IdentityValueBean {
 
     private static final long serialVersionUID = -3129188259811188868L;

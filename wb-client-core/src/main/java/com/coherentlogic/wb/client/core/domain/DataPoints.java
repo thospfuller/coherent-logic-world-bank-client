@@ -27,7 +27,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @Table(name=DATA_POINTS_TBL)
 @XStreamAlias(WB_DATA)
 @XStreamConverter(value=DataPointsConverter.class)
-public class DataPoints extends PaginationBean {
+public class DataPoints extends PaginationBean<DataPoints> {
 
     private static final long serialVersionUID = 7545981253467781206L;
 

@@ -17,6 +17,8 @@ import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
  * 
  * http://api.worldbank.org/incomeLevels
  *
+ * @todo Add the SerializableBean type.
+ *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @Entity

@@ -15,8 +15,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
- * Class represents data returned from a call to the World Bank web services
- * for <i>sources</i> data.
+ * Class represents data returned from a call to the World Bank web services for <i>sources</i> data.
  *
  * @see http://data.worldbank.org/querybuilder -> Data Calls -> Data Sources
  * @see http://api.worldbank.org/sources
@@ -29,7 +28,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @XStreamAlias(WB_SOURCES)
 // The converter does not have any impact on this class so it has been removed.
 //@XStreamConverter(value=CatalogSourcesConverter.class)
-public class CatalogSources extends PaginationBean {
+public class CatalogSources extends PaginationBean<CatalogSources> {
 
     private static final long serialVersionUID = -1630994255725531786L;
 

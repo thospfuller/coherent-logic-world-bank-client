@@ -27,7 +27,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @Table(name=TOPICS_TBL)
 @XStreamAlias(WB_TOPICS)
 @XStreamConverter(value=TopicsConverter.class)
-public class Topics extends PaginationBean {
+public class Topics extends PaginationBean<Topics> {
 
     private static final long serialVersionUID = -2608272772165645414L;
 

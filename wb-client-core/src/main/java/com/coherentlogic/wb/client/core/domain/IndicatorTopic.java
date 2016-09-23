@@ -19,6 +19,8 @@ import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
  *
  * http://api.worldbank.org/topic/5/indicator
  *
+ * @todo Add the SerializableBean type.
+ *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @Entity

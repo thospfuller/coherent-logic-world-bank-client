@@ -12,7 +12,10 @@ import static com.coherentlogic.wb.client.core.domain.PropertyConstants.DATE;
 import static com.coherentlogic.wb.client.core.domain.PropertyConstants.DECIMAL;
 import static com.coherentlogic.wb.client.core.domain.PropertyConstants.VALUE;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
@@ -26,6 +29,8 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
  * class:
  *
  * http://api.worldbank.org/countries/all/indicators/SP.POP.TOTL?date=2000:2002
+ *
+ * @todo Add the SerializableBean type.
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
@@ -55,6 +60,8 @@ public class DataPoint extends IdentityValueBean {
     public DataPoint() {
     }
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @PrimaryKeyJoinColumn
     public DataPointIndicator getDataPointIndicator() {
         return dataPointIndicator;
     }
@@ -68,6 +75,8 @@ public class DataPoint extends IdentityValueBean {
         firePropertyChange(DATA_POINT_INDICATOR, oldValue, dataPointIndicator);
     }
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @PrimaryKeyJoinColumn
     public DataPointCountry getCountry() {
         return country;
     }

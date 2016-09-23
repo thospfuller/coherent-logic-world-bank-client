@@ -14,8 +14,7 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
-public class PaginationBean extends SerializableBean
-    implements PaginationSpecification {
+public class PaginationBean<T> extends SerializableBean<T> implements PaginationSpecification {
 
     private static final long serialVersionUID = 5178764963047504945L;
 

@@ -23,7 +23,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
  */
 @Entity
 @Table(name=INDICATOR_TOPICS_TBL)
-public class IndicatorTopics extends PaginationBean {
+public class IndicatorTopics extends PaginationBean<IndicatorTopics> {
 
     private static final long serialVersionUID = -6352089579106533851L;
 

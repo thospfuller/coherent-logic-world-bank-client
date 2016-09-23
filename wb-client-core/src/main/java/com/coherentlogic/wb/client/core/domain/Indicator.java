@@ -13,7 +13,10 @@ import static com.coherentlogic.wb.client.core.domain.PropertyConstants.SOURCE;
 import static com.coherentlogic.wb.client.core.domain.PropertyConstants.SOURCE_NOTE;
 import static com.coherentlogic.wb.client.core.domain.PropertyConstants.SOURCE_ORGANIZATION;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.coherentlogic.coherent.data.model.core.domain.IdentityBean;
@@ -26,8 +29,9 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 /**
  * A representation of World Bank indicator data.
  *
- * @todo Review the need for an XStreamAlias here since we already have the
- *  converter assigned.
+ * @todo Review the need for an XStreamAlias here since we already have the converter assigned.
+ *
+ * @todo Add the SerializableBean type.
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
@@ -69,6 +73,8 @@ public class Indicator extends IdentityBean {
         firePropertyChange(NAME, oldValue, name);
     }
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @PrimaryKeyJoinColumn
     public Source getSource() {
         return source;
     }
@@ -108,6 +114,8 @@ public class Indicator extends IdentityBean {
         firePropertyChange(SOURCE_ORGANIZATION, oldValue, sourceOrganization);
     }
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @PrimaryKeyJoinColumn
     public IndicatorTopics getIndicatorTopics() {
         return indicatorTopics;
     }

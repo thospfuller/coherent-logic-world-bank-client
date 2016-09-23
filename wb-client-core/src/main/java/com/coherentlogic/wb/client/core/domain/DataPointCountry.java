@@ -5,6 +5,7 @@ import static com.coherentlogic.wb.client.core.domain.Constants.VALUE;
 import static com.coherentlogic.wb.client.core.domain.Constants.WB_COUNTRY;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
@@ -17,6 +18,8 @@ import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
  *
  * @see {@link DataPoint}
  *
+ * @todo Add the SerializableBean type.
+ *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @Entity
@@ -25,8 +28,8 @@ import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
 // We need the converter here otherwise XStream won't deserialize the XML
 // correctly. This is not exactly a beatiful solution, but it's not brutal
 // either.
-@XStreamConverter(value=ToAttributedValueConverter.class,
-    types={IdentityValueBean.class}, strings={VALUE})
+@XStreamConverter(value=ToAttributedValueConverter.class, types={IdentityValueBean.class}, strings={VALUE})
 public class DataPointCountry extends IdentityValueBean {
+
     private static final long serialVersionUID = 5930232423034113115L;
 }

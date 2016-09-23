@@ -8,12 +8,10 @@ import javax.persistence.Table;
 import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
 
 /**
- * This class represents a source as it exists as a member of an
- * {@link Indicator}.
+ * This class represents a source as it exists as a member of an {@link Indicator}.
  *
- * Note that this is not an ideal solution, though it's not too bad either
- * considering that the World Bank data model has a wb:source element used in
- * several places, however consisting of entirely different set of properties.
+ * Note that this is not an ideal solution, though it's not too bad either considering that the World Bank data model
+ * has a wb:source element used in several places, however consisting of entirely different set of properties.
  *
  * See the wb:source in the results from this call:
  * 
@@ -23,8 +21,9 @@ import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
  *
  * @see {@link Source}
  *
- * @todo This class is empty so we could have all properties persisted at the
- *  IdValuePair level.
+ * @todo This class is empty so we could have all properties persisted at the IdValuePair level.
+ *
+ * @todo Add the SerializableBean type.
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */

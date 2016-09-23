@@ -6,16 +6,18 @@ package com.coherentlogic.wb.client.core.domain;
  * @see http://data.worldbank.org/querybuilder IncomeLevels which has ten and
  *  here we only have nine.
  *
+ * @see http://api.worldbank.org/incomelevels
+ *
  * @see http://data.worldbank.org/node/246
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 public enum IncomeLevelCodes {
 
-    NOC,
+//    NOC, No longer valid and will be removed.
     OEC,
     HIC,
-    HPC,
+//    HPC, No longer valid and will be removed.
     LIC,
     LMC,
     LMY,

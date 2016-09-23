@@ -23,11 +23,11 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 @Entity
 @Table(name=INDICATORS_TBL)
 @XStreamAlias(WB_INDICATORS)
-public class Indicators extends PaginationBean {
+public class Indicators extends PaginationBean<Indicators> {
 
     private static final long serialVersionUID = -1865223070921338740L;
 
-	@XStreamAlias(WB_INDICATOR)
+    @XStreamAlias(WB_INDICATOR)
     @XStreamImplicit
     private List<Indicator> indicatorList;
 
@@ -45,29 +45,29 @@ public class Indicators extends PaginationBean {
         firePropertyChange(INDICATOR_LIST, oldValue, indicatorList);
     }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result
-			+ ((indicatorList == null) ? 0 : indicatorList.hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+            + ((indicatorList == null) ? 0 : indicatorList.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Indicators other = (Indicators) obj;
-		if (indicatorList == null) {
-			if (other.indicatorList != null)
-				return false;
-		} else if (!indicatorList.equals(other.indicatorList))
-			return false;
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Indicators other = (Indicators) obj;
+        if (indicatorList == null) {
+            if (other.indicatorList != null)
+                return false;
+        } else if (!indicatorList.equals(other.indicatorList))
+            return false;
+        return true;
+    }
 }

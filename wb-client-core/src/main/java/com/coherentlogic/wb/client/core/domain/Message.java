@@ -19,6 +19,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  * @todo Should this be serializable?
  *
+ * @todo Add the SerializableBean type.
+ *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @Entity

@@ -13,9 +13,8 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
 
 /**
- * Class represents an administrative region -- for example an administrative
- * region may contain the is "LCN" and the value may be set to "Latin America
- * & Caribbean (all income levels)".
+ * Class represents an administrative region -- for example an administrative region may contain the is "LCN" and the
+ * value may be set to "Latin America & Caribbean (all income levels)".
  *
  * @see http://data.worldbank.org/developers/api-overview
  *
@@ -24,11 +23,9 @@ import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
 @Entity
 @Table(name=ADMIN_REGION_TBL)
 @XStreamAlias(WB_ADMIN_REGION)
-//We need the converter here otherwise XStream won't deserialize the XML
-//correctly. This is not exactly a beatiful solution, but it's not brutal
-//either.
-@XStreamConverter(value=ToAttributedValueConverter.class,
-    types={IdentityValueBean.class}, strings={VALUE})
+// We need the converter here otherwise XStream won't deserialize the XML correctly. This is not exactly a beautiful
+// solution, but it's not brutal either.
+@XStreamConverter(value=ToAttributedValueConverter.class, types={IdentityValueBean.class}, strings={VALUE})
 public class AdminRegion extends IdentityValueBean {
 
     private static final long serialVersionUID = -4539675330396358361L;
