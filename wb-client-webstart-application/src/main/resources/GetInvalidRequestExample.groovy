@@ -10,5 +10,6 @@
 import com.coherentlogic.wb.client.core.domain.Countries
 
 Countries result = queryBuilder
+    .countries ("NA")
     .setIncomeLevel("Invalid parameter")
-    .doGet(Countries.class);
+    .doGet(Countries.class)

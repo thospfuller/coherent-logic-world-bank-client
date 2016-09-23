@@ -5,4 +5,8 @@
  */
 import com.coherentlogic.wb.client.core.domain.CatalogSources
 
-return queryBuilder.doGet(CatalogSources.class);
+def results = queryBuilder.sources().doGet(CatalogSources.class)
+
+catalogSourcesDAO.persist (results)
+
+return results

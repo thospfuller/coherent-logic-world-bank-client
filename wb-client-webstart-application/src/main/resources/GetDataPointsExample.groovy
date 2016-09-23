@@ -5,8 +5,12 @@
  */
 import com.coherentlogic.wb.client.core.domain.DataPoints
 
-return queryBuilder
+def results = queryBuilder
     .countries("all")
     .indicators("SP.POP.TOTL")
     .setDate("1998:2012")
     .doGet(DataPoints.class)
+
+dataPointsDAO.persist (results)
+
+return results

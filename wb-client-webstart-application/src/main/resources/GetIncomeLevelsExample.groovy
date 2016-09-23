@@ -6,4 +6,8 @@
 
 import com.coherentlogic.wb.client.core.domain.IncomeLevels
 
-return queryBuilder.doGet(IncomeLevels.class);
+def results = queryBuilder.incomeLevels ().doGet(IncomeLevels.class)
+
+incomeLevelsDAO.persist (results)
+
+return results

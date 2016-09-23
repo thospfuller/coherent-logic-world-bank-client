@@ -6,6 +6,8 @@
 
 import com.coherentlogic.wb.client.core.domain.Indicators
 
-def indicators = queryBuilder.doGet(Indicators.class);
+def results = queryBuilder.doGet(Indicators.class)
 
-return indicators
+indicatorsDAO.persist (results)
+
+return results

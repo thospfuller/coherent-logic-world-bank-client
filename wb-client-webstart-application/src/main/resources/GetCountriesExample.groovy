@@ -7,7 +7,12 @@
 import com.coherentlogic.wb.client.core.domain.IncomeLevelCodes
 import com.coherentlogic.wb.client.core.domain.Countries
 
-return queryBuilder
+def results = queryBuilder
+    .countries ()
     .setPerPage(10)
     .setIncomeLevel(IncomeLevelCodes.LIC)
-    .doGet(Countries.class);
+    .doGet(Countries.class)
+
+countriesDAO.persist (results)
+
+return results
