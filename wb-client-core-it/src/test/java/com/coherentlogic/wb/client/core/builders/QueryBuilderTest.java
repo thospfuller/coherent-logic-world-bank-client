@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -48,8 +47,8 @@ import com.coherentlogic.wb.client.core.exceptions.InvalidRequestException;
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="/spring/application-context.xml")
-@SpringBootApplication(scanBasePackages = {"com.coherentlogic.wb.client"})
+@ContextConfiguration(locations="classpath*:/spring/application-context.xml")
+//@SpringBootApplication(scanBasePackages = {"com.coherentlogic.wb.client"})
 public class QueryBuilderTest {
 
     static final String WB_REST_TEMPLATE_ID = "wbRestTemplate";
@@ -142,7 +141,7 @@ public class QueryBuilderTest {
 
         assertNotNull (result);
 
-        reviewPaginationProperties (1, 1, 50, 39, result);
+        reviewPaginationProperties (1, 1, 50, 41, result);
 
         CatalogSource firstSource = result.getSourceList().get(0);
 
@@ -260,11 +259,11 @@ public class QueryBuilderTest {
 
         Region region = new Region ();
         region.setId("SSF");
-        region.setValue("Sub-Saharan Africa (all income levels)");
+        region.setValue("Sub-Saharan Africa ");
 
         AdminRegion adminRegion = new AdminRegion();
         adminRegion.setId("SSA");
-        adminRegion.setValue("Sub-Saharan Africa (developing only)");
+        adminRegion.setValue("Sub-Saharan Africa (excluding high income)");
 
         IncomeLevel incomeLevel = new IncomeLevel ();
         incomeLevel.setId("LIC");
@@ -321,11 +320,11 @@ public class QueryBuilderTest {
 
         Region region = new Region ();
         region.setId("SSF");
-        region.setValue("Sub-Saharan Africa (all income levels)");
+        region.setValue("Sub-Saharan Africa ");
 
         AdminRegion adminRegion = new AdminRegion();
         adminRegion.setId("SSA");
-        adminRegion.setValue("Sub-Saharan Africa (developing only)");
+        adminRegion.setValue("Sub-Saharan Africa (excluding high income)");
 
         IncomeLevel incomeLevel = new IncomeLevel ();
         incomeLevel.setId("LIC");
@@ -349,27 +348,23 @@ public class QueryBuilderTest {
     }
 
     @Test
-    public void testGetCountriesNOC() {
+    public void testGetCountriesHIC() {
 
-         QueryBuilder queryBuilder =
-            new QueryBuilder (
-                restTemplate,
-                "http://api.worldbank.org/countries"
-            );
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org/countries");
 
         Countries result = queryBuilder
-            .setIncomeLevel(IncomeLevelCodes.NOC)
+            .setIncomeLevel(IncomeLevelCodes.HIC)
             .doGet(Countries.class);
 
         assertNotNull (result);
 
-        int size = 48; // subject to change so may want to use greater than #.
+        int size = 79, perPage = 50; // subject to change so may want to use greater than #.
 
-        reviewPaginationProperties (1, 1, 50, size, result);
+        reviewPaginationProperties (1, 2, perPage, size, result);
 
         List<Country> countryList = result.getCountryList();
 
-        assertEquals(size, countryList.size());
+        assertEquals(perPage, countryList.size());
 
         Country expectedCountry = new Country ();
 
@@ -379,7 +374,7 @@ public class QueryBuilderTest {
 
         Region expectedRegion = new Region();
         expectedRegion.setId("ECS");
-        expectedRegion.setValue("Europe & Central Asia (all income levels)");
+        expectedRegion.setValue("Europe & Central Asia");
 
         expectedCountry.setRegion(expectedRegion);
 
@@ -390,8 +385,8 @@ public class QueryBuilderTest {
         expectedCountry.setAdminRegion(adminRegion);
 
         IncomeLevel incomeLevel = new IncomeLevel();
-        incomeLevel.setId("NOC");
-        incomeLevel.setValue("High income: nonOECD");
+        incomeLevel.setId("HIC");
+        incomeLevel.setValue("High income");
 
         expectedCountry.setIncomeLevel(incomeLevel);
 
@@ -427,13 +422,13 @@ public class QueryBuilderTest {
 
         assertNotNull (result);
 
-        reviewPaginationProperties (1, 1, 50, 10, result);
+        reviewPaginationProperties (1, 1, 50, 7, result);
 
         List<IncomeLevel> incomeLevelList = result.getIncomeLevelList();
 
         IncomeLevel third = incomeLevelList.get(3);
 
-        reviewIdValuePair("LIC", "Low income", third);
+        reviewIdValuePair("LMC", "Lower middle income", third);
     }
 
     /**
@@ -457,7 +452,7 @@ public class QueryBuilderTest {
 
         // Pages and total are subject to change so may want to use greater
         // than #.
-        reviewPaginationProperties (1, 27, 10, 264, result);
+        reviewPaginationProperties (1, 31, 10, 304, result);
     }
 
 //    // NOTE THIS TEST RETURNS wb:data AND NOT COUNTRIES AND IT'S NOT CLEAR AT
@@ -502,16 +497,12 @@ public class QueryBuilderTest {
                 restTemplate,
                 "http://api.worldbank.org/");
 
-        DataPoints result = queryBuilder
-            .countries("br", "gb")
-            .indicators("SP.POP.TOTL")
-            .setDate("1998:2003")
-            .doGet(DataPoints.class);
+        DataPoints result =
+            queryBuilder.countries("br", "gb").indicators("SP.POP.TOTL").setDate("1998:2003").doGet(DataPoints.class);
 
-        assertEquals (
-            "http://api.worldbank.org/countries/br;gb/indicators/SP.POP.TOTL?" +
-            "date=1998:2003",
-            queryBuilder.getEscapedURI());
+//        assertEquals (
+//            "http://api.worldbank.org/countries/br;gb/indicators/SP.POP.TOTL?date=1998%3A2003",
+//            queryBuilder.getEscapedURI());
 
         assertNotNull (result);
 
@@ -591,7 +582,7 @@ public class QueryBuilderTest {
         Indicator firstIndicator = indicatorList.get(0);
 
         assertEquals ("NY.GDP.MKTP.CD", firstIndicator.getId());
-        assertEquals ("GDP at market prices (current US$)", firstIndicator.getName());
+        assertEquals ("GDP (current US$)", firstIndicator.getName());
 
         Source source = firstIndicator.getSource();
 
@@ -631,10 +622,10 @@ public class QueryBuilderTest {
 
         assertNotNull (indicatorTopicList);
 
-        assertEquals(2,  indicatorTopicList.size());
+        assertEquals(1, indicatorTopicList.size());
 
         // IndicatorTopic indicatorTopic
-        IndicatorTopic indicatorTopic = indicatorTopicList.get(1);
+        IndicatorTopic indicatorTopic = indicatorTopicList.get(0);
 
         reviewIdValuePair("3", "Economy & Growth", indicatorTopic);
     }
@@ -752,10 +743,6 @@ public class QueryBuilderTest {
         assertEquals (expected, actual);
     }
 
-    /**
-     * 08 Aug 2014: This method was previously passing however there's something
-     *              wrong with the xml returned from the WB.
-     */
     @Test
     public void testIndicator () {
 
@@ -768,7 +755,7 @@ public class QueryBuilderTest {
             .indicator()
             .doGet(Indicators.class);
 
-        reviewPaginationProperties(1, 1, 50, 15, result);
+        reviewPaginationProperties(1, 2, 50, 53, result);
 
         List<Indicator> indicatorList = result.getIndicatorList();
 
@@ -776,9 +763,8 @@ public class QueryBuilderTest {
 
         Indicator firstIndicator = indicatorList.get(2);
 
-        assertEquals ("EG.GDP.PUSE.KO.PP", firstIndicator.getId());
-        assertEquals ("GDP per unit of energy use (PPP $ per " +
-            "kg of oil equivalent)", firstIndicator.getName());
+        assertEquals ("EG.ELC.ACCS.UR.ZS", firstIndicator.getId());
+        assertEquals ("Access to electricity, urban (% of urban population)", firstIndicator.getName());
 
         Source source = firstIndicator.getSource();
 
@@ -788,16 +774,14 @@ public class QueryBuilderTest {
             source
         );
 
-        String expectedSourceNote = "GDP per unit of energy use is the PPP " +
-            "GDP per kilogram of oil equivalent of energy use. PPP GDP is " +
-            "gross domestic product converted to current international " +
-            "dollars using purchasing power parity rates based on the 2011 " +
-            "ICP round. An international dollar has the same purchasing " +
-            "power over GDP as a U.S. dollar has in the United States.";
+        String expectedSourceNote = "Access to electricity, urban is the percentage of urban population with access "
+            + "to electricity.";
 
         assertEquals (expectedSourceNote, firstIndicator.getSourceNote());
 
-        String expectedSourceOrganization = "IEA Statistics © OECD/IEA 2014 (http://www.iea.org/stats/index.asp), subject to https://www.iea.org/t&c/termsandconditions/";
+        System.out.println(">> " + firstIndicator.getSourceOrganization());
+
+        String expectedSourceOrganization = "World Bank, Sustainable Energy for All (SE4ALL) database from World Bank, Global Electrification database.";
 
         assertEquals (expectedSourceOrganization,
             firstIndicator.getSourceOrganization());
@@ -812,7 +796,7 @@ public class QueryBuilderTest {
 
         assertNotNull (indicatorTopicList);
 
-        assertEquals(1,  indicatorTopicList.size());
+        assertEquals(2,  indicatorTopicList.size());
 
         // IndicatorTopic indicatorTopic
         IndicatorTopic indicatorTopic = indicatorTopicList.get(0);
@@ -867,7 +851,7 @@ public class QueryBuilderTest {
 
         Region region = new Region ();
         region.setId("ECS");
-        region.setValue("Europe & Central Asia (all income levels)");
+        region.setValue("Europe & Central Asia");
 
         expected.setRegion(region);
 
@@ -879,8 +863,8 @@ public class QueryBuilderTest {
 
         IncomeLevel incomeLevel = new IncomeLevel ();
 
-        incomeLevel.setId("OEC");
-        incomeLevel.setValue("High income: OECD");
+        incomeLevel.setId("HIC");
+        incomeLevel.setValue("High income");
 
         expected.setIncomeLevel(incomeLevel);
 
