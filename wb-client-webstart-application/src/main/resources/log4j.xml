@@ -3,6 +3,14 @@
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
+    <appender name="fileAppender" class="org.apache.log4j.FileAppender">
+        <param name="file" value="${user.home}/worldbank-client/worldbank-client-log4j.log"/>
+        <param name="append" value="false" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %c{1} - %m%n"/>
+        </layout>
+    </appender>
+
     <appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
         <param name="Target" value="System.out"/>
         <layout class="org.apache.log4j.PatternLayout">
@@ -10,24 +18,39 @@
         </layout>
     </appender>
 
-    <logger name="com.coherentlogic">
-        <level value="debug"/>
+    <logger name="org.hibernate">
+        <level value="info"/>
+        <appender-ref ref="fileAppender"/>
         <appender-ref ref="consoleAppender"/>
     </logger>
 
-    <logger name="org.springframework.web.client">
-        <level value="debug"/>
+    <logger name="org.hibernate.jdbc">
+        <level value="trace"/>
+        <appender-ref ref="fileAppender"/>
         <appender-ref ref="consoleAppender"/>
     </logger>
 
-    <logger name="httpclient.wire">
-        <level value="debug"/>
+    <logger name="org.hibernate.SQL">
+        <level value="trace"/>
+        <appender-ref ref="fileAppender"/>
+        <appender-ref ref="consoleAppender"/>
+    </logger>
+
+    <logger name="org.hibernate.type.descriptor.sql">
+        <level value="info"/>
+        <appender-ref ref="fileAppender"/>
+        <appender-ref ref="consoleAppender"/>
+    </logger>
+
+    <logger name="org.hibernate.type">
+        <level value="info"/>
+        <appender-ref ref="fileAppender"/>
         <appender-ref ref="consoleAppender"/>
     </logger>
 
     <root>
-        <priority value ="info" />
-        <appender-ref ref="consoleAppender" />
+        <priority value="trace" />
+        <appender-ref ref="fileAppender" />
+        <appender-ref ref="consoleAppender"/>
     </root>
-
 </log4j:configuration>

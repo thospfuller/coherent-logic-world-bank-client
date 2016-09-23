@@ -11,7 +11,7 @@
     <bean id="getIndicatorsExample" class="java.lang.String"
      factory-bean="getIndicatorsExampleFactory" factory-method="getInstance"/>
 
-    <bean id="getIndicatorsExampleFactory" class="com.coherentlogic.wb.client.webstart.application.ExampleFactory">
+    <bean id="getIndicatorsExampleFactory" class="com.coherentlogic.coherent.data.adapter.application.ExampleFactory">
         <constructor-arg name="resource" ref="getIndicatorsExampleResource"/>
     </bean>
 

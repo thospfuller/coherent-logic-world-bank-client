@@ -5,13 +5,13 @@
 
     <bean id="catalogSourcesQueryBuilderFactory" class="com.coherentlogic.wb.client.core.factories.QueryBuilderFactory">
         <constructor-arg name="restTemplate" ref="wbRestTemplate"/>
-        <constructor-arg name="uri" value="http://api.worldbank.org/sources"/>
+        <constructor-arg name="uri" value="http://api.worldbank.org"/>
     </bean>
 
     <bean id="getCatalogSourcesExample" class="java.lang.String"
      factory-bean="getCatalogSourcesExampleFactory" factory-method="getInstance"/>
 
-    <bean id="getCatalogSourcesExampleFactory" class="com.coherentlogic.wb.client.webstart.application.ExampleFactory">
+    <bean id="getCatalogSourcesExampleFactory" class="com.coherentlogic.coherent.data.adapter.application.ExampleFactory">
         <constructor-arg name="resource" ref="getCatalogSourcesExampleResource"/>
     </bean>
 

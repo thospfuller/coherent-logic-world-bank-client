@@ -11,7 +11,7 @@
     <bean id="getDataPointsExample" class="java.lang.String"
      factory-bean="getDataPointsExampleFactory" factory-method="getInstance"/>
 
-    <bean id="getDataPointsExampleFactory" class="com.coherentlogic.wb.client.webstart.application.ExampleFactory">
+    <bean id="getDataPointsExampleFactory" class="com.coherentlogic.coherent.data.adapter.application.ExampleFactory">
         <constructor-arg name="resource" ref="getDataPointsExampleResource"/>
     </bean>
 

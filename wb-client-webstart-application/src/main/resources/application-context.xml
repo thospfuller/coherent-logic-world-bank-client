@@ -63,10 +63,20 @@
                 <value>com.coherentlogic.wb.client.core.domain.ErrorMessage</value>
             </array>
         </property>
+        <!-- If we don't have this set then the instance of PropertyChangeSupport will be null and this will result in
+             an NPE when the fire methods are invoked. -->
+        <property name="marshallingStrategy">
+            <bean class="com.coherentlogic.coherent.data.model.core.xstream.CustomMarshallingStrategy"/>
+        </property>
     </bean>
 
     <bean id="xstreamMarshaller" class="com.coherentlogic.wb.client.core.marshallers.WBXStreamMarshallerDelegate">
         <constructor-arg ref="springXStreamMarshaller"/>
+    </bean>
+
+    <bean id="queryBuilderFactory" class="com.coherentlogic.wb.client.core.factories.QueryBuilderFactory" scope="prototype">
+        <constructor-arg name="restTemplate" ref="wbRestTemplate"/>
+        <constructor-arg name="uri" value="http://api.worldbank.org/"/>
     </bean>
 
     <util:map id="queryBuilderFactoryMap">
@@ -89,16 +99,8 @@
 
     <bean id="binding" class="groovy.lang.Binding"/>
 
-    <bean id="groovyEngine" class="com.coherentlogic.coherent.data.model.demo.application.GroovyEngine">
+    <bean id="groovyEngine" class="com.coherentlogic.coherent.data.adapter.application.GroovyEngine">
         <constructor-arg name="binding" ref="binding"/>
-    </bean>
-
-    <bean id="wbClientGUI"
-     class="com.coherentlogic.wb.client.webstart.application.WBClientGUI"
-     init-method="initialize">
-        <constructor-arg name="groovyEngine" ref="groovyEngine"/>
-        <constructor-arg name="queryBuilderFactoryMap" ref="queryBuilderFactoryMap"/>
-        <constructor-arg name="exampleMap" ref="exampleMap"/>
     </bean>
 </beans>
 
