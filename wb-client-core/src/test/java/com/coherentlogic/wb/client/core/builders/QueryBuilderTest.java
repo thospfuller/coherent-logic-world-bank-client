@@ -229,7 +229,7 @@ public class QueryBuilderTest {
 
     @Test
     public void testSetIncomeLevelWithValidValues () {
-        queryBuilder.setIncomeLevel(IncomeLevelCodes.HPC);
+        queryBuilder.setIncomeLevel(IncomeLevelCodes.HIC);
     }
 
     @Test
