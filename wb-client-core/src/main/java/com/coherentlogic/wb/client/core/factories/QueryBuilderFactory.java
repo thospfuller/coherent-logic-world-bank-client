@@ -8,19 +8,14 @@ import com.coherentlogic.wb.client.core.builders.QueryBuilder;
 /**
  * A factory which is used for creating instances of QueryBuilder.
  * <p>
- * Since the QueryBuilder is not thread-safe, it cannot be set as a member
- * variable -- instead, use this factory and call {@link #getInstance()}
- * whenever you need a new QueryBuilder.
+ * Since the QueryBuilder is not thread-safe, it cannot be set as a member variable -- instead, use this factory and
+ * call {@link #getInstance()} whenever you need a new QueryBuilder.
  * <p>
- * This class can be extended, for example, if you need to always return the
- * same value for some query parameter.
+ * This class can be extended, for example, if you need to always return the same value for some query parameter.
  * <p>
  * @author <a href="support@coherentlogic.com">Support</a>
- *
- * @todo Move this class into the data-model project. 
  */
-public class QueryBuilderFactory
-    extends AbstractQueryBuilderFactory {
+public class QueryBuilderFactory extends AbstractQueryBuilderFactory {
 
     public QueryBuilderFactory(RestTemplate restTemplate, String uri) {
         super(restTemplate, uri);
