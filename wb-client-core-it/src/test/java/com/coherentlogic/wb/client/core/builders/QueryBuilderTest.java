@@ -779,9 +779,8 @@ public class QueryBuilderTest {
 
         assertEquals (expectedSourceNote, firstIndicator.getSourceNote());
 
-        System.out.println(">> " + firstIndicator.getSourceOrganization());
-
-        String expectedSourceOrganization = "World Bank, Sustainable Energy for All (SE4ALL) database from World Bank, Global Electrification database.";
+        String expectedSourceOrganization = "World Bank, Sustainable Energy for All (SE4ALL) database from World "
+            + "Bank, Global Electrification database.";
 
         assertEquals (expectedSourceOrganization,
             firstIndicator.getSourceOrganization());
