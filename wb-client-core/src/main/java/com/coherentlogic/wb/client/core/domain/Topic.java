@@ -35,7 +35,7 @@ public class Topic extends IdentityValueBean {
 
     private static final long serialVersionUID = -3187439709310925507L;
 
-	/**
+    /**
      * The value comes through as an attribute so we override the parent's
      * accessor and mutator methods and declare the property here so that we
      * can apply the appropriate annotation to it.
