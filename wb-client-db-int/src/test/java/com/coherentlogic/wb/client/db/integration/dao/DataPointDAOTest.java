@@ -26,7 +26,7 @@ import com.coherentlogic.wb.client.core.domain.DataPointIndicator;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration
 @Transactional
-@ContextConfiguration(locations={"classpath*:/spring/application-context.xml"})
+@ContextConfiguration(locations={"classpath*:/spring-test/application-context.xml"})
 public class DataPointDAOTest {
 
     static final String DATE = "2006", DECIMAL = "0", ID = "idx";

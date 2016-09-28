@@ -30,7 +30,7 @@ import com.coherentlogic.wb.client.core.domain.Indicators;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration
 @Transactional
-@ContextConfiguration(locations={"classpath*:/spring/application-context.xml"})
+@ContextConfiguration(locations={"classpath*:/spring-test/application-context.xml"})
 public class IndicatorsDAOTest {
 
     static final String NAME = "nombre",
