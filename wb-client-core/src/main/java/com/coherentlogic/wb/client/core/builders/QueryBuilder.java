@@ -64,7 +64,10 @@ import com.coherentlogic.wb.client.core.services.GoogleAnalyticsMeasurementServi
  *
  * @see http://data.worldbank.org
  * @see http://data.worldbank.org/developers/data-catalog-api
+ * @see http://data.worldbank.org/developers
  * @see http://data.worldbank.org/querybuilder
+ * @see http://databank.worldbank.org/data/home.aspx
+ * @see http://datacatalog.worldbank.org/
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  *
