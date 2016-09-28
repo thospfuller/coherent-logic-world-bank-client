@@ -21,7 +21,10 @@ import static com.coherentlogic.wb.client.core.domain.PropertyConstants.LENDING_
 import static com.coherentlogic.wb.client.core.domain.PropertyConstants.LONGITUDE;
 import static com.coherentlogic.wb.client.core.domain.PropertyConstants.REGION;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.coherentlogic.coherent.data.model.core.domain.IdentityBean;
@@ -111,6 +114,8 @@ public class Country extends IdentityBean {
         firePropertyChange(NAME, oldValue, name);
     }
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @PrimaryKeyJoinColumn
     public Region getRegion() {
         return region;
     }
@@ -124,6 +129,8 @@ public class Country extends IdentityBean {
         firePropertyChange(REGION, oldValue, region);
     }
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @PrimaryKeyJoinColumn
     public AdminRegion getAdminRegion() {
         return adminRegion;
     }
@@ -137,6 +144,8 @@ public class Country extends IdentityBean {
         firePropertyChange(ADMIN_REGION, oldValue, adminRegion);
     }
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @PrimaryKeyJoinColumn
     public IncomeLevel getIncomeLevel() {
         return incomeLevel;
     }
@@ -150,6 +159,8 @@ public class Country extends IdentityBean {
         firePropertyChange(INCOME_LEVEL, oldValue, incomeLevel);
     }
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @PrimaryKeyJoinColumn
     public LendingType getLendingType() {
         return lendingType;
     }
