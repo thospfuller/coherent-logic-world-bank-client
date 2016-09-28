@@ -63,6 +63,11 @@
                 <value>com.coherentlogic.wb.client.core.domain.DataPointIndicator</value>
             </array>
         </property>
+        <!-- If we don't have this set then the instance of PropertyChangeSupport will be null and this will result in
+             an NPE when the fire methods are invoked. -->
+        <property name="marshallingStrategy">
+            <bean class="com.coherentlogic.coherent.data.model.core.xstream.CustomMarshallingStrategy"/>
+        </property>
     </bean>
 
     <bean id="xstreamMarshaller" class="com.coherentlogic.wb.client.core.marshallers.WBXStreamMarshallerDelegate">
