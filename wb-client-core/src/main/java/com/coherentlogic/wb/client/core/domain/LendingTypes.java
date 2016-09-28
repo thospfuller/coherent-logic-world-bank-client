@@ -28,7 +28,7 @@ public class LendingTypes extends PaginationBean<LendingTypes> {
 
     private static final long serialVersionUID = 2906188547364937411L;
 
-	@XStreamImplicit
+    @XStreamImplicit
     private List<LendingType> lendingTypeList = null;
 
     @OneToMany(cascade=CascadeType.ALL)
