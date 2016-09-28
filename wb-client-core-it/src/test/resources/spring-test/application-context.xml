@@ -50,7 +50,7 @@
                 <value>com.coherentlogic.wb.client.core.domain.IndicatorTopics</value>
                 <value>com.coherentlogic.wb.client.core.domain.Topics</value>
                 <value>com.coherentlogic.wb.client.core.domain.Topic</value>
-                
+
                 <value>com.coherentlogic.wb.client.core.domain.LendingTypes</value>
                 <value>com.coherentlogic.wb.client.core.domain.Message</value>
                 <value>com.coherentlogic.wb.client.core.domain.ErrorMessage</value>
