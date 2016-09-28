@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ImportResource;
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @Configuration
-@ImportResource({"classpath*:h2-jpa-beans.xml", "classpath*:application-context.xml"})
+@ImportResource({"classpath*:/spring-app/h2-jpa-beans.xml", "classpath*:/spring-app/application-context.xml"})
 public class XMLConfiguration {
 
 }
