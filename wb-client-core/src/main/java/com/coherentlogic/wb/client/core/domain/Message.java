@@ -28,9 +28,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias(WB_MESSAGE)
 public class Message extends IdentityValueBean {
 
-	private static final long serialVersionUID = -7537455771776289598L;
+    private static final long serialVersionUID = -7537455771776289598L;
 
-	@XStreamAlias(KEY)
+    @XStreamAlias(KEY)
     private String key = null;
 
     public Message() {
