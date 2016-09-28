@@ -13,8 +13,7 @@ import com.thoughtworks.xstream.mapper.Mapper;
  */
 public class DataPointConverter extends ReflectionConverter {
 
-    public DataPointConverter(Mapper mapper,
-        ReflectionProvider reflectionProvider) {
+    public DataPointConverter(Mapper mapper, ReflectionProvider reflectionProvider) {
         super(mapper, reflectionProvider);
     }
 
