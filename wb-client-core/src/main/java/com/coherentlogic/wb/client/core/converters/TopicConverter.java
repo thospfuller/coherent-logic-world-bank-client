@@ -6,15 +6,13 @@ import com.thoughtworks.xstream.converters.reflection.ReflectionProvider;
 import com.thoughtworks.xstream.mapper.Mapper;
 
 /**
- * A converter that converts wb:topic elements into instances of
- * {@link Topic}.
+ * A converter that converts wb:topic elements into instances of {@link Topic}.
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 public class TopicConverter extends ReflectionConverter {
 
-    public TopicConverter(Mapper mapper,
-        ReflectionProvider reflectionProvider) {
+    public TopicConverter(Mapper mapper, ReflectionProvider reflectionProvider) {
         super(mapper, reflectionProvider);
     }
 

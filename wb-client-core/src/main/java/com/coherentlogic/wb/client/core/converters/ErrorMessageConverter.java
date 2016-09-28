@@ -8,8 +8,7 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 
 /**
- *  A converter that converts wb:message elements into instances of
- * {@link Message}.
+ * A converter that converts wb:message elements into instances of {@link Message}.
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */

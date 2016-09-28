@@ -6,15 +6,13 @@ import com.thoughtworks.xstream.converters.reflection.ReflectionProvider;
 import com.thoughtworks.xstream.mapper.Mapper;
 
 /**
- *  A converter that converts wb:data elements into instances of
- * {@link DataPoints}.
+ *  A converter that converts wb:data elements into instances of {@link DataPoints}.
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 public class DataPointsConverter extends ReflectionConverter {
 
-    public DataPointsConverter(Mapper mapper,
-        ReflectionProvider reflectionProvider) {
+    public DataPointsConverter(Mapper mapper, ReflectionProvider reflectionProvider) {
         super(mapper, reflectionProvider);
     }
 
@@ -22,14 +20,4 @@ public class DataPointsConverter extends ReflectionConverter {
     public boolean canConvert(Class type) {
         return DataPoints.class.isAssignableFrom(type);
     }
-
-//    @Override
-//    public Object unmarshal(
-//        HierarchicalStreamReader reader,
-//        UnmarshallingContext context
-//    ) {
-//        Object obj = super.unmarshal(reader, context);
-//
-//        return obj;
-//    }
 }

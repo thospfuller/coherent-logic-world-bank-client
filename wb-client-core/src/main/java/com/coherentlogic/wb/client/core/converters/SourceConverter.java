@@ -7,8 +7,7 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 
 /**
- * A converter that converts wb:source elements into instances of
- * {@link Source}.
+ * A converter that converts wb:source elements into instances of {@link Source}.
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */

@@ -6,15 +6,13 @@ import com.thoughtworks.xstream.converters.reflection.ReflectionProvider;
 import com.thoughtworks.xstream.mapper.Mapper;
 
 /**
- * A converter that converts wb:indicator elements into instances of
- * {@link Indicator}.
+ * A converter that converts wb:indicator elements into instances of {@link Indicator}.
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 public class IndicatorConverter extends ReflectionConverter {
 
-    public IndicatorConverter(Mapper mapper,
-        ReflectionProvider reflectionProvider) {
+    public IndicatorConverter(Mapper mapper, ReflectionProvider reflectionProvider) {
         super(mapper, reflectionProvider);
     }
 

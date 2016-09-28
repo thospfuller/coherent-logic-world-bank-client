@@ -1,5 +1,5 @@
 /**
- * This package contains custom converts used in this project.
+ * This package contains custom converters used in this project.
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
