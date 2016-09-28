@@ -2,11 +2,15 @@
  * following URI:
  *
  * http://api.worldbank.org/indicators/NY.GDP.MKTP.CD
+ *
+ * @see http://databank.worldbank.org/data/home.aspx
+ * @see http://datacatalog.worldbank.org/
+ * @see http://data.worldbank.org/developers
  */
 
 import com.coherentlogic.wb.client.core.domain.Indicators
 
-def results = queryBuilder.doGet(Indicators.class)
+def results = queryBuilder.indicators ().doGet(Indicators.class)
 
 indicatorsDAO.persist (results)
 
