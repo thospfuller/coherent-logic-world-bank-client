@@ -47,8 +47,7 @@ import com.coherentlogic.wb.client.core.exceptions.InvalidRequestException;
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath*:/spring/application-context.xml")
-//@SpringBootApplication(scanBasePackages = {"com.coherentlogic.wb.client"})
+@ContextConfiguration(locations="classpath*:/spring-test/application-context.xml")
 public class QueryBuilderTest {
 
     static final String WB_REST_TEMPLATE_ID = "wbRestTemplate";
@@ -133,11 +132,9 @@ public class QueryBuilderTest {
     @Test
     public void testGetSources() {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (restTemplate, "http://api.worldbank.org/sources");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org/");
 
-        CatalogSources result = queryBuilder
-            .doGet(CatalogSources.class);
+        CatalogSources result = queryBuilder.sources().doGet(CatalogSources.class);
 
         assertNotNull (result);
 
