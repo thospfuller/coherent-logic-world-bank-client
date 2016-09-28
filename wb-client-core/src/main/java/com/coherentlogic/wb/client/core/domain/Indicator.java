@@ -14,7 +14,9 @@ import static com.coherentlogic.wb.client.core.domain.PropertyConstants.SOURCE_N
 import static com.coherentlogic.wb.client.core.domain.PropertyConstants.SOURCE_ORGANIZATION;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -88,6 +90,8 @@ public class Indicator extends IdentityBean {
         firePropertyChange(SOURCE, oldValue, source);
     }
 
+    @Lob
+    @Column
     public String getSourceNote() {
         return sourceNote;
     }
