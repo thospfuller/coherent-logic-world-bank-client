@@ -11,7 +11,7 @@ public class InvalidResponseReceivedException extends NestedRuntimeException {
 
     private static final long serialVersionUID = 8625564198110693728L;
 
-	public InvalidResponseReceivedException(String msg) {
+    public InvalidResponseReceivedException(String msg) {
         super(msg);
     }
 
