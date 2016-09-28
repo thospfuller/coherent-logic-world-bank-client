@@ -18,7 +18,7 @@
         </layout>
     </appender>
 
-    <logger name="org.hibernate">
+    <!-- logger name="org.hibernate">
         <level value="info"/>
         <appender-ref ref="fileAppender"/>
         <appender-ref ref="consoleAppender"/>
@@ -46,11 +46,33 @@
         <level value="info"/>
         <appender-ref ref="fileAppender"/>
         <appender-ref ref="consoleAppender"/>
+    </logger -->
+
+    <!-- logger name="httpclient.wire">
+        <level value="debug"/>
+        <appender-ref ref="fileAppender"/>
+        <appender-ref ref="consoleAppender"/>
+    </logger -->
+
+    <!-- logger name="org.apache.commons.httpclient">
+        <level value="debug"/>
+        <appender-ref ref="fileAppender"/>
+        <appender-ref ref="consoleAppender"/>
+    </logger -->
+
+    <!-- logger name="com.thoughtworks.xstream">
+        <level value="all"/>
+        <appender-ref ref="fileAppender"/>
+        <appender-ref ref="consoleAppender"/>
+    </logger -->
+
+    <logger name="org.springframework.oxm">
+        <level value="info"/>
     </logger>
 
     <root>
-        <priority value="trace" />
-        <appender-ref ref="fileAppender" />
+        <priority value="info" />
+        <appender-ref ref="fileAppender"/>
         <appender-ref ref="consoleAppender"/>
     </root>
 </log4j:configuration>
