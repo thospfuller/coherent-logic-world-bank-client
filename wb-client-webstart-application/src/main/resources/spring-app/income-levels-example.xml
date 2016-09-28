@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="getIncomeLevelsExample" class="java.lang.String"
+     factory-bean="getIncomeLevelsExampleFactory" factory-method="getInstance"/>
+
+    <bean id="getIncomeLevelsExampleFactory" class="com.coherentlogic.coherent.data.adapter.application.ExampleFactory">
+        <constructor-arg name="resource" ref="getIncomeLevelsExampleResource"/>
+    </bean>
+
+    <bean id="getIncomeLevelsExampleResource" class="org.springframework.core.io.ClassPathResource">
+        <constructor-arg name="path" value="GetIncomeLevelsExample.groovy"/>
+    </bean>
+</beans>
+

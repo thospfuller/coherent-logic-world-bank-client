@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="getIndicatorsExample2" class="java.lang.String"
+     factory-bean="getIndicatorsExample2Factory" factory-method="getInstance"/>
+
+    <bean id="getIndicatorsExample2Factory" class="com.coherentlogic.coherent.data.adapter.application.ExampleFactory">
+        <constructor-arg name="resource" ref="getIndicatorsExample2Resource"/>
+    </bean>
+
+    <bean id="getIndicatorsExample2Resource" class="org.springframework.core.io.ClassPathResource">
+        <constructor-arg name="path" value="GetIndicatorsExample2.groovy"/>
+    </bean>
+</beans>
+
