@@ -8,7 +8,6 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +44,6 @@ import com.coherentlogic.coherent.data.adapter.application.GroovyEngine;
 import com.coherentlogic.coherent.data.adapter.application.ObjectStringifier;
 import com.coherentlogic.coherent.data.model.core.exceptions.InvalidURIException;
 import com.coherentlogic.wb.client.core.builders.QueryBuilder;
-import com.coherentlogic.wb.client.core.factories.QueryBuilderFactory;
 import com.coherentlogic.wb.client.db.integration.dao.AdminRegionDAO;
 import com.coherentlogic.wb.client.db.integration.dao.CatalogSourceDAO;
 import com.coherentlogic.wb.client.db.integration.dao.CatalogSourcesDAO;
@@ -88,39 +86,14 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(WBClientGUI.class);
 
-    private URI uri = null;
-
     private static final String
         COUNTRIES = "Countries",
         CATALOG_SOURCES = "CatalogSources",
         INVALID_REQUEST = "InvalidRequest",
         INCOME_LEVELS = "IncomeLevels",
         INDICATORS = "Indicators",
-        DATA_POINTS = "DataPoints";
-
-    private static final String
-        COUNTRIES_QUERY_BUILDER_FACTORY = "countriesQueryBuilderFactory",
-        CATALOG_SOURCES_QUERY_BUILDER_FACTORY = "catalogSourcesQueryBuilderFactory",
-        INVALID_REQUEST_QUERY_BUILDER_FACTORY =
-            "invalidRequestQueryBuilderFactory",
-        INCOME_LEVELS_QUERY_BUILDER_FACTORY = "incomeLevelsQueryBuilderFactory",
-        INDICATORS_QUERY_BUILDER_FACTORY =
-            "indicatorsQueryBuilderFactory",
-        DATA_POINTS_QUERY_BUILDER_FACTORY =
-            "dataPointsQueryBuilderFactory";
-
-    private static final Map<String, String> beanIdMap = new HashMap<String, String> ();
-
-    static {
-        beanIdMap.put(COUNTRIES, COUNTRIES_QUERY_BUILDER_FACTORY);
-        beanIdMap.put(CATALOG_SOURCES, CATALOG_SOURCES_QUERY_BUILDER_FACTORY);
-        beanIdMap.put(INVALID_REQUEST, INVALID_REQUEST_QUERY_BUILDER_FACTORY);
-        beanIdMap.put(INCOME_LEVELS, INCOME_LEVELS_QUERY_BUILDER_FACTORY);
-        beanIdMap.put(INDICATORS, INDICATORS_QUERY_BUILDER_FACTORY);
-        beanIdMap.put(DATA_POINTS, DATA_POINTS_QUERY_BUILDER_FACTORY);
-    }
-
-    private static final String
+        INDICATORS2 = "Indicators2",
+        DATA_POINTS = "DataPoints",
         QUERY_BUILDER = "queryBuilder",
         LOG = "log";
 
@@ -132,10 +105,6 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
 
     private final Map<ButtonModel, JRadioButtonMenuItem> radioButtonMap =
         new HashMap<ButtonModel, JRadioButtonMenuItem> ();
-
-    private GroovyEngine groovyEngine;
-
-    private Map<String, QueryBuilderFactory> queryBuilderFactoryMap;
 
     private Map<String, String> exampleMap;
 
@@ -161,6 +130,7 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
         menuBar.add(mnRequest);
 
         JRadioButtonMenuItem countries = new JRadioButtonMenuItem(COUNTRIES);
+        countries.setSelected(true);
         mnRequest.add(countries);
 
         countries.addActionListener(new MenuItemSelectedActionListener (exampleMap, inputTextArea));
@@ -171,7 +141,6 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
         catalogSources.addActionListener(new MenuItemSelectedActionListener (exampleMap, inputTextArea));
 
         JRadioButtonMenuItem invalidRequest =new JRadioButtonMenuItem(INVALID_REQUEST);
-        invalidRequest.setSelected(true);
         mnRequest.add(invalidRequest);
 
         invalidRequest.addActionListener(new MenuItemSelectedActionListener (exampleMap, inputTextArea));
@@ -186,6 +155,11 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
 
         indicators.addActionListener(new MenuItemSelectedActionListener (exampleMap, inputTextArea));
 
+        JRadioButtonMenuItem indicators2 = new JRadioButtonMenuItem(INDICATORS2);
+        mnRequest.add(indicators2);
+
+        indicators2.addActionListener(new MenuItemSelectedActionListener (exampleMap, inputTextArea));
+
         JRadioButtonMenuItem dataPoints = new JRadioButtonMenuItem(DATA_POINTS);
         mnRequest.add(dataPoints);
 
@@ -196,6 +170,7 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
         requestMenuItemsGroup.add(invalidRequest);
         requestMenuItemsGroup.add(incomeLevels);
         requestMenuItemsGroup.add(indicators);
+        requestMenuItemsGroup.add(indicators2);
         requestMenuItemsGroup.add(dataPoints);
 
         radioButtonMap.put(countries.getModel(), countries);
@@ -203,6 +178,7 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
         radioButtonMap.put(invalidRequest.getModel(), invalidRequest);
         radioButtonMap.put(incomeLevels.getModel(), incomeLevels);
         radioButtonMap.put(indicators.getModel(), indicators);
+        radioButtonMap.put(indicators2.getModel(), indicators2);
         radioButtonMap.put(dataPoints.getModel(), dataPoints);
 
         addHelpAbout (menuBar);
@@ -273,18 +249,7 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
     @PostConstruct
     public void initialize () {
 
-        groovyEngine = applicationContext.getBean(GroovyEngine.class);
-
-        queryBuilderFactoryMap = (Map<String, QueryBuilderFactory>)
-            applicationContext.getBean("queryBuilderFactoryMap");
-
         exampleMap = (Map<String, String>) applicationContext.getBean("exampleMap");
-
-        try {
-            uri = new URI("https://twitter.com/CoherentMktData");
-        } catch (URISyntaxException uriSyntaxException) {
-            throw new RuntimeException (uriSyntaxException);
-        }
 
         setTitle("World Bank Client GUI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -301,8 +266,7 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
         setExtendedState(Frame.MAXIMIZED_BOTH); 
 
         JLabel enterYourQueryLabel = new JLabel(
-            "Enter your query here (context contains references to: " +
-            "queryBuilder):");
+            "Enter your query here (context contains references to: queryBuilder):");
 
         panel.add(enterYourQueryLabel);
 
@@ -320,7 +284,7 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
 
         initializeMenu(inputTextArea);
 
-        String exampleText = exampleMap.get (DATA_POINTS);
+        String exampleText = exampleMap.get (COUNTRIES);
 
         inputTextArea.setText(exampleText);
 
@@ -330,8 +294,7 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
 
         panel.add(runScriptButton);
 
-        JLabel outputAppearsBelowLabel = new JLabel(
-            "The output appears below:");
+        JLabel outputAppearsBelowLabel = new JLabel("The output appears below:");
 
         panel.add(outputAppearsBelowLabel);
 
@@ -340,14 +303,11 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
 
         JScrollPane outputTextAreaScrollPane = new JScrollPane(outputTextArea);
 
-        outputTextAreaScrollPane.
-            setVerticalScrollBarPolicy(
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        outputTextAreaScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         panel.add(outputTextAreaScrollPane);
 
-        GraphicsEnvironment env =
-            GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
         Rectangle bounds = env.getMaximumWindowBounds();
 
@@ -361,22 +321,9 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
 
                     String scriptText = inputTextArea.getText();
 
-                    log.info("scriptText:\n\n" + scriptText);
+                    QueryBuilder queryBuilder = applicationContext.getBean(QueryBuilder.class);
 
-                    ButtonModel buttonModel =
-                        requestMenuItemsGroup.getSelection();
-
-                    JRadioButtonMenuItem selectedMenuItem =
-                        radioButtonMap.get(buttonModel);
-
-                    String selectedText = selectedMenuItem.getText();
-
-                    QueryBuilderFactory queryBuilderFactory =
-                        (QueryBuilderFactory)
-                            queryBuilderFactoryMap.get(selectedText);
-
-                    QueryBuilder requestBuilder =
-                        queryBuilderFactory.getInstance();
+                    GroovyEngine groovyEngine = applicationContext.getBean(GroovyEngine.class);
 
                     AdminRegionDAO adminRegionDAO = applicationContext.getBean(AdminRegionDAO.class);
                     CatalogSourceDAO catalogSourceDAO = applicationContext.getBean(CatalogSourceDAO.class);
@@ -402,7 +349,7 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
                     TopicDAO topicDAO = applicationContext.getBean(TopicDAO.class);
                     TopicsDAO topicsDAO = applicationContext.getBean(TopicsDAO.class);
 
-                    groovyEngine.setVariable(QUERY_BUILDER, requestBuilder);
+                    groovyEngine.setVariable(QUERY_BUILDER, queryBuilder);
                     groovyEngine.setVariable(LOG, log);
                     groovyEngine.setVariable("adminRegionDAO", adminRegionDAO);
                     groovyEngine.setVariable("catalogSourceDAO", catalogSourceDAO);
@@ -481,7 +428,7 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
         setVisible(true);
     }
 
-    public static void main (String[] unused) throws InterruptedException {
+    public static void main (String[] unused) throws Exception {
 
         try {
 
@@ -538,152 +485,3 @@ class MenuItemSelectedActionListener implements ActionListener {
         inputTextArea.setText(example);
     }
 }
-
-
-//@SpringBootApplication
-//@EnableAutoConfiguration
-//@ComponentScan(basePackages="com.coherentlogic.wb.client")
-//public class WBClientGUI extends JFrame implements CommandLineRunner {
-//
-//    @Override
-//    public void run(String... args) throws Exception {
-//        setVisible(true);
-//    }
-//
-//    private static final long serialVersionUID = 1L;
-//
-//    private static final Logger log = LoggerFactory.getLogger(WBClientGUI.class);
-//
-//    private static final String JAVADOC_URI = "http://bit.ly/19nRX6W";
-//
-//    private static final String
-//        COUNTRIES = "Countries",
-//        CATALOG_SOURCES = "CatalogSources",
-//        INVALID_REQUEST = "InvalidRequest",
-//        INCOME_LEVELS = "IncomeLevels",
-//        INDICATORS = "Indicators",
-//        DATA_POINTS = "DataPoints";
-//
-//    private static final String COUNTRIES_QUERY_BUILDER_FACTORY = "countriesQueryBuilderFactory";
-//
-//    private static final Map<String, String> beanIdMap = new HashMap<String, String> ();
-//
-//    static {
-//        beanIdMap.put(COUNTRIES, COUNTRIES_QUERY_BUILDER_FACTORY);
-//    }
-//
-//    private Map<String, String> exampleMap;
-//
-////    /**
-////     * @throws URISyntaxException 
-////     * @throws IOException 
-////     * @todo Remove the init method from the constructor.
-////     */
-////    public WBClientGUI(
-////        GroovyEngine groovyEngine,
-////        Map<String, ? extends QueryBuilderFactory> queryBuilderFactoryMap,
-////        Map<String, String> exampleMap
-////    ) throws URISyntaxException, IOException {
-////        super (
-////            groovyEngine,
-////            queryBuilderFactoryMap,
-////            exampleMap,
-////            JAVADOC_URI,
-////            createAboutDialog ()
-////        );
-////
-////        this.exampleMap = exampleMap;
-////
-////        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-////    }
-//
-//    @PostConstruct
-//    public void initialize () {
-//        
-//        this.ab
-//        
-//    }
-//
-//
-//    @Override
-//    protected void initializeMenu (JTextArea inputTextArea) {
-//        JMenuBar menuBar = new JMenuBar();
-//        setJMenuBar(menuBar);
-//
-//        JMenu mnRequest = new JMenu("Examples");
-//        menuBar.add(mnRequest);
-//
-//        JRadioButtonMenuItem countries = new JRadioButtonMenuItem(COUNTRIES);
-//        countries.setSelected(true);
-//        mnRequest.add(countries);
-//
-//        countries.addActionListener(
-//            new MenuItemSelectedActionListener (exampleMap, inputTextArea));
-//
-//        JRadioButtonMenuItem catalogSources =
-//            new JRadioButtonMenuItem(CATALOG_SOURCES);
-//        mnRequest.add(catalogSources);
-//
-//        catalogSources.addActionListener(
-//            new MenuItemSelectedActionListener (exampleMap, inputTextArea));
-//
-//        JRadioButtonMenuItem invalidRequest =
-//            new JRadioButtonMenuItem(INVALID_REQUEST);
-//        mnRequest.add(invalidRequest);
-//
-//        invalidRequest.addActionListener(
-//            new MenuItemSelectedActionListener (exampleMap, inputTextArea));
-//
-//        JRadioButtonMenuItem incomeLevels =
-//            new JRadioButtonMenuItem(INCOME_LEVELS);
-//        mnRequest.add(incomeLevels);
-//
-//        incomeLevels.addActionListener(
-//            new MenuItemSelectedActionListener (exampleMap, inputTextArea));
-//
-//        JRadioButtonMenuItem indicators =
-//            new JRadioButtonMenuItem(INDICATORS);
-//        mnRequest.add(indicators);
-//
-//        indicators.addActionListener(
-//            new MenuItemSelectedActionListener (exampleMap, inputTextArea));
-//
-//        JRadioButtonMenuItem dataPoints =
-//            new JRadioButtonMenuItem(DATA_POINTS);
-//        mnRequest.add(dataPoints);
-//
-//        dataPoints.addActionListener(
-//            new MenuItemSelectedActionListener (exampleMap, inputTextArea));
-//
-//        getRequestMenuItemsGroup().add(countries);
-//        getRequestMenuItemsGroup().add(catalogSources);
-//        getRequestMenuItemsGroup().add(invalidRequest);
-//        getRequestMenuItemsGroup().add(incomeLevels);
-//        getRequestMenuItemsGroup().add(indicators);
-//        getRequestMenuItemsGroup().add(dataPoints);
-//
-//        final Map<ButtonModel, JRadioButtonMenuItem> radioButtonMap =
-//            getRadioButtonMap ();
-//
-//        radioButtonMap.put(countries.getModel(), countries);
-//        radioButtonMap.put(catalogSources.getModel(), catalogSources);
-//        radioButtonMap.put(invalidRequest.getModel(), invalidRequest);
-//        radioButtonMap.put(incomeLevels.getModel(), incomeLevels);
-//        radioButtonMap.put(indicators.getModel(), indicators);
-//        radioButtonMap.put(dataPoints.getModel(), dataPoints);
-//
-//        addHelpAbout (menuBar);
-//    }
-//
-//    @Override
-//    protected String getApplicationTitle() {
-//        return "World Bank Client GUI";
-//    }
-//
-//    @Override
-//    protected String getDefaultExampleApplicationText() {
-//        return exampleMap.get (COUNTRIES);
-//    }
-//
-//    private static final String WB_CLIENT_GUI = "wbClientGUI";
-//}
