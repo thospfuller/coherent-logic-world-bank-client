@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import com.coherentlogic.gama.client.core.builders.QueryBuilder;
 
+import com.coherentlogic.coherent.data.adapter.core.services.AbstractGoogleAnalyticsMeasurementService;
+
 /**
  * Class is used to send events to Google Analytics via the Measurement API.
  *
@@ -16,38 +18,27 @@ import com.coherentlogic.gama.client.core.builders.QueryBuilder;
  * @author <a href="https://www.linkedin.com/in/thomasfuller">Thomas P. Fuller</a>
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
-public class GoogleAnalyticsMeasurementService {
+public class GoogleAnalyticsMeasurementService extends AbstractGoogleAnalyticsMeasurementService {
 
     private static final Logger log = LoggerFactory.getLogger(GoogleAnalyticsMeasurementService.class);
 
-    static final String GOOGLE_ANALYTICS_TRACKING_KEY = "GOOGLE_ANALYTICS_TRACKING";
-
-    public boolean shouldTrack () {
-
-        String gatValue = System.getProperty(GOOGLE_ANALYTICS_TRACKING_KEY);
-
-        return (gatValue == null || Boolean.parseBoolean(gatValue));
-    }
-
-    /**
-     *
-     */
+    @Override
     public void fireGAFrameworkUsageEvent () {
 
         log.debug("fireGAFrameworkUsageEvent: method begins.");
 
         // WARNING: The QueryBuilder must be used once before this will be called so if you see nothing in GA when
         //          testing this, that is the reason why.
-        String response = new QueryBuilder ()
+        String response = new QueryBuilder ("https://coherentlogic.com/about/gama-delegate")
             .withV1()
-            .withTid("N/A")
+            .withTid("[TBD]")
             .withCIDAsRandomUUID()
             .withTAsEvent()
-            .withEc("World Bank Client Framework Usage") // event category
+            .withEc("Framework Usage") // event category
             .withAn("World Bank Client") // application name
-            .withEa("World Bank Client Framework Started") // event action
-            .withAv("Version 1.0.5-RELEASE") // Application version.
-            .withEl("Version 1.0.5-RELEASE")
+            .withEa("Framework Started") // event action
+            .withAv("Version 1.0.6-RELEASE") // Application version.
+            .withEl("Version 1.0.6-RELEASE")
             .doPost();
 
         log.debug("fireGAFrameworkUsageEvent: method ends; response: " + response);
