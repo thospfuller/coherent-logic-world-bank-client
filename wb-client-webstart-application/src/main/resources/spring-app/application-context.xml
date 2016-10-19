@@ -59,7 +59,7 @@
         <!-- If we don't have this set then the instance of PropertyChangeSupport will be null and this will result in
              an NPE when the fire methods are invoked. -->
         <property name="marshallingStrategy">
-            <bean class="com.coherentlogic.coherent.data.model.core.xstream.CustomMarshallingStrategy"/>
+            <bean class="com.coherentlogic.coherent.data.adapter.core.xstream.CustomMarshallingStrategy"/>
         </property>
     </bean>
 
