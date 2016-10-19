@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.coherentlogic.wb</groupId>
         <artifactId>client</artifactId>
-        <version>1.0.5-RELEASE</version>
+        <version>1.0.6-RELEASE</version>
     </parent>
 
     <groupId>com.coherentlogic.wb.client</groupId>
