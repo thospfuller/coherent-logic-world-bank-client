@@ -1,6 +1,6 @@
 package com.coherentlogic.wb.client.core.converters;
 
-import com.coherentlogic.coherent.data.model.core.converters.AbstractConverter;
+import com.coherentlogic.coherent.data.adapter.core.converters.AbstractConverter;
 
 /**
  * A converter that can be extended for the purposes of converting some string into an instance of a child of

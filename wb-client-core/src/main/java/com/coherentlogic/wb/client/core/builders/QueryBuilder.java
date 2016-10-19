@@ -32,10 +32,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
 
-import com.coherentlogic.coherent.data.model.core.builders.AbstractQueryBuilder;
-import com.coherentlogic.coherent.data.model.core.builders.rest.AbstractRESTQueryBuilder;
-import com.coherentlogic.coherent.data.model.core.cache.CacheServiceProviderSpecification;
-import com.coherentlogic.coherent.data.model.core.util.WelcomeMessage;
+import com.coherentlogic.coherent.data.adapter.core.builders.AbstractQueryBuilder;
+import com.coherentlogic.coherent.data.adapter.core.builders.rest.AbstractRESTQueryBuilder;
+import com.coherentlogic.coherent.data.adapter.core.cache.CacheServiceProviderSpecification;
+import com.coherentlogic.coherent.data.adapter.core.util.WelcomeMessage;
 import com.coherentlogic.wb.client.core.domain.Frequency;
 import com.coherentlogic.wb.client.core.domain.IncomeLevelCodes;
 import com.coherentlogic.wb.client.core.domain.LendingTypeCodes;
@@ -83,7 +83,7 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
         "***                                                                                                       ***",
         "***                        Welcome to the World Bank Client  (http://bit.ly/1vZ5md8)                      ***",
         "***                                                                                                       ***",
-        "***                                        Version 1.0.5-RELEASE                                          ***",
+        "***                                        Version 1.0.6-RELEASE                                          ***",
         "***                                                                                                       ***",
         "***                              Please take a moment to follow us on Twitter:                            ***",
         "***                                                                                                       ***",

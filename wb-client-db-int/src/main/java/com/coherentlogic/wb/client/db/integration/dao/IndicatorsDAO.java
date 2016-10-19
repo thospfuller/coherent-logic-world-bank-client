@@ -5,7 +5,7 @@ import static com.coherentlogic.wb.client.db.integration.dao.DAOConstants.INDICA
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.coherentlogic.coherent.data.model.core.db.integration.dao.SerializableDAO;
+import com.coherentlogic.coherent.data.adapter.core.db.integration.dao.SerializableDAO;
 import com.coherentlogic.wb.client.core.domain.Indicators;
 
 /**

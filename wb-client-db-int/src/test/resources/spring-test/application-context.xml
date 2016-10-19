@@ -22,7 +22,7 @@
         </property>
     </bean>
 
-    <bean id="springXStreamMarshaller" class="com.coherentlogic.coherent.data.model.core.xstream.CustomXStreamMarshaller">
+    <bean id="springXStreamMarshaller" class="com.coherentlogic.coherent.data.adapter.core.xstream.CustomXStreamMarshaller">
         <!-- Underscores in attributes cause problems with XStream and the stream driver below
              addresses this issue - in particular see the XmlFriendlyReplacer.
           -->
@@ -66,7 +66,7 @@
         <!-- If we don't have this set then the instance of PropertyChangeSupport will be null and this will result in
              an NPE when the fire methods are invoked. -->
         <property name="marshallingStrategy">
-            <bean class="com.coherentlogic.coherent.data.model.core.xstream.CustomMarshallingStrategy"/>
+            <bean class="com.coherentlogic.coherent.data.adapter.core.xstream.CustomMarshallingStrategy"/>
         </property>
     </bean>
 

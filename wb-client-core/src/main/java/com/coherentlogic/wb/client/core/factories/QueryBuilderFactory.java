@@ -2,7 +2,7 @@ package com.coherentlogic.wb.client.core.factories;
 
 import org.springframework.web.client.RestTemplate;
 
-import com.coherentlogic.coherent.data.model.core.factories.AbstractQueryBuilderFactory;
+import com.coherentlogic.coherent.data.adapter.core.factories.AbstractQueryBuilderFactory;
 import com.coherentlogic.wb.client.core.builders.QueryBuilder;
 
 /**

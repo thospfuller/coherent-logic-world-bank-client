@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.coherentlogic.coherent.data.model.core.db.integration.dao.SerializableDAO;
+import com.coherentlogic.coherent.data.adapter.core.db.integration.dao.SerializableDAO;
 import com.coherentlogic.coherent.data.model.core.domain.SerializableBean;
 import com.coherentlogic.wb.client.core.builders.QueryBuilder;
 import com.coherentlogic.wb.client.core.factories.QueryBuilderFactory;
