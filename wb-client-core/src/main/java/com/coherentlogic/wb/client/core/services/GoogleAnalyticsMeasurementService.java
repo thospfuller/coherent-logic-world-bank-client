@@ -29,7 +29,7 @@ public class GoogleAnalyticsMeasurementService extends AbstractGoogleAnalyticsMe
 
         // WARNING: The QueryBuilder must be used once before this will be called so if you see nothing in GA when
         //          testing this, that is the reason why.
-        String response = new QueryBuilder ("https://coherentlogic.com/about/gama-delegate")
+        String response = new QueryBuilder ()
             .withV1()
             .withTid("[TBD]")
             .withCIDAsRandomUUID()
