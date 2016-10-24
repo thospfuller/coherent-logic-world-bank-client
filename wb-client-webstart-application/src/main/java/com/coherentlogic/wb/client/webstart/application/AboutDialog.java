@@ -23,10 +23,10 @@ import javax.swing.JLabel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.coherentlogic.coherent.data.model.core.exceptions.InvalidURIException;
+import com.coherentlogic.coherent.data.adapter.core.exceptions.InvalidURIException;
 
 /**
- * 
+ *
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */

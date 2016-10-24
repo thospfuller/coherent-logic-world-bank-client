@@ -42,7 +42,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.coherentlogic.coherent.data.adapter.application.GroovyEngine;
 import com.coherentlogic.coherent.data.adapter.application.ObjectStringifier;
-import com.coherentlogic.coherent.data.model.core.exceptions.InvalidURIException;
+import com.coherentlogic.coherent.data.adapter.core.exceptions.InvalidURIException;
 import com.coherentlogic.wb.client.core.builders.QueryBuilder;
 import com.coherentlogic.wb.client.db.integration.dao.AdminRegionDAO;
 import com.coherentlogic.wb.client.db.integration.dao.CatalogSourceDAO;
@@ -73,7 +73,7 @@ import com.jamonapi.MonitorFactory;
 
 /**
  * The front-end for the World Bank Client that allows users to directly work
- * with the {@link com.coherentlogic.wb.client.core.builders.QueryBuilder}. 
+ * with the {@link com.coherentlogic.wb.client.core.builders.QueryBuilder}.
  *
  * @author <a href="support@coherentlogic.com">Support</a>
  */
@@ -255,7 +255,7 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         final JPanel parent = new JPanel();
-        parent.setLayout(new BorderLayout()); 
+        parent.setLayout(new BorderLayout());
 
         final JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
@@ -263,7 +263,7 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
         parent.add(panel);
 
         getContentPane().add(parent, BorderLayout.CENTER);
-        setExtendedState(Frame.MAXIMIZED_BOTH); 
+        setExtendedState(Frame.MAXIMIZED_BOTH);
 
         JLabel enterYourQueryLabel = new JLabel(
             "Enter your query here (context contains references to: queryBuilder):");
