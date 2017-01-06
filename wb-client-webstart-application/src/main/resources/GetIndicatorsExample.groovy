@@ -8,10 +8,8 @@
  * @see http://data.worldbank.org/developers
  */
 
-import com.coherentlogic.wb.client.core.domain.Indicators
+def results = queryBuilder.indicators ().doGetAsIndicators()
 
-def results = queryBuilder.indicators ().doGet(Indicators.class)
-
-indicatorsDAO.persist (results)
+indicatorsService.save (results)
 
 return results

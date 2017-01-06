@@ -12,6 +12,6 @@ import com.coherentlogic.wb.client.core.domain.IncomeLevels
 
 def results = queryBuilder.incomeLevels ().doGet(IncomeLevels.class)
 
-incomeLevelsDAO.persist (results)
+incomeLevelsService.save (results)
 
 return results

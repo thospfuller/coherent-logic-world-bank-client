@@ -17,6 +17,6 @@ def results = queryBuilder
     .setIncomeLevel(IncomeLevelCodes.LIC)
     .doGet(Countries.class)
 
-countriesDAO.persist (results)
+countriesService.save (results)
 
 return results

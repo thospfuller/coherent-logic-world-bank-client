@@ -3,7 +3,6 @@
  *
  * http://api.worldbank.org/countries/all/indicators/SP.POP.TOTL?date=2000:2002
  */
-import com.coherentlogic.wb.client.core.domain.DataPoints
 
 import joinery.DataFrame
 import joinery.DataFrame.PlotType
@@ -12,9 +11,9 @@ def results = queryBuilder
     .countries("br")
     .indicators("NY.GDP.MKTP.CD")
     .setDate("1970:2016")
-    .doGet(DataPoints.class)
+    .doGetAsDataPoints()
 
-indicatorsDAO.persist(results)
+dataPointsService.save(results)
 
 def dataFrame = new DataFrame<Object> ()
 

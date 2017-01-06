@@ -11,6 +11,6 @@ import com.coherentlogic.wb.client.core.domain.CatalogSources
 
 def results = queryBuilder.sources().doGet(CatalogSources.class)
 
-catalogSourcesDAO.persist (results)
+catalogSourcesService.save (results)
 
 return results

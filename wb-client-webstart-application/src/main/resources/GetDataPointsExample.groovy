@@ -15,6 +15,6 @@ def results = queryBuilder
     .setDate("1998:2012")
     .doGet(DataPoints.class)
 
-dataPointsDAO.persist (results)
+dataPointsService.save (results)
 
 return results
