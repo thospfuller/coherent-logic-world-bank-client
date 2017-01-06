@@ -84,7 +84,7 @@ public class AboutDialog extends JDialog {
         JLabel blank = newLabel("");
 
         JLabel name = newLabel(
-            "Coherent Logic World Bank Client GUI version 1.0.6-RELEASE");
+            "Coherent Logic World Bank Client GUI version 2.0.0-RELEASE");
         JLabel copyright = newLabel(
             "Copyright (C) 2012 - Present Coherent Logic Limited; All Rights " +
             "Reserved.");
