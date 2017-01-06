@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.coherentlogic.wb</groupId>
         <artifactId>client</artifactId>
-        <version>1.0.6-RELEASE</version>
+        <version>2.0.0-RELEASE</version>
     </parent>
 
     <groupId>com.coherentlogic.wb.client</groupId>
@@ -24,17 +24,17 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.coherentlogic.coherent.data-model</groupId>
-            <artifactId>data-model-core</artifactId>
+            <groupId>com.coherentlogic.enterprise-data-adapter</groupId>
+            <artifactId>data-adapter-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.coherentlogic.coherent.data-model</groupId>
-            <artifactId>data-adapter-core</artifactId>
+            <groupId>com.coherentlogic.enterprise-data-adapter</groupId>
+            <artifactId>xstream-int</artifactId>
         </dependency>
         <dependency>
             <groupId>com.coherentlogic.gama.client</groupId>
             <artifactId>gama-client-core</artifactId>
-            <version>0.8.6-RELEASE</version>
+            <version>1.0.0-RELEASE</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
