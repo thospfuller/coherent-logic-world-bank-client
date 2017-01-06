@@ -23,6 +23,7 @@ import static com.coherentlogic.wb.client.core.domain.Constants.TOPICS;
 import static com.coherentlogic.wb.client.core.domain.Constants.YES;
 
 import java.net.URI;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,11 +37,18 @@ import com.coherentlogic.coherent.data.adapter.core.builders.AbstractQueryBuilde
 import com.coherentlogic.coherent.data.adapter.core.builders.rest.AbstractRESTQueryBuilder;
 import com.coherentlogic.coherent.data.adapter.core.cache.CacheServiceProviderSpecification;
 import com.coherentlogic.coherent.data.adapter.core.util.WelcomeMessage;
+import com.coherentlogic.wb.client.core.domain.CatalogSources;
+import com.coherentlogic.wb.client.core.domain.Countries;
+import com.coherentlogic.wb.client.core.domain.DataPoints;
 import com.coherentlogic.wb.client.core.domain.Frequency;
 import com.coherentlogic.wb.client.core.domain.IncomeLevelCodes;
+import com.coherentlogic.wb.client.core.domain.IncomeLevels;
+import com.coherentlogic.wb.client.core.domain.Indicators;
 import com.coherentlogic.wb.client.core.domain.LendingTypeCodes;
+import com.coherentlogic.wb.client.core.domain.LendingTypes;
 import com.coherentlogic.wb.client.core.domain.PropertyConstants;
 import com.coherentlogic.wb.client.core.domain.RegionCodes;
+import com.coherentlogic.wb.client.core.domain.Topics;
 import com.coherentlogic.wb.client.core.exceptions.InvalidFromToFormatException;
 import com.coherentlogic.wb.client.core.exceptions.InvalidMetatypesException;
 import com.coherentlogic.wb.client.core.exceptions.InvalidParameterValueException;
@@ -83,7 +91,7 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
         "***                                                                                                       ***",
         "***                        Welcome to the World Bank Client  (http://bit.ly/1vZ5md8)                      ***",
         "***                                                                                                       ***",
-        "***                                        Version 1.0.6-RELEASE                                          ***",
+        "***                                        Version 2.0.0-RELEASE                                          ***",
         "***                                                                                                       ***",
         "***                              Please take a moment to follow us on Twitter:                            ***",
         "***                                                                                                       ***",
@@ -523,7 +531,7 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
 
         assertNotLessThanEqualTo ("page", 0, page);
 
-        addParameter (PAGE, Integer.toString(page));
+        addParameter (PAGE, page);
 
         return this;
     }
@@ -540,7 +548,7 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
 
         assertNotLessThanEqualTo ("perPage", 0, perPage);
 
-        addParameter (PER_PAGE, Integer.toString(perPage));
+        addParameter (PER_PAGE, perPage);
 
         return this;
     }
@@ -559,7 +567,7 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
      */
     public QueryBuilder setMRV (int mrv) {
 
-        addParameter (MRV, Integer.toString(mrv));
+        addParameter (MRV, mrv);
 
         return this;
     }
@@ -788,5 +796,200 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
         URI uri = getUriBuilder().build();
 
         return (T) getRestTemplate ().getForObject(uri, type);
+    }
+
+    /**
+     * Do get as {@link DataPoints} and then return that result.
+     */
+    public DataPoints doGetAsDataPoints () {
+        return doGetAsDataPoints(data -> { return data; });
+    }
+
+    /**
+     * Do get as {@link DataPoints}, execute the given function, and then return an instance of type
+     * {@link DataPoints}.
+     */
+    public DataPoints doGetAsDataPoints (Function<DataPoints, DataPoints> function) {
+        return doGetAsDataPoints(DataPoints.class, function);
+    }
+
+    /**
+     * Do get as {@link DataPoints}, execute the given function, and then return an instance of type resultType.
+     */
+    public <R> R doGetAsDataPoints (Class<R> resultType, Function<DataPoints, R> function) {
+
+        DataPoints unconvertedResult = doGet(DataPoints.class);
+
+        R result = function.apply(unconvertedResult);
+
+        return result;
+    }
+    
+
+    /**
+     * Do get as {@link Countries} and then return that result.
+     */
+    public Countries doGetAsCountries () {
+        return doGetAsCountries(data -> { return data; });
+    }
+
+    /**
+     * Do get as {@link Countries}, execute the given function, and then return an instance of type
+     * {@link Countries}.
+     */
+    public Countries doGetAsCountries (Function<Countries, Countries> function) {
+        return doGetAsCountries(Countries.class, function);
+    }
+
+    /**
+     * Do get as {@link Countries}, execute the given function, and then return an instance of type resultType.
+     */
+    public <R> R doGetAsCountries (Class<R> resultType, Function<Countries, R> function) {
+
+        Countries unconvertedResult = doGet(Countries.class);
+
+        R result = function.apply(unconvertedResult);
+
+        return result;
+    }
+    
+
+    /**
+     * Do get as {@link Indicators} and then return that result.
+     */
+    public Indicators doGetAsIndicators () {
+        return doGetAsIndicators(data -> { return data; });
+    }
+
+    /**
+     * Do get as {@link Indicators}, execute the given function, and then return an instance of type
+     * {@link Indicators}.
+     */
+    public Indicators doGetAsIndicators (Function<Indicators, Indicators> function) {
+        return doGetAsIndicators(Indicators.class, function);
+    }
+
+    /**
+     * Do get as {@link Indicators}, execute the given function, and then return an instance of type resultType.
+     */
+    public <R> R doGetAsIndicators (Class<R> resultType, Function<Indicators, R> function) {
+
+        Indicators unconvertedResult = doGet(Indicators.class);
+
+        R result = function.apply(unconvertedResult);
+
+        return result;
+    }
+    
+
+    /**
+     * Do get as {@link CatalogSources} and then return that result.
+     */
+    public CatalogSources doGetAsCatalogSources () {
+        return doGetAsCatalogSources(data -> { return data; });
+    }
+
+    /**
+     * Do get as {@link CatalogSources}, execute the given function, and then return an instance of type
+     * {@link CatalogSources}.
+     */
+    public CatalogSources doGetAsCatalogSources (Function<CatalogSources, CatalogSources> function) {
+        return doGetAsCatalogSources(CatalogSources.class, function);
+    }
+
+    /**
+     * Do get as {@link CatalogSources}, execute the given function, and then return an instance of type resultType.
+     */
+    public <R> R doGetAsCatalogSources (Class<R> resultType, Function<CatalogSources, R> function) {
+
+        CatalogSources unconvertedResult = doGet(CatalogSources.class);
+
+        R result = function.apply(unconvertedResult);
+
+        return result;
+    }
+    
+
+    /**
+     * Do get as {@link IncomeLevels} and then return that result.
+     */
+    public IncomeLevels doGetAsIncomeLevels () {
+        return doGetAsIncomeLevels(data -> { return data; });
+    }
+
+    /**
+     * Do get as {@link IncomeLevels}, execute the given function, and then return an instance of type
+     * {@link IncomeLevels}.
+     */
+    public IncomeLevels doGetAsIncomeLevels (Function<IncomeLevels, IncomeLevels> function) {
+        return doGetAsIncomeLevels(IncomeLevels.class, function);
+    }
+
+    /**
+     * Do get as {@link IncomeLevels}, execute the given function, and then return an instance of type resultType.
+     */
+    public <R> R doGetAsIncomeLevels (Class<R> resultType, Function<IncomeLevels, R> function) {
+
+        IncomeLevels unconvertedResult = doGet(IncomeLevels.class);
+
+        R result = function.apply(unconvertedResult);
+
+        return result;
+    }
+    
+
+    /**
+     * Do get as {@link LendingTypes} and then return that result.
+     */
+    public LendingTypes doGetAsLendingTypes () {
+        return doGetAsLendingTypes(data -> { return data; });
+    }
+
+    /**
+     * Do get as {@link LendingTypes}, execute the given function, and then return an instance of type
+     * {@link LendingTypes}.
+     */
+    public LendingTypes doGetAsLendingTypes (Function<LendingTypes, LendingTypes> function) {
+        return doGetAsLendingTypes(LendingTypes.class, function);
+    }
+
+    /**
+     * Do get as {@link LendingTypes}, execute the given function, and then return an instance of type resultType.
+     */
+    public <R> R doGetAsLendingTypes (Class<R> resultType, Function<LendingTypes, R> function) {
+
+        LendingTypes unconvertedResult = doGet(LendingTypes.class);
+
+        R result = function.apply(unconvertedResult);
+
+        return result;
+    }
+    
+
+    /**
+     * Do get as {@link Topics} and then return that result.
+     */
+    public Topics doGetAsTopics () {
+        return doGetAsTopics(data -> { return data; });
+    }
+
+    /**
+     * Do get as {@link Topics}, execute the given function, and then return an instance of type
+     * {@link Topics}.
+     */
+    public Topics doGetAsTopics (Function<Topics, Topics> function) {
+        return doGetAsTopics(Topics.class, function);
+    }
+
+    /**
+     * Do get as {@link Topics}, execute the given function, and then return an instance of type resultType.
+     */
+    public <R> R doGetAsTopics (Class<R> resultType, Function<Topics, R> function) {
+
+        Topics unconvertedResult = doGet(Topics.class);
+
+        R result = function.apply(unconvertedResult);
+
+        return result;
     }
 }
