@@ -25,7 +25,7 @@
              jdbc:h2:mem:worldbank-db;DB_CLOSE_DELAY=-1
              jdbc:h2:tcp://localhost/~/fred-db
           -->
-        <property name="url" value="jdbc:h2:tcp://localhost/~/worldbank-db" />
+        <property name="url" value="jdbc:h2:mem:worldbank-db;DB_CLOSE_DELAY=-1" />
         <property name="username" value="sa" />
         <property name="password" value="password" />
     </bean>
