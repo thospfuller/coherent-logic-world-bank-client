@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
+import com.coherentlogic.coherent.data.adapter.core.exceptions.ExecutionFailedException;
 import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
 import com.coherentlogic.wb.client.core.domain.AdminRegion;
 import com.coherentlogic.wb.client.core.domain.CatalogSource;
@@ -37,7 +38,6 @@ import com.coherentlogic.wb.client.core.domain.Region;
 import com.coherentlogic.wb.client.core.domain.Source;
 import com.coherentlogic.wb.client.core.domain.Topic;
 import com.coherentlogic.wb.client.core.domain.Topics;
-import com.coherentlogic.wb.client.core.exceptions.InvalidRequestException;
 
 /**
  * Integration test for the {@link QueryBuilder} class.
@@ -112,7 +112,7 @@ public class QueryBuilderTest {
      * This test ensures that errors returned from the World Bank cause an
      * exception to be thrown.
      */
-    @Test(expected=InvalidRequestException.class)
+    @Test(expected=ExecutionFailedException.class) // The cause is now InvalidRequestException
     public void testBadRequest() {
 
          QueryBuilder queryBuilder =
@@ -760,8 +760,8 @@ public class QueryBuilderTest {
 
         Indicator firstIndicator = indicatorList.get(2);
 
-        assertEquals ("EG.ELC.ACCS.UR.ZS", firstIndicator.getId());
-        assertEquals ("Access to electricity, urban (% of urban population)", firstIndicator.getName());
+        assertEquals ("NY.GDP.PETR.RT.ZS", firstIndicator.getId());
+        assertEquals ("Oil rents (% of GDP)", firstIndicator.getName());
 
         Source source = firstIndicator.getSource();
 
@@ -771,13 +771,13 @@ public class QueryBuilderTest {
             source
         );
 
-        String expectedSourceNote = "Access to electricity, urban is the percentage of urban population with access "
-            + "to electricity.";
+        String expectedSourceNote = "Oil rents are the difference between the value of crude oil production at world "
+            + "prices and total costs of production.";
 
         assertEquals (expectedSourceNote, firstIndicator.getSourceNote());
 
-        String expectedSourceOrganization = "World Bank, Sustainable Energy for All (SE4ALL) database from World "
-            + "Bank, Global Electrification database.";
+        String expectedSourceOrganization = "Estimates based on sources and methods described in \"The Changing "
+            + "Wealth of Nations: Measuring Sustainable Development in the New Millennium\" (World Bank, 2011).";
 
         assertEquals (expectedSourceOrganization,
             firstIndicator.getSourceOrganization());
