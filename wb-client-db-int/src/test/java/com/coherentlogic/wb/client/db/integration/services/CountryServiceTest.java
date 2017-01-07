@@ -38,13 +38,13 @@ import com.coherentlogic.wb.client.db.integration.services.CountryService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration
 @Transactional
-public class CountryDAOTest {
+public class CountryServiceTest {
 
     @Autowired
-    private CountriesService countriesDAO;
+    private CountriesService countriesService;
 
     @Autowired
-    private CountryService countryDAO;
+    private CountryService countryService;
 
     @Autowired
     private QueryBuilderFactory queryBuilderFactory = null;
@@ -53,21 +53,22 @@ public class CountryDAOTest {
 
     @Before
     public void setUp() throws Exception {
+
         QueryBuilder queryBuilder = queryBuilderFactory.getInstance();
 
         countries = queryBuilder
             .countries()
             .setPerPage(10)
             .setIncomeLevel(IncomeLevelCodes.LIC)
-            .doGet(Countries.class);
+            .doGetAsCountries();
 
-        countriesDAO.save(countries);
+        countriesService.save(countries);
     }
 
     @After
     public void tearDown() throws Exception {
-        countriesDAO = null;
-        countryDAO = null;
+        countriesService = null;
+        countryService = null;
         countries = null;
     }
 
@@ -85,12 +86,13 @@ public class CountryDAOTest {
 
         assertNotNull (id);
 
-        Country persistedCountry = countryDAO.findOne(id);
+        Country persistedCountry = countryService.findOne(id);
 
         assertNotNull (persistedCountry);
     }
 
     private void reviewCountry (Country country) {
+
         assertEquals ("BEN", country.getId());
         assertEquals ("BJ", country.getIsoCode());
         assertEquals ("Benin", country.getName());
@@ -98,14 +100,12 @@ public class CountryDAOTest {
         Region region = country.getRegion();
 
         assertEquals ("SSF", region.getId());
-        assertEquals (
-            "Sub-Saharan Africa (all income levels)", region.getValue());
+        assertEquals ("Sub-Saharan Africa (all income levels)", region.getValue());
 
         AdminRegion adminRegion = country.getAdminRegion();
 
         assertEquals ("SSA", adminRegion.getId());
-        assertEquals (
-            "Sub-Saharan Africa (developing only)", adminRegion.getValue());
+        assertEquals ("Sub-Saharan Africa (developing only)", adminRegion.getValue());
 
         IncomeLevel incomeLevel = country.getIncomeLevel();
 

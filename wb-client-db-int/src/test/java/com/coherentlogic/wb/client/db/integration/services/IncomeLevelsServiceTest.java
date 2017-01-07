@@ -31,10 +31,10 @@ import com.coherentlogic.wb.client.db.integration.services.IncomeLevelsService;
 @TransactionConfiguration
 @Transactional
 @ContextConfiguration(locations={"classpath*:/spring-test/application-context.xml"})
-public class IncomeLevelsDAOTest {
+public class IncomeLevelsServiceTest {
 
     @Autowired
-    private IncomeLevelsService incomeLevelsDAO = null;
+    private IncomeLevelsService incomeLevelsService = null;
 
     private IncomeLevels incomeLevels = null;
 
@@ -42,11 +42,10 @@ public class IncomeLevelsDAOTest {
 
         IncomeLevels result = new IncomeLevels ();
 
-        IncomeLevel incomeLevel =
-            IdentityValueBeanTestHelper.create(IncomeLevel.class);
+        IncomeLevel incomeLevel = IdentityValueBeanTestHelper.create(IncomeLevel.class);
 
         List<IncomeLevel> incomeLevelList = new ArrayList<IncomeLevel> ();
-        
+
         incomeLevelList.add(incomeLevel);
 
         result.setIncomeLevelList(incomeLevelList);
@@ -71,31 +70,29 @@ public class IncomeLevelsDAOTest {
 
     @Test
     public void testAllCRUDOperations () {
-        incomeLevelsDAO.save(incomeLevels);
+
+        incomeLevelsService.save(incomeLevels);
 
         Long primaryKey = incomeLevels.getPrimaryKey();
 
         assertNotNull(primaryKey);
 
-        IncomeLevels incomeLevels2 =
-            incomeLevelsDAO.findOne(primaryKey);
+        IncomeLevels incomeLevels2 = incomeLevelsService.findOne(primaryKey);
 
         assertNotNull(incomeLevels2);
         assertEquals(incomeLevels, incomeLevels2);
 
         incomeLevels2.setPerPage(12);
 
-        incomeLevelsDAO.save(incomeLevels2);
+        incomeLevelsService.save(incomeLevels2);
 
-        IncomeLevels incomeLevels3 =
-            incomeLevelsDAO.findOne(primaryKey);
+        IncomeLevels incomeLevels3 = incomeLevelsService.findOne(primaryKey);
 
         assertEquals((Integer) 12, incomeLevels3.getPerPage());
 
-        incomeLevelsDAO.delete(incomeLevels3);
+        incomeLevelsService.delete(incomeLevels3);
 
-        IncomeLevels incomeLevels4 =
-            incomeLevelsDAO.findOne(primaryKey);
+        IncomeLevels incomeLevels4 = incomeLevelsService.findOne(primaryKey);
 
         assertNull(incomeLevels4);
     }

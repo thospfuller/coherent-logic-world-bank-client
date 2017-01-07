@@ -1,5 +1,11 @@
 package com.coherentlogic.wb.client.db.integration.services;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
 
 /**
@@ -10,15 +16,15 @@ import com.coherentlogic.coherent.data.model.core.domain.IdentityValueBean;
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
-public class IdentityValueBeanTestHelper<S, T extends IdentityValueBean> {
+public class IdentityValueBeanTestHelper<R extends JpaRepository<T, Long>, T extends IdentityValueBean> {
 
     static final String NAME1 = "name1";
 
-    private final S serializableDAO;
+    private final R repository;
 
-    public IdentityValueBeanTestHelper(S defaultDAO) {
+    public IdentityValueBeanTestHelper(R repository) {
         super();
-        this.serializableDAO = defaultDAO;
+        this.repository = repository;
     }
 
     public static <T extends IdentityValueBean> T create (Class<T> type) {
@@ -32,43 +38,41 @@ public class IdentityValueBeanTestHelper<S, T extends IdentityValueBean> {
                 "Unable to create the type " + type, exception);
         }
 
-        idValuePair.setId(DataPointCountryDAOTest.VALUEX);
-        idValuePair.setValue(DataPointCountryDAOTest.VALUEY);
+        idValuePair.setId(DataPointCountryServiceTest.VALUEX);
+        idValuePair.setValue(DataPointCountryServiceTest.VALUEY);
 
         return idValuePair;
     }
 
-//    /**
-//     * @todo We need to check some of the child objects to ensure changes are
-//     *  being handled correctly at that level.
-//     */
-//    public void testAllCRUDOperations (T idValuePair) {
-//        serializableDAO.persist(idValuePair);
-//
-//        Long primaryKey = idValuePair.getPrimaryKey();
-//
-//        assertNotNull(primaryKey);
-//
-//        T idValuePair2 =
-//            serializableDAO.find(primaryKey);
-//
-//        assertNotNull(idValuePair2);
-//        assertEquals(idValuePair, idValuePair2);
-//
-//        idValuePair2.setId(NAME1);
-//
-//        serializableDAO.merge(idValuePair2);
-//
-//        T idValuePair3 =
-//            serializableDAO.find(primaryKey);
-//
-//        assertEquals(NAME1, idValuePair3.getId ());
-//
-//        serializableDAO.remove(idValuePair3);
-//
-//        IdentityValueBean idValuePair4 =
-//            serializableDAO.find(primaryKey);
-//
-//        assertNull(idValuePair4);
-//    }
+    /**
+     * @todo We need to check some of the child objects to ensure changes are
+     *  being handled correctly at that level.
+     */
+    public void testAllCRUDOperations (T idValuePair) {
+
+    	repository.save(idValuePair);
+
+        Long primaryKey = idValuePair.getPrimaryKey();
+
+        assertNotNull("primaryKey", primaryKey);
+
+        T idValuePair2 = repository.findOne(primaryKey);
+
+        assertNotNull("idValuePair2", idValuePair2);
+        assertEquals(idValuePair, idValuePair2);
+
+        idValuePair2.setId(NAME1);
+
+        repository.save(idValuePair2);
+
+        T idValuePair3 = repository.findOne(primaryKey);
+
+        assertEquals(NAME1, idValuePair3.getId ());
+
+        repository.delete(idValuePair3);
+
+        IdentityValueBean idValuePair4 = repository.findOne(primaryKey);
+
+        assertNull(idValuePair4);
+    }
 }

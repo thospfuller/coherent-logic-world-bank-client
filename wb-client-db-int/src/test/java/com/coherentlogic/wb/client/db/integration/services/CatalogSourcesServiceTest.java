@@ -33,10 +33,10 @@ import com.coherentlogic.wb.client.db.integration.services.CatalogSourcesService
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration
 @Transactional
-public class CatalogSourcesDAOTest {
+public class CatalogSourcesServiceTest {
 
     @Autowired
-    private CatalogSourcesService catalogSourcesDAO = null;
+    private CatalogSourcesService catalogSourcesService = null;
 
     @Autowired
     private QueryBuilderFactory queryBuilderFactory = null;
@@ -52,7 +52,7 @@ public class CatalogSourcesDAOTest {
 
     @After
     public void tearDown() throws Exception {
-        catalogSourcesDAO = null;
+        catalogSourcesService = null;
         catalogSources = null;
     }
 
@@ -69,17 +69,15 @@ public class CatalogSourcesDAOTest {
 
         assertNull (firstCatalogSource.getPrimaryKey());
 
-        catalogSourcesDAO.save(catalogSources);
+        catalogSourcesService.save(catalogSources);
 
         Long uniqueId = catalogSources.getPrimaryKey();
 
         assertNotNull (uniqueId);
 
-        CatalogSources persistedCatalogSources =
-            catalogSourcesDAO.findOne(uniqueId);
+        CatalogSources persistedCatalogSources = catalogSourcesService.findOne(uniqueId);
 
-        List<CatalogSource> persistedCatalogSourceList =
-            persistedCatalogSources.getSourceList();
+        List<CatalogSource> persistedCatalogSourceList = persistedCatalogSources.getSourceList();
 
         assertNotNull (persistedCatalogSources);
         assertEquals (28, persistedCatalogSourceList.size());
@@ -88,20 +86,17 @@ public class CatalogSourcesDAOTest {
 
         catalogSource.getPrimaryKey();
 
-        catalogSourcesDAO.save(persistedCatalogSources);
+        catalogSourcesService.save(persistedCatalogSources);
 
-        CatalogSources mergedCatalogSources =
-            catalogSourcesDAO.findOne(uniqueId);
+        CatalogSources mergedCatalogSources = catalogSourcesService.findOne(uniqueId);
 
-        List<CatalogSource> mergedCatalogSourceList =
-            persistedCatalogSources.getSourceList();
+        List<CatalogSource> mergedCatalogSourceList = persistedCatalogSources.getSourceList();
 
         assertEquals (27, mergedCatalogSourceList.size());
 
-        catalogSourcesDAO.delete(mergedCatalogSources);
+        catalogSourcesService.delete(mergedCatalogSources);
 
-        CatalogSources nullCatalogSources =
-            catalogSourcesDAO.findOne(uniqueId);
+        CatalogSources nullCatalogSources = catalogSourcesService.findOne(uniqueId);
 
         assertNull (nullCatalogSources);
     }

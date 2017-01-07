@@ -8,16 +8,15 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.web.client.RestTemplate;
 
 import com.coherentlogic.wb.client.core.builders.QueryBuilder;
 import com.coherentlogic.wb.client.core.domain.Countries;
 import com.coherentlogic.wb.client.core.domain.Country;
 import com.coherentlogic.wb.client.core.domain.IncomeLevelCodes;
 import com.coherentlogic.wb.client.db.integration.repositories.CountriesRepository;
-import com.coherentlogic.wb.client.db.integration.services.CountriesService;
 
 /**
  * Unit test for the {@link CountriesRepository} class.
@@ -26,11 +25,11 @@ import com.coherentlogic.wb.client.db.integration.services.CountriesService;
  *
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
  */
-@Ignore
-public class CountriesDAOTest extends BasicDAOTestHarness<Countries> {
+@ContextConfiguration(locations={"classpath*:/spring-test/application-context.xml"})
+public class CountriesServiceTest extends BasicServiceTestHarness<Countries> {
 
     @Autowired
-    private CountriesService countriesDAO;
+    private CountriesService countriesService;
 
     @Before
     public void setUp() throws Exception {
@@ -42,11 +41,14 @@ public class CountriesDAOTest extends BasicDAOTestHarness<Countries> {
 
     @Override
     protected Countries query(QueryBuilder queryBuilder) {
-        return queryBuilder
+
+        Countries countries = queryBuilder
             .countries()
             .setPerPage(10)
             .setIncomeLevel(IncomeLevelCodes.LIC)
-            .doGet(Countries.class);
+            .doGetAsCountries();
+
+        return countries;
     }
 
     @Override
@@ -66,17 +68,16 @@ public class CountriesDAOTest extends BasicDAOTestHarness<Countries> {
 
     @Override
     protected Countries reviewPersistedObject(Countries parent) {
-        countriesDAO.save(parent);
+
+        countriesService.save(parent);
 
         Long uniqueId = parent.getPrimaryKey();
 
         assertNotNull (uniqueId);
 
-        Countries persistedCountries =
-            countriesDAO.findOne(uniqueId);
+        Countries persistedCountries = countriesService.findOne(uniqueId);
 
-        List<Country> persistedCountryList =
-                persistedCountries.getCountryList();
+        List<Country> persistedCountryList = persistedCountries.getCountryList();
 
         assertNotNull (persistedCountryList);
         assertEquals (10, persistedCountryList.size());
@@ -99,13 +100,11 @@ public class CountriesDAOTest extends BasicDAOTestHarness<Countries> {
 
         Long uniqueId = parent.getPrimaryKey();
 
-        countriesDAO.save(parent);
+        countriesService.save(parent);
 
-        Countries mergedCountries =
-            countriesDAO.findOne(uniqueId);
+        Countries mergedCountries = countriesService.findOne(uniqueId);
 
-        List<Country> mergedCountryList =
-            mergedCountries.getCountryList();
+        List<Country> mergedCountryList = mergedCountries.getCountryList();
 
         assertEquals (9, mergedCountryList.size());
 
@@ -117,10 +116,9 @@ public class CountriesDAOTest extends BasicDAOTestHarness<Countries> {
 
         Long uniqueId = parent.getPrimaryKey();
 
-        countriesDAO.delete(parent);
+        countriesService.delete(parent);
 
-        Countries nullCountries =
-            countriesDAO.findOne(uniqueId);
+        Countries nullCountries = countriesService.findOne(uniqueId);
 
         assertNull (nullCountries);
 

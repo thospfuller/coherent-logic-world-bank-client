@@ -22,7 +22,6 @@ import com.coherentlogic.wb.client.core.domain.IndicatorTopic;
 import com.coherentlogic.wb.client.core.domain.IndicatorTopics;
 import com.coherentlogic.wb.client.core.domain.Source;
 import com.coherentlogic.wb.client.db.integration.repositories.IndicatorRepository;
-import com.coherentlogic.wb.client.db.integration.services.IndicatorService;
 
 /**
  * Unit test for the {@link IndicatorRepository} class.
@@ -33,7 +32,7 @@ import com.coherentlogic.wb.client.db.integration.services.IndicatorService;
 @TransactionConfiguration
 @Transactional
 @ContextConfiguration(locations={"classpath*:/spring-test/application-context.xml"})
-public class IndicatorDAOTest {
+public class IndicatorServiceTest {
 
     static final String NAME = "nombre",
         NAME1 = "nom",
@@ -41,7 +40,7 @@ public class IndicatorDAOTest {
         SOURCE_ORGANISATION = "sourceOrg1";
 
     @Autowired
-    private IndicatorService indicatorDAO = null;
+    private IndicatorService indicatorService = null;
 
     private Indicator indicator = null;
 
@@ -49,13 +48,12 @@ public class IndicatorDAOTest {
 
         IndicatorTopics results = new IndicatorTopics ();
 
-        List<IndicatorTopic> indicatorTopicList =
-            new ArrayList <IndicatorTopic> ();
+        List<IndicatorTopic> indicatorTopicList = new ArrayList <IndicatorTopic> ();
 
         IndicatorTopic indicatorTopic = new IndicatorTopic ();
 
-        indicatorTopic.setId(DataPointCountryDAOTest.ID);
-        indicatorTopic.setValue(DataPointCountryDAOTest.VALUEX);
+        indicatorTopic.setId(DataPointCountryServiceTest.ID);
+        indicatorTopic.setValue(DataPointCountryServiceTest.VALUEX);
 
         results.setIndicatorTopicList(indicatorTopicList);
 
@@ -71,7 +69,7 @@ public class IndicatorDAOTest {
 
         Indicator result = new Indicator ();
 
-        result.setId(DataPointCountryDAOTest.ID);
+        result.setId(DataPointCountryServiceTest.ID);
 
         result.setIndicatorTopics(createIndicatorTopics());
         result.setName(NAME);
@@ -101,31 +99,29 @@ public class IndicatorDAOTest {
      */
     @Test
     public void testAllCRUDOperations () {
-        indicatorDAO.save(indicator);
+
+        indicatorService.save(indicator);
 
         Long primaryKey = indicator.getPrimaryKey();
 
         assertNotNull(primaryKey);
 
-        Indicator indicator2 =
-            indicatorDAO.findOne(primaryKey);
+        Indicator indicator2 = indicatorService.findOne(primaryKey);
 
         assertNotNull(indicator2);
         assertEquals(indicator, indicator2);
 
         indicator2.setName(NAME1);
 
-        indicatorDAO.save(indicator2);
+        indicatorService.save(indicator2);
 
-        Indicator indicator3 =
-            indicatorDAO.findOne(primaryKey);
+        Indicator indicator3 = indicatorService.findOne(primaryKey);
 
         assertEquals(NAME1, indicator3.getName ());
 
-        indicatorDAO.delete(indicator3);
+        indicatorService.delete(indicator3);
 
-        Indicator indicator4 =
-            indicatorDAO.findOne(primaryKey);
+        Indicator indicator4 = indicatorService.findOne(primaryKey);
 
         assertNull(indicator4);
     }

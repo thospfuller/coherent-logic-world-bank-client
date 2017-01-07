@@ -25,7 +25,7 @@ import com.coherentlogic.wb.client.db.integration.repositories.CatalogSourcesRep
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration
 @Transactional
-public abstract class BasicDAOTestHarness<P> {
+public abstract class BasicServiceTestHarness<P> {
 
     @Autowired
     private QueryBuilderFactory queryBuilderFactory = null;

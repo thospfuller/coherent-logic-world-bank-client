@@ -33,7 +33,7 @@ import com.coherentlogic.wb.client.db.integration.services.IndicatorsService;
 @TransactionConfiguration
 @Transactional
 @ContextConfiguration(locations={"classpath*:/spring-test/application-context.xml"})
-public class IndicatorsDAOTest {
+public class IndicatorsServiceTest {
 
     static final String NAME = "nombre",
         NAME1 = "nom",
@@ -41,23 +41,24 @@ public class IndicatorsDAOTest {
         SOURCE_ORGANISATION = "sourceOrg1";
 
     @Autowired
-    private IndicatorsService indicatorsDAO = null;
+    private IndicatorsService indicatorsService = null;
 
     private Indicators indicators = null;
 
     static Indicators createIndicators () {
+
         Indicators result = new Indicators ();
 
         List<Indicator> indicatorList = new ArrayList<Indicator> ();
 
-        indicatorList.add (IndicatorDAOTest.createIndicator());
+        indicatorList.add (IndicatorServiceTest.createIndicator());
 
         result.setIndicatorList (indicatorList);
         result.setPage (0);
         result.setPages (1);
         result.setPerPage (2);
         result.setTotal (3);
-        
+
         return result;
     }
 
@@ -77,31 +78,28 @@ public class IndicatorsDAOTest {
      */
     @Test
     public void testAllCRUDOperations () {
-        indicatorsDAO.save(indicators);
+        indicatorsService.save(indicators);
 
         Long primaryKey = indicators.getPrimaryKey();
 
         assertNotNull(primaryKey);
 
-        Indicators indicators2 =
-            indicatorsDAO.findOne(primaryKey);
+        Indicators indicators2 = indicatorsService.findOne(primaryKey);
 
         assertNotNull(indicators2);
         assertEquals(indicators, indicators2);
 
         indicators2.setPage(12);
 
-        indicatorsDAO.save(indicators2);
+        indicatorsService.save(indicators2);
 
-        Indicators indicators3 =
-            indicatorsDAO.findOne(primaryKey);
+        Indicators indicators3 = indicatorsService.findOne(primaryKey);
 
         assertEquals((Integer) 12, indicators3.getPage());
 
-        indicatorsDAO.delete(indicators3);
+        indicatorsService.delete(indicators3);
 
-        Indicators indicators4 =
-            indicatorsDAO.findOne(primaryKey);
+        Indicators indicators4 = indicatorsService.findOne(primaryKey);
 
         assertNull(indicators4);
     }

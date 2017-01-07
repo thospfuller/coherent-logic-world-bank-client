@@ -31,10 +31,10 @@ import com.coherentlogic.wb.client.db.integration.services.DataPointsService;
 @TransactionConfiguration
 @Transactional
 @ContextConfiguration(locations={"classpath*:/spring-test/application-context.xml"})
-public class DataPointsDAOTest {
+public class DataPointsServiceTest {
 
     @Autowired
-    private DataPointsService dataPointsDAO = null;
+    private DataPointsService dataPointsService = null;
 
     private DataPoints dataPoints = null;
 
@@ -43,7 +43,7 @@ public class DataPointsDAOTest {
 
         List<DataPoint> dataPointList = new ArrayList<DataPoint> ();
 
-        DataPoint dataPoint = DataPointDAOTest.createDataPoint();
+        DataPoint dataPoint = DataPointServiceTest.createDataPoint();
 
         dataPointList.add(dataPoint);
 
@@ -69,31 +69,29 @@ public class DataPointsDAOTest {
 
     @Test
     public void testAllCRUDOperations () {
-        dataPointsDAO.save(dataPoints);
+
+        dataPointsService.save(dataPoints);
 
         Long primaryKey = dataPoints.getPrimaryKey();
 
         assertNotNull(primaryKey);
 
-        DataPoints dataPoints2 =
-            dataPointsDAO.findOne(primaryKey);
+        DataPoints dataPoints2 = dataPointsService.findOne(primaryKey);
 
         assertNotNull(dataPoints2);
         assertEquals(dataPoints, dataPoints2);
 
         dataPoints2.setTotal(2);
 
-        dataPointsDAO.save(dataPoints2);
+        dataPointsService.save(dataPoints2);
 
-        DataPoints dataPoints3 =
-            dataPointsDAO.findOne(primaryKey);
+        DataPoints dataPoints3 = dataPointsService.findOne(primaryKey);
 
         assertEquals((Integer) 2, dataPoints3.getTotal ());
 
-        dataPointsDAO.delete(dataPoints3);
+        dataPointsService.delete(dataPoints3);
 
-        DataPoints dataPoints4 =
-            dataPointsDAO.findOne(primaryKey);
+        DataPoints dataPoints4 = dataPointsService.findOne(primaryKey);
 
         assertNull(dataPoints4);
     }

@@ -28,32 +28,31 @@ import com.coherentlogic.wb.client.db.integration.services.DataPointService;
 @TransactionConfiguration
 @Transactional
 @ContextConfiguration(locations={"classpath*:/spring-test/application-context.xml"})
-public class DataPointDAOTest {
+public class DataPointServiceTest {
 
     static final String DATE = "2006", DECIMAL = "0", ID = "idx";
 
     @Autowired
-    private DataPointService dataPointDAO;
+    private DataPointService dataPointService;
 
     private DataPoint dataPoint = null;
 
     static DataPoint createDataPoint () {
+
         DataPoint dataPoint = new DataPoint ();
 
-        DataPointCountry dataPointCountry =
-            IdentityValueBeanTestHelper.create(DataPointCountry.class);
+        DataPointCountry dataPointCountry = IdentityValueBeanTestHelper.create(DataPointCountry.class);
 
         dataPoint.setCountry(dataPointCountry);
 
-        DataPointIndicator dataPointIndicator =
-            IdentityValueBeanTestHelper.create(DataPointIndicator.class);
+        DataPointIndicator dataPointIndicator = IdentityValueBeanTestHelper.create(DataPointIndicator.class);
 
         dataPoint.setDataPointIndicator(dataPointIndicator);
 
         dataPoint.setDate(DATE);
         dataPoint.setDecimal(DECIMAL);
-        dataPoint.setId(DataPointCountryDAOTest.VALUEX);
-        dataPoint.setValue(DataPointCountryDAOTest.VALUEY);
+        dataPoint.setId(DataPointCountryServiceTest.VALUEX);
+        dataPoint.setValue(DataPointCountryServiceTest.VALUEY);
 
         return dataPoint;
     }
@@ -65,27 +64,25 @@ public class DataPointDAOTest {
 
     @After
     public void tearDown() throws Exception {
-        dataPointDAO = null;
+        dataPointService = null;
         dataPoint = null;
     }
 
     @Test
     public void testAllCRUDOperations () {
 
-        dataPointDAO.save(dataPoint);
+        dataPointService.save(dataPoint);
 
         Long primaryKey = dataPoint.getPrimaryKey();
 
         assertNotNull(primaryKey);
 
-        DataPoint dataPoint2 =
-            dataPointDAO.findOne(primaryKey);
+        DataPoint dataPoint2 = dataPointService.findOne(primaryKey);
 
         assertNotNull(dataPoint2);
         assertEquals(dataPoint, dataPoint2);
 
-        DataPointIndicator dataPointIndicator =
-            dataPoint.getDataPointIndicator();
+        DataPointIndicator dataPointIndicator = dataPoint.getDataPointIndicator();
 
         assertNotNull(dataPointIndicator);
         assertNotNull(dataPointIndicator.getId());
@@ -103,21 +100,17 @@ public class DataPointDAOTest {
 //        assertNotNull(dataPointIndicator.getPrimaryKey());
         assertNotNull(dataPointIndicator.getValue());
 
-        dataPoint2.setValue(DataPointCountryDAOTest.VALUEY);
+        dataPoint2.setValue(DataPointCountryServiceTest.VALUEY);
 
-        dataPointDAO.save(dataPoint2);
+        dataPointService.save(dataPoint2);
 
-        DataPoint dataPoint3 =
-            dataPointDAO.findOne(primaryKey);
+        DataPoint dataPoint3 = dataPointService.findOne(primaryKey);
 
-        assertEquals(
-            DataPointCountryDAOTest.VALUEY,
-            dataPoint3.getValue());
+        assertEquals(DataPointCountryServiceTest.VALUEY, dataPoint3.getValue());
 
-        dataPointDAO.delete(dataPoint3);
+        dataPointService.delete(dataPoint3);
 
-        DataPoint dataPoint4 =
-            dataPointDAO.findOne(primaryKey);
+        DataPoint dataPoint4 = dataPointService.findOne(primaryKey);
 
         assertNull(dataPoint4);
     }

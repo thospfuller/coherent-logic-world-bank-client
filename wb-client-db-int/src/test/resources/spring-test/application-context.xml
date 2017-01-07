@@ -16,32 +16,18 @@
 
     <import resource="jpa-beans.xml"/>
 
-    <bean id="wbRestTemplate" class="org.springframework.web.client.RestTemplate">
-        <property name="messageConverters">
-            <list>
-                <bean id="xstreamMessageConverter"
-                    class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
-                    <property name="marshaller" ref="xstreamMarshaller" />
-                    <property name="unmarshaller" ref="xstreamMarshaller" />
-                </bean>
-            </list>
-        </property>
-    </bean>
-
-    <bean id="springXStreamMarshaller" class="com.coherentlogic.coherent.data.adapter.core.xstream.CustomXStreamMarshaller">
+    <bean id="springXStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
         <!-- Underscores in attributes cause problems with XStream and the stream driver below
              addresses this issue - in particular see the XmlFriendlyReplacer.
           -->
         <property name="streamDriver">
-            <!-- com.thoughtworks.xstream.io.xml.XppDriver / com.coherentlogic.wb.client.io.xml.BOMAwareXppDriver -->
-            <bean class="com.thoughtworks.xstream.io.xml.DomDriver">
-                <constructor-arg name="encoding" value="UTF-8"/>
-                <!-- constructor-arg>
+            <bean class="com.coherentlogic.wb.client.core.drivers.CustomXppDriver">
+                <constructor-arg>
                     <bean class="com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer">
                         <constructor-arg index="0" value="_-"/>
                         <constructor-arg index="1" value="_"/>
                     </bean>
-                </constructor-arg -->
+                </constructor-arg>
             </bean>
         </property>
         <property name="annotatedClasses">
@@ -50,7 +36,6 @@
                 <value>com.coherentlogic.wb.client.core.domain.CatalogSource</value>
                 <value>com.coherentlogic.wb.client.core.domain.IncomeLevels</value>
                 <value>com.coherentlogic.wb.client.core.domain.IncomeLevel</value>
-
                 <value>com.coherentlogic.wb.client.core.domain.Countries</value>
                 <value>com.coherentlogic.wb.client.core.domain.Country</value>
                 <value>com.coherentlogic.wb.client.core.domain.Region</value>
@@ -60,7 +45,6 @@
                 <value>com.coherentlogic.wb.client.core.domain.IndicatorTopics</value>
                 <value>com.coherentlogic.wb.client.core.domain.Topics</value>
                 <value>com.coherentlogic.wb.client.core.domain.Topic</value>
-                
                 <value>com.coherentlogic.wb.client.core.domain.LendingTypes</value>
                 <value>com.coherentlogic.wb.client.core.domain.Message</value>
                 <value>com.coherentlogic.wb.client.core.domain.ErrorMessage</value>
@@ -80,9 +64,21 @@
         <constructor-arg ref="springXStreamMarshaller"/>
     </bean>
 
+    <bean id="wbRestTemplate" class="org.springframework.web.client.RestTemplate" scope="prototype">
+        <property name="messageConverters">
+            <list>
+                <bean id="xstreamMessageConverter"
+                    class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+                    <property name="marshaller" ref="xstreamMarshaller" />
+                    <property name="unmarshaller" ref="xstreamMarshaller" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
     <bean id="queryBuilderFactory" class="com.coherentlogic.wb.client.core.factories.QueryBuilderFactory">
         <constructor-arg name="restTemplate" ref="wbRestTemplate"/>
-        <constructor-arg name="uri" value="http://api.worldbank.org"/>
+        <constructor-arg name="uri" value="http://api.worldbank.org/"/>
     </bean>
 </beans>
 
