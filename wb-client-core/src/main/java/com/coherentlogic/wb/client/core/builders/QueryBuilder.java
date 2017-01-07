@@ -824,7 +824,6 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
 
         return result;
     }
-    
 
     /**
      * Do get as {@link Countries} and then return that result.
@@ -852,7 +851,6 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
 
         return result;
     }
-    
 
     /**
      * Do get as {@link Indicators} and then return that result.
@@ -880,7 +878,6 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
 
         return result;
     }
-    
 
     /**
      * Do get as {@link CatalogSources} and then return that result.
@@ -908,7 +905,6 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
 
         return result;
     }
-    
 
     /**
      * Do get as {@link IncomeLevels} and then return that result.
@@ -936,7 +932,6 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
 
         return result;
     }
-    
 
     /**
      * Do get as {@link LendingTypes} and then return that result.
@@ -964,7 +959,6 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
 
         return result;
     }
-    
 
     /**
      * Do get as {@link Topics} and then return that result.
