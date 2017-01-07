@@ -234,14 +234,13 @@ public class QueryBuilderTest {
     @Test
     public void testGetCountries() {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (restTemplate,
-                "http://api.worldbank.org/countries");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org/");
 
         Countries result = queryBuilder
+            .countries()
             .setPerPage(10)
             .setIncomeLevel("LIC")
-            .doGet(Countries.class);
+            .doGetAsCountries ();
 
         assertNotNull (result);
 
@@ -294,9 +293,7 @@ public class QueryBuilderTest {
     @Test
     public void testGetCountries2() {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (restTemplate,
-                "http://api.worldbank.org/");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org/");
 
         Countries result = queryBuilder
             .countries()
@@ -409,9 +406,7 @@ public class QueryBuilderTest {
     @Test
     public void testIncomeLevels() {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (restTemplate,
-                "http://api.worldbank.org");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org");
 
         IncomeLevels result = queryBuilder
             .incomeLevels()
@@ -435,12 +430,10 @@ public class QueryBuilderTest {
     @Test
     public void testCountriesWithValidFromTo() {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (
-                restTemplate,
-                "http://api.worldbank.org/countries/");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org/");
 
         Countries result = queryBuilder
+            .countries()
             .setPerPage(10)
             .setDate("1998:2003")
             .doGet(Countries.class);
@@ -489,10 +482,7 @@ public class QueryBuilderTest {
     @Test
     public void testCountrieBrGbIndicatorsExample() {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (
-                restTemplate,
-                "http://api.worldbank.org/");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org/");
 
         DataPoints result =
             queryBuilder.countries("br", "gb").indicators("SP.POP.TOTL").setDate("1998:2003").doGetAsDataPoints();
@@ -511,11 +501,9 @@ public class QueryBuilderTest {
 
         DataPoint dataPoint = dataPointList.get(4);
 
-        reviewIdValuePair("SP.POP.TOTL", "Population, total",
-            dataPoint.getDataPointIndicator());
+        reviewIdValuePair("SP.POP.TOTL", "Population, total", dataPoint.getDataPointIndicator());
 
-        reviewIdValuePair("BR", "Brazil",
-            dataPoint.getCountry());
+        reviewIdValuePair("BR", "Brazil", dataPoint.getCountry());
 
         assertEquals ("1999", dataPoint.getDate());
         // Pages is subject to change so may want to use greater than #.
@@ -533,11 +521,10 @@ public class QueryBuilderTest {
     @Test
     public void testCountriesWithInvalidFromTo() {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (
-                restTemplate, "http://api.worldbank.org/countries");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org/");
 
         Countries result = queryBuilder
+            .countries()
             .setPerPage(10)
             .setDate("2003:1998")
             .setIncomeLevel("LIC")
@@ -561,10 +548,9 @@ public class QueryBuilderTest {
     @Test
     public void testIndicators() {
 
-        QueryBuilder queryBuilder = new QueryBuilder (
-            restTemplate, "http://api.worldbank.org/indicators/NY.GDP.MKTP.CD");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org/");
 
-        Indicators result = queryBuilder.doGetAsIndicators();
+        Indicators result = queryBuilder.indicators("NY.GDP.MKTP.CD").doGetAsIndicators();
 
         assertNotNull (result);
 
@@ -581,11 +567,7 @@ public class QueryBuilderTest {
 
         Source source = firstIndicator.getSource();
 
-        reviewIdValuePair(
-            "2",
-            "World Development Indicators",
-            source
-        );
+        reviewIdValuePair("2", "World Development Indicators", source);
 
         String expectedSourceNote = "GDP at purchaser's prices is the sum " +
             "of gross value added by all resident producers in the economy " +
@@ -604,16 +586,13 @@ public class QueryBuilderTest {
         String expectedSourceOrganization = "World Bank national accounts " +
             "data, and OECD National Accounts data files.";
 
-        assertEquals (expectedSourceOrganization,
-            firstIndicator.getSourceOrganization());
+        assertEquals (expectedSourceOrganization, firstIndicator.getSourceOrganization());
 
-        IndicatorTopics indicatorTopics =
-            firstIndicator.getIndicatorTopics();
+        IndicatorTopics indicatorTopics = firstIndicator.getIndicatorTopics();
 
         assertNotNull (indicatorTopics);
 
-        List<IndicatorTopic> indicatorTopicList =
-            indicatorTopics.getIndicatorTopicList();
+        List<IndicatorTopic> indicatorTopicList = indicatorTopics.getIndicatorTopicList();
 
         assertNotNull (indicatorTopicList);
 
@@ -662,8 +641,7 @@ public class QueryBuilderTest {
 
         String escapedURI = queryBuilder.getEscapedURI();
 
-        assertEquals (
-            "http://api.worldbank.org/incomeLevel/LIC?per_page=10", escapedURI);
+        assertEquals ("http://api.worldbank.org/incomeLevel/LIC?per_page=10", escapedURI);
 
         reviewPaginationProperties(1, 1, 10, 1, result);
     }
@@ -684,8 +662,7 @@ public class QueryBuilderTest {
 
         String escapedURI = queryBuilder.getEscapedURI();
 
-        assertEquals (
-            "http://api.worldbank.org/topic/13?per_page=100", escapedURI);
+        assertEquals ("http://api.worldbank.org/topic/13?per_page=100", escapedURI);
 
         reviewPaginationProperties(1, 1, 100, 1, result);
     }
@@ -749,11 +726,7 @@ public class QueryBuilderTest {
 
         Source source = firstIndicator.getSource();
 
-        reviewIdValuePair(
-            "2",
-            "World Development Indicators",
-            source
-        );
+        reviewIdValuePair("2", "World Development Indicators", source);
 
         String expectedSourceNote = "Oil rents are the difference between the value of crude oil production at world "
             + "prices and total costs of production.";
@@ -763,16 +736,13 @@ public class QueryBuilderTest {
         String expectedSourceOrganization = "Estimates based on sources and methods described in \"The Changing "
             + "Wealth of Nations: Measuring Sustainable Development in the New Millennium\" (World Bank, 2011).";
 
-        assertEquals (expectedSourceOrganization,
-            firstIndicator.getSourceOrganization());
+        assertEquals (expectedSourceOrganization, firstIndicator.getSourceOrganization());
 
-        IndicatorTopics indicatorTopics =
-            firstIndicator.getIndicatorTopics();
+        IndicatorTopics indicatorTopics = firstIndicator.getIndicatorTopics();
 
         assertNotNull (indicatorTopics);
 
-        List<IndicatorTopic> indicatorTopicList =
-            indicatorTopics.getIndicatorTopicList();
+        List<IndicatorTopic> indicatorTopicList = indicatorTopics.getIndicatorTopicList();
 
         assertNotNull (indicatorTopicList);
 
