@@ -42,7 +42,6 @@
                 <value>com.coherentlogic.wb.client.core.domain.CatalogSource</value>
                 <value>com.coherentlogic.wb.client.core.domain.IncomeLevels</value>
                 <value>com.coherentlogic.wb.client.core.domain.IncomeLevel</value>
-
                 <value>com.coherentlogic.wb.client.core.domain.Countries</value>
                 <value>com.coherentlogic.wb.client.core.domain.Country</value>
                 <value>com.coherentlogic.wb.client.core.domain.Region</value>
@@ -52,7 +51,6 @@
                 <value>com.coherentlogic.wb.client.core.domain.IndicatorTopics</value>
                 <value>com.coherentlogic.wb.client.core.domain.Topics</value>
                 <value>com.coherentlogic.wb.client.core.domain.Topic</value>
-                
                 <value>com.coherentlogic.wb.client.core.domain.LendingTypes</value>
                 <value>com.coherentlogic.wb.client.core.domain.Message</value>
                 <value>com.coherentlogic.wb.client.core.domain.ErrorMessage</value>
@@ -83,11 +81,6 @@
             </list>
         </property>
     </bean>
-
-    <!-- bean id="queryBuilderFactory" class="com.coherentlogic.wb.client.core.factories.QueryBuilderFactory" scope="prototype">
-        <constructor-arg name="restTemplate" ref="wbRestTemplate"/>
-        <constructor-arg name="uri" value="http://api.worldbank.org/"/>
-    </bean -->
 
     <bean id="queryBuilder" class="com.coherentlogic.wb.client.core.builders.QueryBuilder" scope="prototype">
         <constructor-arg name="restTemplate" ref="wbRestTemplate"/>
