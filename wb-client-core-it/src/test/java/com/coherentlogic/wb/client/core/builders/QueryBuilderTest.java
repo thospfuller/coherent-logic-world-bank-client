@@ -495,7 +495,7 @@ public class QueryBuilderTest {
                 "http://api.worldbank.org/");
 
         DataPoints result =
-            queryBuilder.countries("br", "gb").indicators("SP.POP.TOTL").setDate("1998:2003").doGet(DataPoints.class);
+            queryBuilder.countries("br", "gb").indicators("SP.POP.TOTL").setDate("1998:2003").doGetAsDataPoints();
 
 //        assertEquals (
 //            "http://api.worldbank.org/countries/br;gb/indicators/SP.POP.TOTL?date=1998%3A2003",
@@ -541,7 +541,7 @@ public class QueryBuilderTest {
             .setPerPage(10)
             .setDate("2003:1998")
             .setIncomeLevel("LIC")
-            .doGet(Countries.class);
+            .doGetAsCountries();
 
         assertNotNull (result);
 
@@ -561,12 +561,10 @@ public class QueryBuilderTest {
     @Test
     public void testIndicators() {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (restTemplate,
-                "http://api.worldbank.org/indicators/NY.GDP.MKTP.CD");
+        QueryBuilder queryBuilder = new QueryBuilder (
+            restTemplate, "http://api.worldbank.org/indicators/NY.GDP.MKTP.CD");
 
-        Indicators result = queryBuilder
-            .doGet(Indicators.class);
+        Indicators result = queryBuilder.doGetAsIndicators();
 
         assertNotNull (result);
 
@@ -633,13 +631,9 @@ public class QueryBuilderTest {
     @Test
     public void testLendingTypes () {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (restTemplate,
-                "http://api.worldbank.org");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org");
 
-        LendingTypes result = queryBuilder
-            .lendingTypes()
-            .doGet(LendingTypes.class);
+        LendingTypes result = queryBuilder.lendingTypes().doGetAsLendingTypes();
 
         reviewPaginationProperties(1, 1, 50, 4, result);
 
@@ -659,14 +653,12 @@ public class QueryBuilderTest {
     @Test
     public void testIncomeLevel () {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (restTemplate,
-                "http://api.worldbank.org/");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org/");
 
         IncomeLevels result = queryBuilder
             .incomeLevel(IncomeLevelCodes.LIC)
             .setPerPage(10)
-            .doGet(IncomeLevels.class);
+            .doGetAsIncomeLevels();
 
         String escapedURI = queryBuilder.getEscapedURI();
 
@@ -683,14 +675,12 @@ public class QueryBuilderTest {
     @Test
     public void testTopic () {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (restTemplate,
-                "http://api.worldbank.org/");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org/");
 
         Topics result = queryBuilder
             .topic("13")
             .setPerPage(100)
-            .doGet(Topics.class);
+            .doGetAsTopics();
 
         String escapedURI = queryBuilder.getEscapedURI();
 
@@ -703,13 +693,9 @@ public class QueryBuilderTest {
     @Test
     public void testTopics () {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (restTemplate,
-                "http://api.worldbank.org");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org");
 
-        Topics result = queryBuilder
-            .topics()
-            .doGet(Topics.class);
+        Topics result = queryBuilder.topics().doGetAsTopics();
 
         reviewPaginationProperties(1, 1, 50, 21, result);
 
@@ -743,14 +729,12 @@ public class QueryBuilderTest {
     @Test
     public void testIndicator () {
 
-        QueryBuilder queryBuilder =
-            new QueryBuilder (restTemplate,
-                "http://api.worldbank.org");
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org");
 
         Indicators result = queryBuilder
             .topic("5")
             .indicator()
-            .doGet(Indicators.class);
+            .doGetAsIndicators();
 
         reviewPaginationProperties(1, 2, 50, 53, result);
 
@@ -824,15 +808,14 @@ public class QueryBuilderTest {
 
     @Test
     public void testIsoCodes () {
-        QueryBuilder queryBuilder =
-                new QueryBuilder (restTemplate,
-                    "http://api.worldbank.org/");
+
+        QueryBuilder queryBuilder = new QueryBuilder (restTemplate, "http://api.worldbank.org/");
 
         Countries countries = 
             queryBuilder
                 .countries()
                 .setIsoCodes("br", "gb")
-                .doGet(Countries.class);
+                .doGetAsCountries ();
 
         reviewPaginationProperties(1, 1, 50, 2, countries);
 
