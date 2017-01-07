@@ -55,20 +55,14 @@ import com.coherentlogic.wb.client.core.exceptions.InvalidParameterValueExceptio
 import com.coherentlogic.wb.client.core.services.GoogleAnalyticsMeasurementService;
 
 /**
- * Class that allows the developer to construct and execute a query to the
- * World Bank web services.
+ * Class that allows the developer to construct and execute a query to the World Bank web services.
  * <p>
- * Note that this class is <b>not</b> thread-safe and cannot be used as a member
- * -level property -- if this is required, use the
- * {@link com.coherentlogic.wb.client.core.builders#RequestBuilderFactory
- * QueryBuilderFactory} class.
+ * Note that this class is <b>not</b> thread-safe and cannot be used as a member-level property -- if this is required,
+ * use the {@link com.coherentlogic.wb.client.core.builders#RequestBuilderFactory QueryBuilderFactory} class.
  * <p>
- * In order to facilitate method-chaining each setter method returns a reference
- * to this object.
+ * In order to facilitate method-chaining each setter method returns a reference to this object.
  * <p>
- * For examples, refer to the {@link
- * com.coherentlogic.wb.client.core.builders#QueryBuilderTest
- * QueryBuilderTest} class.
+ * For examples, refer to the {@link com.coherentlogic.wb.client.core.builders#QueryBuilderTest QueryBuilderTest} class.
  *
  * @see http://data.worldbank.org
  * @see http://data.worldbank.org/developers/data-catalog-api
@@ -77,10 +71,8 @@ import com.coherentlogic.wb.client.core.services.GoogleAnalyticsMeasurementServi
  * @see http://databank.worldbank.org/data/home.aspx
  * @see http://datacatalog.worldbank.org/
  *
+ * @author <a href="https://www.linkedin.com/in/thomasfuller">Thomas P. Fuller</a>
  * @author <a href="mailto:support@coherentlogic.com">Support</a>
- *
- * @todo Refactor this class as some of the logic needs to be shared between
- *  this class and the FRED Client.
  */
 public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
 
@@ -163,43 +155,41 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
     /**
      * The from/to constant -- ie. YYYY:YYYY.
      */
-    private static final String FROM_TO_PATTERN =
-        YEAR_PATTERN + ":" + YEAR_PATTERN;
+    private static final String FROM_TO_PATTERN = YEAR_PATTERN + ":" + YEAR_PATTERN;
 
     /**
      * The from/to pattern is used to ensure that from/to strings have the
      * proper format.
      */
-    private static final Pattern fromToPattern =
-        Pattern.compile(FROM_TO_PATTERN);
+    private static final Pattern fromToPattern = Pattern.compile(FROM_TO_PATTERN);
+
+    public static final String DEFAULT_ENDPOINT_URI = "http://api.worldbank.org/";
 
     /**
      * @see {@link AbstractQueryBuilder}.
      */
-    public QueryBuilder (
-        RestTemplate restTemplate,
-        String uri
-    ) {
+    public QueryBuilder (RestTemplate restTemplate) {
+        super (restTemplate, DEFAULT_ENDPOINT_URI);
+    }
+
+    /**
+     * @see {@link AbstractQueryBuilder}.
+     */
+    public QueryBuilder (RestTemplate restTemplate, String uri) {
         super (restTemplate, uri);
     }
 
     /**
      * @see {@link AbstractQueryBuilder}.
      */
-    public QueryBuilder (
-        RestTemplate restTemplate,
-        UriBuilder uriBuilder
-    ) {
+    public QueryBuilder (RestTemplate restTemplate, UriBuilder uriBuilder) {
         super (restTemplate, uriBuilder);
     }
 
     /**
      * @see {@link AbstractQueryBuilder}.
      */
-    public QueryBuilder(
-        RestTemplate restTemplate,
-        String uri,
-        CacheServiceProviderSpecification<String, Object> cache
+    public QueryBuilder(RestTemplate restTemplate, String uri, CacheServiceProviderSpecification<String, Object> cache
     ) {
         super(restTemplate, uri, cache);
     }
@@ -232,6 +222,7 @@ public class QueryBuilder extends AbstractRESTQueryBuilder<String> {
      * @param countries One or more country codes.
      */
     public QueryBuilder countries (String... countries) {
+
         super.extendPathWith(COUNTRIES);
 
         if (countries != null)
