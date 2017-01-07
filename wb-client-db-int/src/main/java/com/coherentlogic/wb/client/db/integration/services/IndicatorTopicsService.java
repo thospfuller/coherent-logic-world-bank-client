@@ -30,7 +30,7 @@ public class IndicatorTopicsService extends EntityManagerAwareService {
     @Autowired
     private IndicatorTopicsRepository indicatorTopicsRepository;
 
-    public IndicatorTopicsRepository getindicatorTopicsRepository() {
+    public IndicatorTopicsRepository getIndicatorTopicsRepository() {
         return indicatorTopicsRepository;
     }
 

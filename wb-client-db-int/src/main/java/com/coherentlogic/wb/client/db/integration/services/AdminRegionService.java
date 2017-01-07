@@ -30,7 +30,7 @@ public class AdminRegionService extends EntityManagerAwareService {
     @Autowired
     private AdminRegionRepository adminRegionRepository;
 
-    public AdminRegionRepository getadminRegionRepository() {
+    public AdminRegionRepository getAdminRegionRepository() {
         return adminRegionRepository;
     }
 
@@ -134,4 +134,3 @@ public class AdminRegionService extends EntityManagerAwareService {
         return adminRegionRepository.save(entity);
     }
 }
-

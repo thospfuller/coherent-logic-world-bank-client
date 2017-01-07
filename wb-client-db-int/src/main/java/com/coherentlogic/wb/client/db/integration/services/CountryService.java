@@ -30,7 +30,7 @@ public class CountryService extends EntityManagerAwareService {
     @Autowired
     private CountryRepository countryRepository;
 
-    public CountryRepository getcountryRepository() {
+    public CountryRepository getCountryRepository() {
         return countryRepository;
     }
 
@@ -134,4 +134,3 @@ public class CountryService extends EntityManagerAwareService {
         return countryRepository.save(entity);
     }
 }
-

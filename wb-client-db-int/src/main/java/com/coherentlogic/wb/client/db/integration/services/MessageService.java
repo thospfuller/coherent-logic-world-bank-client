@@ -30,7 +30,7 @@ public class MessageService extends EntityManagerAwareService {
     @Autowired
     private MessageRepository messageRepository;
 
-    public MessageRepository getmessageRepository() {
+    public MessageRepository getMessageRepository() {
         return messageRepository;
     }
 
@@ -134,4 +134,3 @@ public class MessageService extends EntityManagerAwareService {
         return messageRepository.save(entity);
     }
 }
-

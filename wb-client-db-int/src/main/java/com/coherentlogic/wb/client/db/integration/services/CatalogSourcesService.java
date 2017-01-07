@@ -30,7 +30,7 @@ public class CatalogSourcesService extends EntityManagerAwareService {
     @Autowired
     private CatalogSourcesRepository catalogSourcesRepository;
 
-    public CatalogSourcesRepository getcatalogSourcesRepository() {
+    public CatalogSourcesRepository getCatalogSourcesRepository() {
         return catalogSourcesRepository;
     }
 
@@ -134,4 +134,3 @@ public class CatalogSourcesService extends EntityManagerAwareService {
         return catalogSourcesRepository.save(entity);
     }
 }
-

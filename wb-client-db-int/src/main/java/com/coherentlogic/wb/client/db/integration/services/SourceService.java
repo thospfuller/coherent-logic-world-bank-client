@@ -30,7 +30,7 @@ public class SourceService extends EntityManagerAwareService {
     @Autowired
     private SourceRepository sourceRepository;
 
-    public SourceRepository getsourceRepository() {
+    public SourceRepository getSourceRepository() {
         return sourceRepository;
     }
 
@@ -134,4 +134,3 @@ public class SourceService extends EntityManagerAwareService {
         return sourceRepository.save(entity);
     }
 }
-

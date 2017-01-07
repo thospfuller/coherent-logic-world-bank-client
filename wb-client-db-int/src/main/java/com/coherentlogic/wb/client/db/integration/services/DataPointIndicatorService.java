@@ -30,7 +30,7 @@ public class DataPointIndicatorService extends EntityManagerAwareService {
     @Autowired
     private DataPointIndicatorRepository dataPointIndicatorRepository;
 
-    public DataPointIndicatorRepository getdataPointIndicatorRepository() {
+    public DataPointIndicatorRepository getDataPointIndicatorRepository() {
         return dataPointIndicatorRepository;
     }
 
@@ -134,4 +134,3 @@ public class DataPointIndicatorService extends EntityManagerAwareService {
         return dataPointIndicatorRepository.save(entity);
     }
 }
-

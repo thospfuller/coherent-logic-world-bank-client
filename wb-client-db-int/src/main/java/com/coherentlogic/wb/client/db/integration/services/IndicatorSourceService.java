@@ -30,7 +30,7 @@ public class IndicatorSourceService extends EntityManagerAwareService {
     @Autowired
     private IndicatorSourceRepository indicatorSourceRepository;
 
-    public IndicatorSourceRepository getindicatorSourceRepository() {
+    public IndicatorSourceRepository getIndicatorSourceRepository() {
         return indicatorSourceRepository;
     }
 
@@ -134,4 +134,3 @@ public class IndicatorSourceService extends EntityManagerAwareService {
         return indicatorSourceRepository.save(entity);
     }
 }
-

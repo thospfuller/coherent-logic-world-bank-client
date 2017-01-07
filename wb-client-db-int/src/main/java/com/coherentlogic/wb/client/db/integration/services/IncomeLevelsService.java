@@ -30,7 +30,7 @@ public class IncomeLevelsService extends EntityManagerAwareService {
     @Autowired
     private IncomeLevelsRepository incomeLevelsRepository;
 
-    public IncomeLevelsRepository getincomeLevelsRepository() {
+    public IncomeLevelsRepository getIncomeLevelsRepository() {
         return incomeLevelsRepository;
     }
 
@@ -134,4 +134,3 @@ public class IncomeLevelsService extends EntityManagerAwareService {
         return incomeLevelsRepository.save(entity);
     }
 }
-

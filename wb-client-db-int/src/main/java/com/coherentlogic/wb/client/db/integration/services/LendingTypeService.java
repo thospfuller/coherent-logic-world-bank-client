@@ -30,7 +30,7 @@ public class LendingTypeService extends EntityManagerAwareService {
     @Autowired
     private LendingTypeRepository lendingTypeRepository;
 
-    public LendingTypeRepository getlendingTypeRepository() {
+    public LendingTypeRepository getLendingTypeRepository() {
         return lendingTypeRepository;
     }
 
@@ -134,4 +134,3 @@ public class LendingTypeService extends EntityManagerAwareService {
         return lendingTypeRepository.save(entity);
     }
 }
-

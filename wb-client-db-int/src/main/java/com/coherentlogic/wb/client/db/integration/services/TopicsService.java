@@ -30,7 +30,7 @@ public class TopicsService extends EntityManagerAwareService {
     @Autowired
     private TopicsRepository topicsRepository;
 
-    public TopicsRepository gettopicsRepository() {
+    public TopicsRepository getTopicsRepository() {
         return topicsRepository;
     }
 
@@ -134,4 +134,3 @@ public class TopicsService extends EntityManagerAwareService {
         return topicsRepository.save(entity);
     }
 }
-

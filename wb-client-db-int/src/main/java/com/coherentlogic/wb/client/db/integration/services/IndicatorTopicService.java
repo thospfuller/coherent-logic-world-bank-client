@@ -30,7 +30,7 @@ public class IndicatorTopicService extends EntityManagerAwareService {
     @Autowired
     private IndicatorTopicRepository indicatorTopicRepository;
 
-    public IndicatorTopicRepository getindicatorTopicRepository() {
+    public IndicatorTopicRepository getIndicatorTopicRepository() {
         return indicatorTopicRepository;
     }
 
@@ -134,4 +134,3 @@ public class IndicatorTopicService extends EntityManagerAwareService {
         return indicatorTopicRepository.save(entity);
     }
 }
-

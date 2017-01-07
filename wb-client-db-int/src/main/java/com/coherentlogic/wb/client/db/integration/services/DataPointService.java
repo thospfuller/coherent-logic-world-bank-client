@@ -30,7 +30,7 @@ public class DataPointService extends EntityManagerAwareService {
     @Autowired
     private DataPointRepository dataPointRepository;
 
-    public DataPointRepository getdataPointRepository() {
+    public DataPointRepository getDataPointRepository() {
         return dataPointRepository;
     }
 
@@ -134,4 +134,3 @@ public class DataPointService extends EntityManagerAwareService {
         return dataPointRepository.save(entity);
     }
 }
-

@@ -30,7 +30,7 @@ public class RegionService extends EntityManagerAwareService {
     @Autowired
     private RegionRepository regionRepository;
 
-    public RegionRepository getregionRepository() {
+    public RegionRepository getRegionRepository() {
         return regionRepository;
     }
 
@@ -134,4 +134,3 @@ public class RegionService extends EntityManagerAwareService {
         return regionRepository.save(entity);
     }
 }
-
