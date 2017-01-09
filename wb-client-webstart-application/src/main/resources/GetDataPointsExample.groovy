@@ -7,13 +7,12 @@
  * @see http://datacatalog.worldbank.org/
  * @see http://data.worldbank.org/developers
  */
-import com.coherentlogic.wb.client.core.domain.DataPoints
 
 def results = queryBuilder
     .countries("all")
     .indicators("SP.POP.TOTL")
     .setDate("1998:2012")
-    .doGet(DataPoints.class)
+    .doGetAsDataPoints ()
 
 dataPointsService.save (results)
 

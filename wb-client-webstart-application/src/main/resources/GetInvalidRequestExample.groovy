@@ -11,11 +11,10 @@
  * @see http://datacatalog.worldbank.org/
  * @see http://data.worldbank.org/developers
  */
-import com.coherentlogic.wb.client.core.domain.Countries
 
 // EXPECTED TO FAIL!
 
 Countries result = queryBuilder
     .countries ("NA")
     .setIncomeLevel("Invalid parameter")
-    .doGet(Countries.class)
+    .doGetAsCountries()

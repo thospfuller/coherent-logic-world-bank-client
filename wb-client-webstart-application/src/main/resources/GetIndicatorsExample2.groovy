@@ -23,8 +23,12 @@ def values = [] as List<BigDecimal>
 def sortedDataPoints = results.dataPointList.sort { it.date }
 
 sortedDataPoints.each {
+
     dates << it.date
-    values << new java.math.BigDecimal (it.value)
+
+    def nextValue = "".equals (it.value) ? BigDecimal.ZERO : it.value
+
+    values << new java.math.BigDecimal (nextValue)
 }
 
 dataFrame.add((Object) "Date", (List<Object>) dates)

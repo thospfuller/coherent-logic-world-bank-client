@@ -9,13 +9,12 @@
  */
 
 import com.coherentlogic.wb.client.core.domain.IncomeLevelCodes
-import com.coherentlogic.wb.client.core.domain.Countries
 
 def results = queryBuilder
     .countries ()
     .setPerPage(10)
     .setIncomeLevel(IncomeLevelCodes.LIC)
-    .doGet(Countries.class)
+    .doGetAsCountries()
 
 countriesService.save (results)
 

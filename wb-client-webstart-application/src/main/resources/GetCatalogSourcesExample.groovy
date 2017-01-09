@@ -7,9 +7,8 @@
  * @see http://datacatalog.worldbank.org/
  * @see http://data.worldbank.org/developers
  */
-import com.coherentlogic.wb.client.core.domain.CatalogSources
 
-def results = queryBuilder.sources().doGet(CatalogSources.class)
+def results = queryBuilder.sources().doGetAsCatalogSources()
 
 catalogSourcesService.save (results)
 

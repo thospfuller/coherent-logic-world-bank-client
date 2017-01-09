@@ -8,9 +8,7 @@
  * @see http://data.worldbank.org/developers
  */
 
-import com.coherentlogic.wb.client.core.domain.IncomeLevels
-
-def results = queryBuilder.incomeLevels ().doGet(IncomeLevels.class)
+def results = queryBuilder.incomeLevels ().doGetAsIncomeLevels()
 
 incomeLevelsService.save (results)
 
