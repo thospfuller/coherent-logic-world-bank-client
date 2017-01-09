@@ -404,12 +404,18 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
                             objectStringifier.toString(result);
 
                         String fullResult =
-                            "// Note that null values are not indicative of a " +
-                            "problem, per se, for \n" +
-                            "// example the PrimaryKey is only ever assigned " +
-                            "when the object has been \n" +
-                            "// saved to a database and since this does not " +
-                            "happen in this example.\n\n\n" +
+                            "// Note that null values are not indicative of a problem, per se, for \n" +
+                            "// example the PrimaryKey is only ever assigned when the object has been \n" +
+                            "// saved to a database and since this does not happen in this example.\n\n\n" +
+                            "//\n" +
+                            "// -----\n" +
+                            "//\n" +
+                            "// JAMON Performance Metrics:\n" +
+                            "//\n" +
+                            "// " + monitor + "\n" +
+                            "//\n" +
+                            "// -----\n" +
+                            "//\n\n\n" +
                             stringifiedResult;
 
                         outputTextArea.setText(fullResult);
@@ -425,7 +431,15 @@ public class WBClientGUI extends JFrame implements CommandLineRunner {
      */
     @Override
     public void run(String... args) throws Exception {
+
         setVisible(true);
+
+        java.awt.EventQueue.invokeLater(
+            () -> {
+                toFront();
+                repaint();
+            }
+        );
     }
 
     public static void main (String[] unused) throws Exception {
